@@ -58,3 +58,4 @@ final String COIN_EFFECT = "coin_effect.wav";
 final String GROUND_GROUP = "assets/ground_group.png";
 final String GROUND_GROUP_3 = "assets/ground_group_3.png";
 
+final float GRAVITY = 20.0;

@@ -19,7 +19,7 @@ class Player extends Entity {
     //super(path: String, posizione iniziale: PVector, salute: int, gravità: float, velocità: float, salto: float)
     super(path, //Texture
           initialPosition, //Intial Position
-          20.0, //Gravity
+          GRAVITY, //Gravity
           5.0, //Speed
           20.0, //Jump
           1, //breakingValueUp

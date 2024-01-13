@@ -2,9 +2,9 @@ class SuperMushroom extends PowerUp {
     boolean isRight;
 
     SuperMushroom(float x, float y, boolean isRight) {
-        //super(path: String, posizione iniziale: PVector, salute: int, gravità: float, velocità: float, salto: float)
+        //super(path: String, posizione iniziale: PVector, gravità: float, velocità: float, salto: float)
         
-        super(POWER_UP + SUPER_MUSHROOM, new PVector(x, y), 15.0, 5, 6);
+        super(POWER_UP + SUPER_MUSHROOM, new PVector(x, y), GRAVITY, 5, 6);
 
         this.isRight = isRight;
     }

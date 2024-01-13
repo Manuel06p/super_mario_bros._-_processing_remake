@@ -28,21 +28,7 @@ Level livello1() {
   powerUps.add(new Coin(1500, 500));
 
   //Nemici
-  enemies.add(
-    new Enemy(
-      GOOMBA + RX + GOOMBA_NEUTRAL, //texture
-      new PVector(150, 350), //position
-      50, //health
-      10, //damage
-      15.0, // gravity
-      3.0, //speed
-      3.0, //jumpValue
-      1, //breakingValueUp
-      0, //breakingValueDown
-      0, //breakingValueLeft
-      0 //breakingValueRight
-    )
-  );
+  enemies.add(new Goomba(150, 350));
   //String path, PVector initialPosition, int health, int damage, float gravity, float speed, float jumpValue
 
   // Crea e restituisci un nuovo livello

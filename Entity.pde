@@ -1,5 +1,7 @@
 class Entity extends Sprite {
     
+    
+
     final int JUMP_TIMEOUT_VALUE = 5;
     int jumpTimeout;
     float gravity;
