@@ -17,7 +17,16 @@ class Player extends Entity {
 
   Player(String path, PVector initialPosition) {
     //super(path: String, posizione iniziale: PVector, salute: int, gravità: float, velocità: float, salto: float)
-    super(path, initialPosition, 5, 20.0, 5.0, 20.0, 1, 0, 0, 0);
+    super(path, //Texture
+          initialPosition, //Intial Position
+          20.0, //Gravity
+          5.0, //Speed
+          20.0, //Jump
+          1, //breakingValueUp
+          0, //breakingValueDown
+          0, //breakingValueLeft
+          0 //breakingValueRight
+    );
 
     powerLevelSet.put(0, MARIO_BASE);
     powerLevelSet.put(1, MARIO_SUPER_MUSHROOM);

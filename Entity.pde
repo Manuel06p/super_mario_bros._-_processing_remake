@@ -1,5 +1,5 @@
 class Entity extends Sprite {
-    int health;
+    
     final int JUMP_TIMEOUT_VALUE = 5;
     int jumpTimeout;
     float gravity;
@@ -11,9 +11,8 @@ class Entity extends Sprite {
 
     boolean jump = false;
 
-    Entity(String path, PVector initialPosition, int health, float gravity, float speed, float jumpValue, int breakingValueUp, int breakingValueDown, int breakingValueLeft, int breakingValueRight) {
+    Entity(String path, PVector initialPosition, float gravity, float speed, float jumpValue, int breakingValueUp, int breakingValueDown, int breakingValueLeft, int breakingValueRight) {
         super(path, initialPosition);
-        this.health = health;
         this.gravity = gravity;
         this.movementSpeed = speed;
         this.speed.y = 0;
