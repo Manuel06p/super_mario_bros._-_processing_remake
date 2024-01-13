@@ -1,34 +1,47 @@
 class Goomba extends Enemy {
-  int damage;
-  int health;
-  boolean isActive = true;
+    boolean isRight;
 
-  Goomba(float x, float y) {
+    Goomba(float x, float y, boolean isRight) {
+        super(GOOMBA + RX + GOOMBA_NEUTRAL, //path
+                new PVector(x, y), //initialPosition
+                1, //health
+                1, //damage
+                GRAVITY, //gravity
+                3.0, //speed
+                5.0, //jumpValue
+                1, //breakingValueUp
+                0, //breakingValueDown
+                0, //breakingValueLeft
+                0 //breakingValueRight
+        );
 
-    super(GOOMBA + RX + GOOMBA_NEUTRAL, //path
-            new PVector(x, y), //initialPosition
-            1, //health
-            1, //damage
-            GRAVITY, //gravity
-            3.0, //speed
-            5.0, //jumpValue
-            1, //breakingValueUp
-            0, //breakingValueDown
-            0, //breakingValueLeft
-            0 //breakingValueRight
-    );
+        imageDictionary.put("goomba", new ArrayList<PImage>() {{
+            add(loadImage(GOOMBA + RX + GOOMBA_NEUTRAL));
+            add(loadImage(GOOMBA + LX + GOOMBA_NEUTRAL));
+        }});
+
+        animation(imageDictionary.get("goomba"), 7);
+        currentAnimation = 0;
+
+        this.isRight = isRight;
     }
 
-    void takeDamage(int damage) {
-        health -= damage;
-        if (health <= 0) {
-        isActive = false;
-        }
-    }
+    
 
     @Override
-    void update() {
-        super.update();
+    void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
+        super.update(platforms, powerUps);
+
+        isRight = moveAuto(isRight);
+
+        
+        if (collideUp(player)) {
+            takeDamage(player.damage);
+            player.bounceOverEnemy();
+            kick_effect.play();
+        }
+        
+
     }
 
     @Override

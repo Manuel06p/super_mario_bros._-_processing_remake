@@ -28,7 +28,7 @@ Level livello1() {
   powerUps.add(new Coin(1500, 500));
 
   //Nemici
-  enemies.add(new Goomba(150, 350));
+  enemies.add(new Goomba(1000, 350, false));
   //String path, PVector initialPosition, int health, int damage, float gravity, float speed, float jumpValue
 
   // Crea e restituisci un nuovo livello

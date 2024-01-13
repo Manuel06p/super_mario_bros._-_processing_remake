@@ -10,6 +10,7 @@ Sound overworld_ost;
 Sound powerup_effect;
 Sound jump_super_effect;
 Sound coin_effect;
+Sound kick_effect;
 
 void setup() {
   fullScreen();
@@ -31,6 +32,7 @@ void setup() {
   powerup_effect = new Sound(this, SOUND + POWERUP_EFFECT);
   jump_super_effect = new Sound(this, SOUND + JUMP_SUPER_EFFECT);
   coin_effect = new Sound(this, SOUND + COIN_EFFECT);
+  kick_effect = new Sound(this, SOUND + KICK_EFFECT);
 
   player = new Player(MARIO + MARIO_BASE + RX + MARIO_NEUTRAL, level.playerInitialPosition.copy());
 

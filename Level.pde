@@ -29,8 +29,21 @@ class Level {
     void update() {
         // Aggiorna la posizione della telecamera in base alla velocità specifica del livello
         cameraX += cameraSpeed;
-        for (Enemy enemy : enemies) {
+
+        ArrayList<Integer> killedEnemies = new ArrayList<Integer>();
+
+        for (int i = 0; i < enemies.size(); i++) {
+            Enemy enemy = enemies.get(i);
             enemy.update(platforms, powerUps);
+            if (!enemy.isActive) {
+                killedEnemies.add(i);
+            }
+        }
+        
+        Collections.sort(killedEnemies, Collections.reverseOrder());
+
+        for (int killedEnemy : killedEnemies) {
+            enemies.remove(killedEnemy);
         }
 
         for (Platform platform : platforms) {

@@ -6,6 +6,7 @@ class Player extends Entity {
   
   boolean isBoosted;
   int powerLevel = 0;
+  int damage;
 
   HashMap<Integer, String> powerLevelSet = new HashMap<Integer, String>();
 
@@ -13,6 +14,7 @@ class Player extends Entity {
   String rightKey;
   String boostKey;
   String jumpKey;
+  
 
 
   Player(String path, PVector initialPosition) {
@@ -93,6 +95,7 @@ class Player extends Entity {
 
     this.isBoosted = false;
     
+    this.damage = 1;
     
     this.leftKey = "left_arrow_key";
     this.rightKey = "right_arrow_key";
@@ -101,6 +104,13 @@ class Player extends Entity {
   }
 
   // Altri metodi specifici del giocatore, se necessario
+
+  void bounceOverEnemy() {
+    player.downCollision = true;
+      player.jump = true;
+      player.jumpTimeout = 0;
+      player.jumpStatus = player.jumpValue/3.0*2.0;
+  }
 
   void superMushroomPower() {
     powerLevel = 1;

@@ -54,6 +54,7 @@ final String OVERWORLD_OST = "overworld_ost.wav";
 final String POWERUP_EFFECT = "powerup_effect.wav";
 final String JUMP_SUPER_EFFECT = "jump_super_effect.wav";
 final String COIN_EFFECT = "coin_effect.wav";
+final String KICK_EFFECT = "kick_effect.wav";
 
 final String GROUND_GROUP = "assets/ground_group.png";
 final String GROUND_GROUP_3 = "assets/ground_group_3.png";

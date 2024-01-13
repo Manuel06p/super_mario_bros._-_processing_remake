@@ -13,15 +13,15 @@ class Enemy extends Entity {
   }
 
   void takeDamage(int damage) {
-    health -= damage;
-    if (health <= 0) {
-      isActive = false;
-    }
+      health -= damage;
+      if (health <= 0) {
+          isActive = false;
+      }
   }
 
   @Override
-  void update() {
-    super.update();
+  void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
+    super.update(platforms, powerUps);
   }
 
   @Override
