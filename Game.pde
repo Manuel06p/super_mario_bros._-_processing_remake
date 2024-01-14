@@ -8,7 +8,7 @@ HashMap<String, Key> keyMap;
 
 Sound overworld_ost;
 Sound powerup_effect;
-Sound jump_super_effect;
+Sound jump_effect;
 Sound coin_effect;
 Sound kick_effect;
 
@@ -30,7 +30,7 @@ void setup() {
 
   overworld_ost = new Sound(this, SOUND + OVERWORLD_OST);
   powerup_effect = new Sound(this, SOUND + POWERUP_EFFECT);
-  jump_super_effect = new Sound(this, SOUND + JUMP_SUPER_EFFECT);
+  jump_effect = new Sound(this, SOUND + JUMP_EFFECT);
   coin_effect = new Sound(this, SOUND + COIN_EFFECT);
   kick_effect = new Sound(this, SOUND + KICK_EFFECT);
 

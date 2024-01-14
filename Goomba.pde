@@ -8,7 +8,8 @@ class Goomba extends Enemy {
                 1, //damage
                 GRAVITY, //gravity
                 3.0, //speed
-                5.0, //jumpValue
+                0, //smallJumpValue
+                0, //superJumpValue
                 1, //breakingValueUp
                 0, //breakingValueDown
                 0, //breakingValueLeft

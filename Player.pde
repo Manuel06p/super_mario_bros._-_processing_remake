@@ -23,7 +23,8 @@ class Player extends Entity {
           initialPosition, //Intial Position
           GRAVITY, //Gravity
           5.0, //Speed
-          20.0, //Jump
+          10.0, //smallJump
+          20.0, //superJump
           1, //breakingValueUp
           0, //breakingValueDown
           0, //breakingValueLeft
@@ -173,9 +174,10 @@ class Player extends Entity {
 
     if (getKeyStatus(jumpKey)) {
       jump = true;
-      if (jumpStatus == 1) {
-        jump_super_effect.play();
-      }
+      
+    }
+    if (jumpStatus == 1) {
+      jump_effect.play();
     }
   }
   

@@ -4,7 +4,7 @@ class SuperMushroom extends PowerUp {
     SuperMushroom(float x, float y, boolean isRight) {
         //super(path: String, posizione iniziale: PVector, gravità: float, velocità: float, salto: float)
         
-        super(POWER_UP + SUPER_MUSHROOM, new PVector(x, y), GRAVITY, 5, 6);
+        super(POWER_UP + SUPER_MUSHROOM, new PVector(x, y), GRAVITY, 5, 0, 0);
 
         this.isRight = isRight;
     }

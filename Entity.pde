@@ -6,6 +6,8 @@ class Entity extends Sprite {
     int jumpTimeout;
     float gravity;
     float jumpValue;
+    float smallJumpValue;
+    float superJumpValue;
     float jumpStatus;
     float movementSpeed;
 
@@ -13,13 +15,18 @@ class Entity extends Sprite {
 
     boolean jump = false;
 
-    Entity(String path, PVector initialPosition, float gravity, float speed, float jumpValue, int breakingValueUp, int breakingValueDown, int breakingValueLeft, int breakingValueRight) {
+    Entity(String path, PVector initialPosition, float gravity, float speed, float smallJumpValue, float superJumpValue, int breakingValueUp, int breakingValueDown, int breakingValueLeft, int breakingValueRight) {
         super(path, initialPosition);
         this.gravity = gravity;
         this.movementSpeed = speed;
         this.speed.y = 0;
         jumpTimeout = 0;
-        this.jumpValue = jumpValue;
+        
+
+        this.smallJumpValue = smallJumpValue;
+        this.superJumpValue = superJumpValue;
+
+        this.jumpValue = this.smallJumpValue;
 
         this.breakingValue.put("up", breakingValueUp);
         this.breakingValue.put("down", breakingValueDown);
@@ -40,8 +47,12 @@ class Entity extends Sprite {
         } else if ((jump || jumpStatus > 0) && jumpTimeout == 0) {
             if (jumpStatus<jumpValue && !upCollision) {
                 jumpStatus += 1;
+                jump = false;
                 applyInvertedGravity();
+            } else if (jump && jumpValue == smallJumpValue && jumpStatus > 3) {
+                jumpValue = superJumpValue;
             } else {
+                jumpValue = smallJumpValue;
                 jumpStatus = 0;
                 jump = false;
                 jumpTimeout = JUMP_TIMEOUT_VALUE;
