@@ -5,20 +5,37 @@ import java.util.Collections;
 Level level;
 Player player;
 HashMap<String, Key> keyMap;
+HashMap<String, Level> levels;
 
 Sound overworld_ost;
 Sound powerup_effect;
 Sound jump_effect;
 Sound coin_effect;
 Sound kick_effect;
+Sound pipe_effect;
+Sound die_effect;
 
 void setup() {
+  overworld_ost = new Sound(this, SOUND + OVERWORLD_OST);
+  powerup_effect = new Sound(this, SOUND + POWERUP_EFFECT);
+  jump_effect = new Sound(this, SOUND + JUMP_EFFECT);
+  coin_effect = new Sound(this, SOUND + COIN_EFFECT);
+  kick_effect = new Sound(this, SOUND + KICK_EFFECT);
+  pipe_effect = new Sound(this, SOUND + PIPE_EFFECT);
+  die_effect = new Sound(this, SOUND + DIE_EFFECT);
+
   fullScreen();
   windowTitle(GAME_TITLE);
   frameRate(FRAME_RATE);
-  level = livello1();
+
+  levels = new HashMap<String, Level>();
+
+  levels.put("level_1", new Level1());
+
+  level = levels.get("level_1");
 
   keyMap = new HashMap<String, Key>();
+
   
   // Aggiungi gli oggetti Key al dizionario
   keyMap.put("a_key", new Key('a'));
@@ -28,16 +45,22 @@ void setup() {
   keyMap.put("shift_key", new Key(SHIFT));
   keyMap.put("spacebar_key", new Key(32));
 
-  overworld_ost = new Sound(this, SOUND + OVERWORLD_OST);
-  powerup_effect = new Sound(this, SOUND + POWERUP_EFFECT);
-  jump_effect = new Sound(this, SOUND + JUMP_EFFECT);
-  coin_effect = new Sound(this, SOUND + COIN_EFFECT);
-  kick_effect = new Sound(this, SOUND + KICK_EFFECT);
+  
 
   player = new Player(MARIO + MARIO_BASE + RX + MARIO_NEUTRAL, level.playerInitialPosition.copy());
-
-  overworld_ost.loop();
 }
+
+// Aggiorna la logica del gioco
+void update() {
+  if (player.isDead) {
+    level.reset();
+    player.reset(level.playerInitialPosition);
+  }
+  level.update();
+  player.update(level.platforms, level.powerUps);
+
+}
+
 
 void draw() {
   background(159, 203, 255);
@@ -56,12 +79,6 @@ void draw() {
   translate(level.cameraX, 0);
 }
 
-// Aggiorna la logica del gioco
-void update() {
-  level.update();
-  player.update(level.platforms, level.powerUps);
-
-}
 
 
 void keyPressed() {

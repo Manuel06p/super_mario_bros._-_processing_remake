@@ -55,6 +55,8 @@ final String POWERUP_EFFECT = "powerup_effect.wav";
 final String JUMP_EFFECT = "jump_effect.wav";
 final String COIN_EFFECT = "coin_effect.wav";
 final String KICK_EFFECT = "kick_effect.wav";
+final String PIPE_EFFECT = "pipe_effect.wav";
+final String DIE_EFFECT = "die_effect.wav";
 
 final String GROUND_GROUP = "assets/ground_group.png";
 final String GROUND_GROUP_3 = "assets/ground_group_3.png";

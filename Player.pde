@@ -5,9 +5,11 @@ class Player extends Entity {
   int boostValue;
   
   boolean isBoosted;
-  int powerLevel = 0;
+  int powerLevel = 1;
   int damage;
-
+  final int damageTimeoutValue = 120;
+  int damageTimeout;
+  boolean isDead = false;
   HashMap<Integer, String> powerLevelSet = new HashMap<Integer, String>();
 
   String leftKey;
@@ -31,8 +33,10 @@ class Player extends Entity {
           0 //breakingValueRight
     );
 
-    powerLevelSet.put(0, MARIO_BASE);
-    powerLevelSet.put(1, MARIO_SUPER_MUSHROOM);
+    damageTimeout = damageTimeoutValue;
+
+    powerLevelSet.put(1, MARIO_BASE);
+    powerLevelSet.put(2, MARIO_SUPER_MUSHROOM);
 
     imageDictionary.put(MARIO_BASE + RX + "_mario_neutral", new ArrayList<PImage>() {{
       add(loadImage(MARIO + MARIO_BASE + RX + MARIO_NEUTRAL));
@@ -105,6 +109,17 @@ class Player extends Entity {
   }
 
   // Altri metodi specifici del giocatore, se necessario
+  void reset(PVector initialPosition) {
+    basePower();
+    position = initialPosition;
+    
+    isDead = false;
+    damageTimeout = damageTimeoutValue;
+    if (isBoosted) {
+      isBoosted = false;
+      movementSpeed /= boostValue;
+    }
+  }
 
   void bounceOverEnemy() {
     player.downCollision = true;
@@ -113,8 +128,20 @@ class Player extends Entity {
       player.jumpStatus = player.jumpValue/3.0*2.0;
   }
 
-  void superMushroomPower() {
+  void basePower() {
     powerLevel = 1;
+    player.breakingValue.put("up", 1);
+    animation(imageDictionary.get(powerLevelSet.get(powerLevel) + side + "_mario_neutral"), 0);
+    currentAnimation = 0;
+    float oldHeight = height;
+    width = texture.width;
+    height = texture.height;
+    position.y = position.y + oldHeight - height;
+    damage = 1;
+  }
+
+  void superMushroomPower() {
+    powerLevel = 2;
     player.breakingValue.put("up", 2);
 
     animation(imageDictionary.get(powerLevelSet.get(powerLevel) + side + "_mario_neutral"), 0);
@@ -123,12 +150,27 @@ class Player extends Entity {
     width = texture.width;
     height = texture.height;
     position.y = position.y + oldHeight - height;
+    damage = 1;
   }
 
   // Override della funzione draw() per personalizzarla
   void draw() {
     // Aggiungi eventuali logiche di disegno specifiche per il giocatore
     super.draw();  // Chiama il metodo draw() della classe base (Entity)
+  }
+
+  void takeDamage(int damage) {
+    if (damageTimeout == damageTimeoutValue) {
+      if (powerLevel - damage <= 0 ) {
+        die_effect.play();
+        isDead = true;
+      } else if (damage > 0) {
+        powerLevel -= damage;
+        basePower();
+        pipe_effect.play();
+      }
+      damageTimeout = 0;
+    }
   }
 
   void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
@@ -179,6 +221,10 @@ class Player extends Entity {
     if (jumpStatus == 1) {
       jump_effect.play();
     }
+
+    if (damageTimeout < damageTimeoutValue) {
+      damageTimeout += 1;
+    } 
   }
   
 }

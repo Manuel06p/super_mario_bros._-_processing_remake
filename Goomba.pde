@@ -41,6 +41,10 @@ class Goomba extends Enemy {
             player.bounceOverEnemy();
             kick_effect.play();
         }
+
+        if (collideDown(player) || collideRight(player) || collideLeft(player)) {
+            player.takeDamage(damage);
+        }
         
 
     }

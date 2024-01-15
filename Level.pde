@@ -8,22 +8,23 @@ class Level {
     int id;
     float cameraX;
     float cameraSpeed;
+    Sound music;
     
 
     PVector playerInitialPosition;
 
-    Level(ArrayList<Platform> platforms, ArrayList<Enemy> enemies, ArrayList<PowerUp> powerUps, int length, String tag, String name, int id, float cameraSpeed, PVector playerInitialPosition) {
-        this.platforms = platforms;
-        this.enemies = enemies;
-        this.powerUps = powerUps;
-        this.length = length;
-        this.tag = tag;
-        this.name = name;
-        this.id = id;
+    Level(Sound music) {
+        this.music = music;
+        reset();
         this.cameraX = 0;
-        this.cameraSpeed = cameraSpeed;
-        this.playerInitialPosition = playerInitialPosition;
-        
+    }
+
+    void reset() {
+        music.loop();
+        cameraX = 0;
+        platforms = new ArrayList<Platform>();
+        enemies = new ArrayList<Enemy>();
+        powerUps = new ArrayList<PowerUp>();
     }
 
     void update() {
