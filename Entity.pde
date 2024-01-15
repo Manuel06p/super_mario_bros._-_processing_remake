@@ -145,7 +145,10 @@ class Entity extends Sprite {
                 if (this instanceof Player && questionBlock.isActive) {
                     questionBlock.isActive = false;
                     questionBlock.emptyBlock();
-                    powerUps.add(new SuperMushroom(questionBlock.position.x, questionBlock.position.y - questionBlock.height, true));
+                    if (questionBlock.powerUp == SUPER_MUSHROOM) {
+                        powerUps.add(new SuperMushroom(questionBlock.position.x, questionBlock.position.y - questionBlock.height, true));
+                    }
+                    
                 }
                 
             }

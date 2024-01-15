@@ -22,7 +22,7 @@ Platform single_brick(float x, float y) {
   );
 }
 
-QuestionBlock question_block(float x, float y) {
+QuestionBlock question_block(float x, float y, String powerUp) {
   return new QuestionBlock(
     QUESTION_BLOCK + QUESTION_BLOCK_1, //texture
     new PVector(x, GAME_HEIGHT - y),  //position
@@ -30,6 +30,7 @@ QuestionBlock question_block(float x, float y) {
     3, //breakabilityUp
     3, //breakabilityDown
     3, //breakabilityLeft
-    3 //breakabilityRight
+    3, //breakabilityRight
+    powerUp // powerUp
   );
 }

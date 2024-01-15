@@ -42,7 +42,7 @@ class Goomba extends Enemy {
             kick_effect.play();
         }
 
-        if (collideDown(player) || collideRight(player) || collideLeft(player)) {
+        if (collideDown(player) || ((collideRight(player) || collideLeft(player)) && player.position.y + player.height > centralPositionY())) {
             player.takeDamage(damage);
         }
         

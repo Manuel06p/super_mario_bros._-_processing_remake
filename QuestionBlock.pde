@@ -1,10 +1,11 @@
 class QuestionBlock extends Platform {
     
     boolean isActive = true;
+    String powerUp = "";
 
-    QuestionBlock(String path, PVector initialPosition, boolean hasBounds, int breakabilityUp, int breakabilityDown, int breakabilityLeft, int breakabilityRight) {
+    QuestionBlock(String path, PVector initialPosition, boolean hasBounds, int breakabilityUp, int breakabilityDown, int breakabilityLeft, int breakabilityRight, String powerUp) {
         super(path, initialPosition, hasBounds, breakabilityUp, breakabilityDown, breakabilityLeft, breakabilityRight);
-
+        this.powerUp = powerUp;
 
         imageDictionary.put("question_block", new ArrayList<PImage>() {{
             add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_1));

@@ -18,10 +18,11 @@ class Level1 extends Level {
 
         platforms.add(ground(0, 120));
         platforms.add(single_brick(1080, 500));
-        platforms.add(question_block(1200, 500));
+        platforms.add(question_block(1200, 500, SUPER_MUSHROOM));
         platforms.add(single_brick(1320, 500));
         platforms.add(single_brick(1800, 240));
         platforms.add(single_brick(800, 240));
+
 
         powerUps.add(new Coin(1500, 500));
 
