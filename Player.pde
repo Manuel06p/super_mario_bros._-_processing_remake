@@ -3,6 +3,8 @@
 class Player extends Entity {
   
   int boostValue;
+  int lives;
+  int coins;
   
   boolean isBoosted;
   int powerLevel = 1;
@@ -16,6 +18,11 @@ class Player extends Entity {
   String rightKey;
   String boostKey;
   String jumpKey;
+  
+  StringBuilder coinString = new StringBuilder();
+  
+  
+  Text coinHUD;
   
 
 
@@ -33,6 +40,7 @@ class Player extends Entity {
           0 //breakingValueRight
     );
 
+    lives = 3;    
     damageTimeout = damageTimeoutValue;
 
     powerLevelSet.put(1, MARIO_BASE);
@@ -106,12 +114,19 @@ class Player extends Entity {
     this.rightKey = "right_arrow_key";
     this.boostKey = "shift_key";
     this.jumpKey = "spacebar_key";
+    
+    coinString.append("x");
+    coinString.append(coins);
+    
+    this.coinHUD = new Text(STANDARD_FONT, 200, 200, coinString, 255);
   }
 
   // Altri metodi specifici del giocatore, se necessario
   void reset(PVector initialPosition) {
     basePower();
     position = initialPosition;
+    
+    coins = 0;
     
     isDead = false;
     damageTimeout = damageTimeoutValue;
@@ -152,11 +167,27 @@ class Player extends Entity {
     position.y = position.y + oldHeight - height;
     damage = 1;
   }
+  
+  void drawCoinHUD() {
+    coinHUD.draw();
+  }
+
+  void coin() {
+    coins += 1;
+    
+    if (coins > 99) {
+        coins = 0;
+    }
+    
+    coinString.replace(2, 2, "0" + coins);
+  }
 
   // Override della funzione draw() per personalizzarla
   void draw() {
     // Aggiungi eventuali logiche di disegno specifiche per il giocatore
     super.draw();  // Chiama il metodo draw() della classe base (Entity)
+    
+
   }
 
   void takeDamage(int damage) {
@@ -175,6 +206,7 @@ class Player extends Entity {
 
   void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
     super.update(platforms, powerUps); // Chiama l'aggiornamento di Entity
+    
     
     if (getKeyStatus(leftKey)) {
       if (currentAnimation != 1) {

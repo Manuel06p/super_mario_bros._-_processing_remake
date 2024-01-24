@@ -61,4 +61,7 @@ final String DIE_EFFECT = "die_effect.wav";
 final String GROUND_GROUP = "assets/ground_group.png";
 final String GROUND_GROUP_3 = "assets/ground_group_3.png";
 
+final String FONTS = "assets/fonts/";
+final String STANDARD_FONT = FONTS + "standard_font.ttf";
+
 final float GRAVITY = 20.0;

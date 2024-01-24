@@ -19,4 +19,3 @@ class PowerUp extends Entity {
         super.draw();
     }
 }
-

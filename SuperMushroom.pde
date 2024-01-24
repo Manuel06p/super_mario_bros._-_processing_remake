@@ -26,4 +26,3 @@ class SuperMushroom extends PowerUp {
         super.draw();
     }
 }
-

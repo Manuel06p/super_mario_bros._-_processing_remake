@@ -22,7 +22,7 @@ class Coin extends PowerUp {
         super.update(platforms, powerUps);     
 
         if (collideDown(player) || collideRight(player) || collideLeft(player) || collideUp(player)) {
-            //player.coin();
+            player.coin();
             isActive = false;
             coin_effect.play();
         }
@@ -33,4 +33,3 @@ class Coin extends PowerUp {
         super.draw();
     }
 }
-

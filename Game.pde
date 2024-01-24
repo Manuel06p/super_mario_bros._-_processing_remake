@@ -1,6 +1,7 @@
 // File: Game.pde
 import java.util.Iterator;
 import java.util.Collections;
+import java.lang.Object.*;
 
 Level level;
 Player player;
@@ -66,6 +67,10 @@ void draw() {
   background(159, 203, 255);
 
   // Chiamare la funzione update del livello
+  
+
+  pushMatrix();
+
   update();
 
   // Spostare il display in base alla posizione della telecamera
@@ -77,6 +82,9 @@ void draw() {
 
   // Reimpostare la trasformazione per il prossimo frame
   translate(level.cameraX, 0);
+  popMatrix();
+
+  player.drawCoinHUD();
 }
 
 
