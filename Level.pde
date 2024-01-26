@@ -14,6 +14,9 @@ class Level {
     Text coinHudText;
     Sprite coinHudIcon;
     
+    StringBuilder lifeHudString = new StringBuilder();
+    Text lifeHudText;
+    Sprite lifeHudIcon;
 
     PVector playerInitialPosition;
 
@@ -22,8 +25,13 @@ class Level {
 
         //HUD
         coinHudString.append("x00");
-        coinHudIcon = new Sprite(POWER_UP + COIN_0, new PVector(70, 70));
+        coinHudIcon = new Sprite(POWER_UP + COIN_0, new PVector(400, 70));
         coinHudText = new Text(STANDARD_FONT, coinHudIcon.position.x + 62, coinHudIcon.position.y + 62, coinHudString, 255, 40);
+
+        lifeHudString.append("x03");
+        lifeHudIcon = new Sprite(POWER_UP + ONE_UP_MUSHROOM, new PVector(70, 70));
+        lifeHudText = new Text(STANDARD_FONT, lifeHudIcon.position.x + 98, lifeHudIcon.position.y + 62, lifeHudString, 255, 40);
+
 
         reset();
         this.cameraX = 0;
@@ -102,5 +110,7 @@ class Level {
     void drawHud() {
         coinHudIcon.draw();
         coinHudText.draw();
+        lifeHudIcon.draw();
+        lifeHudText.draw();
     }
 }

@@ -34,7 +34,9 @@ class Entity extends Sprite {
         this.breakingValue.put("right", breakingValueRight);
     }
 
-    
+    void jump() {
+        
+    }
 
     void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
         
@@ -44,6 +46,8 @@ class Entity extends Sprite {
           this.takeDamage(-1);
         }
         
+
+
         checkCollisions(platforms, powerUps);
 
         if (!downCollision && jumpStatus == 0 ) {
@@ -71,15 +75,6 @@ class Entity extends Sprite {
             jumpTimeout -= 1;
         }
 
-        if (speed.x == 0) {
-            /*
-            if (rightCollision) {
-                position.x = rightCollisionX;
-            } else if (leftCollision) {
-                position.x = leftCollisionX;
-            }
-            */
-        }
     }
 
     void applyGravity() {
@@ -151,6 +146,10 @@ class Entity extends Sprite {
                     questionBlock.emptyBlock();
                     if (questionBlock.powerUp == SUPER_MUSHROOM) {
                         powerUps.add(new SuperMushroom(questionBlock.position.x, questionBlock.position.y - questionBlock.height, true));
+                        powerup_appears_effect.play();
+                    } else if (questionBlock.powerUp == ONE_UP_MUSHROOM) {
+                        powerUps.add(new OneUpMushroom(questionBlock.position.x, questionBlock.position.y - questionBlock.height, true));
+                        powerup_appears_effect.play();
                     }
                     
                 }

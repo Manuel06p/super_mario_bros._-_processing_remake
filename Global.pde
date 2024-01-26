@@ -21,6 +21,7 @@ final String MARIO_WALK_1 = "_mario_walk_1.png";
 final String MARIO_WALK_2 = "_mario_walk_2.png";
 final String MARIO_WALK_3 = "_mario_walk_3.png";
 final String MARIO_JUMP = "_mario_jump.png";
+final String MARIO_DEAD = "mario_dead.png";
 
 final String ENEMIES = "assets/enemies/";
 
@@ -42,6 +43,7 @@ final String QUESTION_BLOCK_EMPTY = "question_block_empty.png";
 final String POWER_UP = "assets/power_up/";
 
 final String SUPER_MUSHROOM = "super_mushroom.png";
+final String ONE_UP_MUSHROOM = "one_up_mushroom.png";
 
 final String COIN_0 = "coin_0.png";
 final String COIN_1 = "coin_1.png";
@@ -54,9 +56,11 @@ final String OVERWORLD_OST = "overworld_ost.wav";
 final String POWERUP_EFFECT = "powerup_effect.wav";
 final String JUMP_EFFECT = "jump_effect.wav";
 final String COIN_EFFECT = "coin_effect.wav";
+final String ONE_UP_EFFECT = "one_up_effect.wav";
 final String KICK_EFFECT = "kick_effect.wav";
 final String PIPE_EFFECT = "pipe_effect.wav";
 final String DIE_EFFECT = "die_effect.wav";
+final String POWERUP_APPEARS_EFFECT = "powerup_appears_effect.wav";
 
 final String GROUND_GROUP = "assets/ground_group.png";
 final String GROUND_GROUP_3 = "assets/ground_group_3.png";

@@ -16,7 +16,10 @@ Sound coin_effect;
 Sound kick_effect;
 Sound pipe_effect;
 Sound die_effect;
+Sound one_up_effect;
+Sound powerup_appears_effect;
 
+Timer deadTimeout;
 
 void setup() {
   overworld_ost = new Sound(this, SOUND + OVERWORLD_OST);
@@ -26,6 +29,10 @@ void setup() {
   kick_effect = new Sound(this, SOUND + KICK_EFFECT);
   pipe_effect = new Sound(this, SOUND + PIPE_EFFECT);
   die_effect = new Sound(this, SOUND + DIE_EFFECT);
+  one_up_effect = new Sound(this, SOUND + ONE_UP_EFFECT);
+  powerup_appears_effect = new Sound(this, SOUND + POWERUP_APPEARS_EFFECT);
+
+  deadTimeout = new Timer(360);
 
   fullScreen();
   windowTitle(GAME_TITLE);
@@ -57,14 +64,19 @@ void setup() {
 // Aggiorna la logica del gioco
 void update() {
   if (player.isDead) {
-    level.reset();
-    player.reset(level.playerInitialPosition);
+    deadTimeout.update();
+    if (deadTimeout.tick()) {
+      level.reset();
+      player.reset(level.playerInitialPosition);
+      deadTimeout.reset();
+    } else {
+      level.update();
+      player.update(level.platforms, level.powerUps);
+    }
+  } else {
+    level.update();
+    player.update(level.platforms, level.powerUps);
   }
-  level.update();
-  player.update(level.platforms, level.powerUps);
-  
-  
-  
 }
 
 
