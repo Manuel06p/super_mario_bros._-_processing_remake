@@ -15,6 +15,13 @@ class PowerUp extends Entity {
     }
     
     @Override
+    void takeDamage(int damage) {
+      if (damage == -1) {
+        isActive = false;
+      }
+    }
+    
+    @Override
     void draw() {
         super.draw();
     }

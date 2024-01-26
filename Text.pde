@@ -5,10 +5,10 @@ class Text {
   PFont font;
   StringBuilder text;
   
-  Text(String path, float x, float y, StringBuilder text, color font_color) {
+  Text(String path, float x, float y, StringBuilder text, color font_color, int size) {
     position = new PVector(x, y);
     this.font_color = font_color;
-    size = 20;
+    this.size = size;
     this.text = text;
     font = createFont(path, size); 
   }

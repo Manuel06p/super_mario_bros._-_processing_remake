@@ -39,7 +39,11 @@ class Entity extends Sprite {
     void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
         
         super.update();
-
+        
+        if (exceedsLowerBound()) {
+          this.takeDamage(-1);
+        }
+        
         checkCollisions(platforms, powerUps);
 
         if (!downCollision && jumpStatus == 0 ) {
@@ -232,6 +236,10 @@ class Entity extends Sprite {
         }
 
         return isRight;
+    }
+    
+    void takeDamage(int damage) {
+      
     }
 
     @Override

@@ -9,20 +9,22 @@ class Player extends Entity {
   boolean isBoosted;
   int powerLevel = 1;
   int damage;
-  final int damageTimeoutValue = 120;
+  final int DAMAGE_TIMEOUT_VALUE = 120;
   int damageTimeout;
   boolean isDead = false;
   HashMap<Integer, String> powerLevelSet = new HashMap<Integer, String>();
+
+  
 
   String leftKey;
   String rightKey;
   String boostKey;
   String jumpKey;
   
-  StringBuilder coinString = new StringBuilder();
   
   
-  Text coinHUD;
+  
+
   
 
 
@@ -41,7 +43,9 @@ class Player extends Entity {
     );
 
     lives = 3;    
-    damageTimeout = damageTimeoutValue;
+    damageTimeout = DAMAGE_TIMEOUT_VALUE;
+
+    
 
     powerLevelSet.put(1, MARIO_BASE);
     powerLevelSet.put(2, MARIO_SUPER_MUSHROOM);
@@ -115,21 +119,17 @@ class Player extends Entity {
     this.boostKey = "shift_key";
     this.jumpKey = "spacebar_key";
     
-    coinString.append("x");
-    coinString.append(coins);
     
-    this.coinHUD = new Text(STANDARD_FONT, 200, 200, coinString, 255);
   }
 
   // Altri metodi specifici del giocatore, se necessario
   void reset(PVector initialPosition) {
+    side = RX;
     basePower();
     position = initialPosition;
     
-    coins = 0;
-    
     isDead = false;
-    damageTimeout = damageTimeoutValue;
+    damageTimeout = DAMAGE_TIMEOUT_VALUE;
     if (isBoosted) {
       isBoosted = false;
       movementSpeed /= boostValue;
@@ -168,9 +168,6 @@ class Player extends Entity {
     damage = 1;
   }
   
-  void drawCoinHUD() {
-    coinHUD.draw();
-  }
 
   void coin() {
     coins += 1;
@@ -178,8 +175,12 @@ class Player extends Entity {
     if (coins > 99) {
         coins = 0;
     }
+    if (coins < 10) {
+      level.coinHudString.replace(level.coinHudString.length()-1, level.coinHudString.length(), coins + "");
+    } else {
+      level.coinHudString.replace(level.coinHudString.length()-2, level.coinHudString.length(), coins + "");
+    }
     
-    coinString.replace(2, 2, "0" + coins);
   }
 
   // Override della funzione draw() per personalizzarla
@@ -189,9 +190,15 @@ class Player extends Entity {
     
 
   }
-
+  
+  @Override
   void takeDamage(int damage) {
-    if (damageTimeout == damageTimeoutValue) {
+    super.takeDamage(damage);
+    if (damage == -1) {
+      die_effect.play();
+      isDead = true;
+    } else {
+      if (damageTimeout == DAMAGE_TIMEOUT_VALUE) {
       if (powerLevel - damage <= 0 ) {
         die_effect.play();
         isDead = true;
@@ -202,11 +209,18 @@ class Player extends Entity {
       }
       damageTimeout = 0;
     }
+    }
+    
   }
 
   void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
     super.update(platforms, powerUps); // Chiama l'aggiornamento di Entity
     
+    if (position.x < 0) {
+      leftCollision = true;
+      position.x = 0;
+    }
+
     
     if (getKeyStatus(leftKey)) {
       if (currentAnimation != 1) {
@@ -254,7 +268,7 @@ class Player extends Entity {
       jump_effect.play();
     }
 
-    if (damageTimeout < damageTimeoutValue) {
+    if (damageTimeout < DAMAGE_TIMEOUT_VALUE) {
       damageTimeout += 1;
     } 
   }

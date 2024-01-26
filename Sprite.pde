@@ -105,6 +105,10 @@ class Sprite {
     }
     return rightCollisionTemp;
   }
+  
+  boolean exceedsLowerBound() {
+    return this.position.y > GAME_HEIGHT;
+  }
 
   boolean collideLeft(Sprite sprite) {
     boolean leftCollisionTemp = false;

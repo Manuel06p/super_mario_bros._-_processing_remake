@@ -3,6 +3,7 @@ import java.util.Iterator;
 import java.util.Collections;
 import java.lang.Object.*;
 
+
 Level level;
 Player player;
 HashMap<String, Key> keyMap;
@@ -15,6 +16,7 @@ Sound coin_effect;
 Sound kick_effect;
 Sound pipe_effect;
 Sound die_effect;
+
 
 void setup() {
   overworld_ost = new Sound(this, SOUND + OVERWORLD_OST);
@@ -47,6 +49,7 @@ void setup() {
   keyMap.put("spacebar_key", new Key(32));
 
   
+  
 
   player = new Player(MARIO + MARIO_BASE + RX + MARIO_NEUTRAL, level.playerInitialPosition.copy());
 }
@@ -59,7 +62,9 @@ void update() {
   }
   level.update();
   player.update(level.platforms, level.powerUps);
-
+  
+  
+  
 }
 
 
@@ -70,21 +75,20 @@ void draw() {
   
 
   pushMatrix();
-
-  update();
-
-  // Spostare il display in base alla posizione della telecamera
-  translate(-level.cameraX, 0);
-
-  // Disegnare il livello
-  level.draw();
-  player.draw();
-
-  // Reimpostare la trasformazione per il prossimo frame
-  translate(level.cameraX, 0);
+    update();
+    // Spostare il display in base alla posizione della telecamera
+    translate(-level.cameraX, 0);
+  
+    // Disegnare il livello
+    level.draw();
+    player.draw();
+  
+    // Reimpostare la trasformazione per il prossimo frame
+    translate(level.cameraX, 0);
   popMatrix();
 
-  player.drawCoinHUD();
+  level.drawHud();
+  
 }
 
 

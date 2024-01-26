@@ -12,11 +12,13 @@ class Enemy extends Entity {
     this.damage = damage;
   }
 
+  @Override
   void takeDamage(int damage) {
-      health -= damage;
-      if (health <= 0) {
-          isActive = false;
-      }
+    super.takeDamage(damage);
+    health -= damage;
+    if (health <= 0 || damage == -1) {
+        isActive = false;
+    }
   }
 
   @Override
