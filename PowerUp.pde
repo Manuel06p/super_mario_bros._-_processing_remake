@@ -5,7 +5,7 @@ class PowerUp extends Entity {
 
     PowerUp(String path, PVector initialPosition, float gravity, float speed, float smallJumpValue, float superJumpValue) {
         //super(path: String, posizione iniziale: PVector, salute: int, gravità: float, velocità: float, salto: float)
-        super(path, initialPosition, gravity, speed, smallJumpValue, superJumpValue, -1, -1, -1, -1);
+        super(path, new PVector(initialPosition.x, GAME_HEIGHT-initialPosition.y), gravity, speed, smallJumpValue, superJumpValue, -1, -1, -1, -1);
 
     }
 

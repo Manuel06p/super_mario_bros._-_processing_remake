@@ -30,6 +30,10 @@ final String GOOMBA_NEUTRAL = "_goomba_neutral.png";
 
 final String ITEMS = "assets/items/";
 
+final String GROUND_17X1 = ITEMS + "ground_17x1.png";
+
+final String BLOCK = ITEMS + "block.png";
+
 final String BRICK = ITEMS + "brick.png";
 
 final String QUESTION_BLOCK = ITEMS + "question_block/";
@@ -44,8 +48,11 @@ final String POWER_UP = "assets/power_up/";
 
 final String SUPER_MUSHROOM = "super_mushroom.png";
 final String ONE_UP_MUSHROOM = "one_up_mushroom.png";
+final String ONE_UP_MUSHROOM_BIG = "one_up_mushroom_big.png";
 
 final String COIN_0 = "coin_0.png";
+final String COIN_0_BIG = "coin_0_big.png";
+
 final String COIN_1 = "coin_1.png";
 final String COIN_2 = "coin_2.png";
 final String COIN_3 = "coin_3.png";

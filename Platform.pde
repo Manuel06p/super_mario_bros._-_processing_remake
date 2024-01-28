@@ -15,7 +15,7 @@ class Platform extends Sprite {
    * - initialPosition: posizione iniziale della piattaforma.
    */
   Platform(String path, PVector initialPosition, boolean hasBounds, int breakabilityUp, int breakabilityDown, int breakabilityLeft, int breakabilityRight) {
-    super(path, initialPosition);
+    super(path, new PVector(initialPosition.x, GAME_HEIGHT-initialPosition.y));
     this.hasBounds = hasBounds;
 
 
@@ -40,6 +40,5 @@ class Platform extends Sprite {
   void draw() {  
     super.draw();  // Chiamare il metodo draw della classe madre
     // Puoi aggiungere ulteriori dettagli di disegno specifici della piattaforma, se necessario
-    
   }
 }

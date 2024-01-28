@@ -19,7 +19,16 @@ Sound die_effect;
 Sound one_up_effect;
 Sound powerup_appears_effect;
 
-Timer deadTimeout;
+Timer deadResetTimeout;
+Timer deadScreenTimeout;
+
+Text coinLoadLevelText;
+Sprite coinLoadLevelIcon;
+
+Text lifeLoadLevelText;
+Sprite lifeLoadLevelIcon;
+
+StringBuilder levelNameString = new StringBuilder();
 
 void setup() {
   overworld_ost = new Sound(this, SOUND + OVERWORLD_OST);
@@ -32,7 +41,8 @@ void setup() {
   one_up_effect = new Sound(this, SOUND + ONE_UP_EFFECT);
   powerup_appears_effect = new Sound(this, SOUND + POWERUP_APPEARS_EFFECT);
 
-  deadTimeout = new Timer(360);
+  deadResetTimeout = new Timer(200); //Tempo della durata del dead screen, prima del reset
+  deadScreenTimeout = new Timer(150); //Tempo di durata dell'animazione, prima dell'inizio del dead screen
 
   fullScreen();
   windowTitle(GAME_TITLE);
@@ -58,36 +68,30 @@ void setup() {
   
   
 
-  player = new Player(MARIO + MARIO_BASE + RX + MARIO_NEUTRAL, level.playerInitialPosition.copy());
+  player = new Player(MARIO + MARIO_BASE + RX + MARIO_NEUTRAL, level.playerInitialPosition);
+
+  coinLoadLevelIcon = new Sprite(POWER_UP + COIN_0_BIG, new PVector(740, 600));
+  coinLoadLevelText = new Text(STANDARD_FONT, coinLoadLevelIcon.position.x + 120, coinLoadLevelIcon.position.y + 135, level.coinHudString, 255, 100);
+
+  lifeLoadLevelIcon = new Sprite(POWER_UP + ONE_UP_MUSHROOM_BIG, new PVector(700, 200));
+  lifeLoadLevelText = new Text(STANDARD_FONT, lifeLoadLevelIcon.position.x + 195, lifeLoadLevelIcon.position.y + 135, level.lifeHudString, 255, 100);
+
+  levelNameString.append(level.name);
+
+  lifeLoadLevelText = new Text(STANDARD_FONT, 195, 135, levelNameString, 255, 100);
+
 }
 
 // Aggiorna la logica del gioco
-void update() {
-  if (player.isDead) {
-    deadTimeout.update();
-    if (deadTimeout.tick()) {
-      level.reset();
-      player.reset(level.playerInitialPosition);
-      deadTimeout.reset();
-    } else {
-      level.update();
-      player.update(level.platforms, level.powerUps);
-    }
-  } else {
-    level.update();
-    player.update(level.platforms, level.powerUps);
-  }
+void updateLevel() {
+  level.update();
+  player.update(level.platforms, level.powerUps);
 }
 
-
-void draw() {
+void drawLevel() {
   background(159, 203, 255);
-
-  // Chiamare la funzione update del livello
-  
-
   pushMatrix();
-    update();
+    updateLevel();
     // Spostare il display in base alla posizione della telecamera
     translate(-level.cameraX, 0);
   
@@ -100,6 +104,42 @@ void draw() {
   popMatrix();
 
   level.drawHud();
+}
+
+
+
+void loadLevelDraw() {
+  background(0);
+  coinLoadLevelIcon.draw();
+  coinLoadLevelText.draw();
+  lifeLoadLevelIcon.draw();
+  lifeLoadLevelText.draw();
+}
+
+void draw() {
+  // Chiamare la funzione update del livello
+  if (!player.isDead) {
+      drawLevel();
+  } else if (player.lives <= 0) {
+    
+  } else {
+    if (deadResetTimeout.tick()) { // Attiva il reset del player alla fine del timer
+      level.reset();
+      player.reset(level.playerInitialPosition);
+      deadResetTimeout.reset();
+      deadScreenTimeout.reset();
+    } else {
+      deadScreenTimeout.update();
+      if (deadScreenTimeout.tick()) { // Attiva lo screen delle vite dopo l'animazione alla fine del timer
+        deadResetTimeout.update();
+        loadLevelDraw();
+      } else {
+        drawLevel();
+      }      
+    }
+  }
+
+  
   
 }
 

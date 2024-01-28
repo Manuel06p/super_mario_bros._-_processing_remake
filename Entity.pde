@@ -145,10 +145,10 @@ class Entity extends Sprite {
                     questionBlock.isActive = false;
                     questionBlock.emptyBlock();
                     if (questionBlock.powerUp == SUPER_MUSHROOM) {
-                        powerUps.add(new SuperMushroom(questionBlock.position.x, questionBlock.position.y - questionBlock.height, true));
+                        powerUps.add(new SuperMushroom(questionBlock.position.x, questionBlock.position.y + questionBlock.height, true));
                         powerup_appears_effect.play();
                     } else if (questionBlock.powerUp == ONE_UP_MUSHROOM) {
-                        powerUps.add(new OneUpMushroom(questionBlock.position.x, questionBlock.position.y - questionBlock.height, true));
+                        powerUps.add(new OneUpMushroom(questionBlock.position.x, questionBlock.position.y + questionBlock.height, true));
                         powerup_appears_effect.play();
                     }
                     

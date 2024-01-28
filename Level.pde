@@ -85,7 +85,8 @@ class Level {
             powerUps.remove(killedPowerUp);
         }
         
-        if ((cameraX + GAME_WIDTH) - (player.position.x + player.width) < 800) { //Verso destra
+
+        if ((cameraX + GAME_WIDTH) - (player.position.x + player.width) < 800 && cameraX + GAME_WIDTH < length) { //Verso destra
             cameraX += cameraSpeed;
         } else if (player.position.x - cameraX < 800 && cameraX > 0) { //Verso sinistra
             cameraX -= cameraSpeed;

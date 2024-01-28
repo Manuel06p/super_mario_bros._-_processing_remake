@@ -280,7 +280,10 @@ class Player extends Entity {
       if (position.x < 0) {
         leftCollision = true;
         position.x = 0;
-     }
+      } else if (position.x + width > level.length) {
+        rightCollision = true;
+        position.x = level.length - width;
+      }
 
       if (getKeyStatus(leftKey)) {
         if (currentAnimation != 1) {
