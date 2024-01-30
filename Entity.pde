@@ -150,8 +150,10 @@ class Entity extends Sprite {
                     } else if (questionBlock.powerUp == ONE_UP_MUSHROOM) {
                         powerUps.add(new OneUpMushroom(questionBlock.position.x, questionBlock.position.y + questionBlock.height, true));
                         powerup_appears_effect.play();
+                    } else if (questionBlock.powerUp == FIRE_FLOWER) {
+                        powerUps.add(new FireFlower(questionBlock.position.x + 15, questionBlock.position.y + questionBlock.height));
+                        powerup_appears_effect.play();
                     }
-                    
                 }
                 
             }

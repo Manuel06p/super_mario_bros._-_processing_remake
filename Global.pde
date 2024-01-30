@@ -15,6 +15,7 @@ final String MARIO = "assets/player/";
 
 final String MARIO_BASE = "base/";
 final String MARIO_SUPER_MUSHROOM = "super_mushroom/";
+final String MARIO_FIRE_FLOWER = "fire_flower/";
 
 final String MARIO_NEUTRAL = "_mario_neutral.png";
 final String MARIO_WALK_1 = "_mario_walk_1.png";
@@ -52,10 +53,16 @@ final String ONE_UP_MUSHROOM_BIG = "one_up_mushroom_big.png";
 
 final String COIN_0 = "coin_0.png";
 final String COIN_0_BIG = "coin_0_big.png";
-
 final String COIN_1 = "coin_1.png";
 final String COIN_2 = "coin_2.png";
 final String COIN_3 = "coin_3.png";
+
+final String FIRE_FLOWER = "fire_flower";
+
+final String FIRE_FLOWER_0 = "fire_flower_0.png";
+final String FIRE_FLOWER_1 = "fire_flower_1.png";
+final String FIRE_FLOWER_2 = "fire_flower_2.png";
+final String FIRE_FLOWER_3 = "fire_flower_3.png";
 
 final String SOUND = "assets/sound/";
 

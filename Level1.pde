@@ -18,7 +18,7 @@ class Level1 extends Level {
 
         platforms.add(ground_17x1(0, 120));
         platforms.add(brick(1200, 520));
-        platforms.add(question_block(1320, 520, SUPER_MUSHROOM));
+        platforms.add(question_block(1320, 520, FIRE_FLOWER));
         platforms.add(brick(1440, 520));
 
         enemies.add(new Goomba(1680, 210, false));

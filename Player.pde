@@ -51,6 +51,7 @@ class Player extends Entity {
 
     powerLevelSet.put(1, MARIO_BASE);
     powerLevelSet.put(2, MARIO_SUPER_MUSHROOM);
+    powerLevelSet.put(3, MARIO_FIRE_FLOWER);
 
     imageDictionary.put(MARIO_BASE + "mario_dead", new ArrayList<PImage>() {{
       add(loadImage(MARIO + MARIO_BASE + MARIO_DEAD));
@@ -113,6 +114,36 @@ class Player extends Entity {
       add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + LX + MARIO_WALK_1));
       add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + LX + MARIO_WALK_2));
       add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + LX + MARIO_WALK_3));
+    }});
+
+
+    //Fire flower
+    imageDictionary.put(MARIO_FIRE_FLOWER + RX + "_mario_neutral", new ArrayList<PImage>() {{
+      add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_NEUTRAL));
+    }});
+
+    imageDictionary.put(MARIO_FIRE_FLOWER + LX + "_mario_neutral", new ArrayList<PImage>() {{
+      add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_NEUTRAL));
+    }});
+
+    imageDictionary.put(MARIO_FIRE_FLOWER + RX + "_mario_jump", new ArrayList<PImage>() {{
+      add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_JUMP));
+    }});
+
+    imageDictionary.put(MARIO_FIRE_FLOWER + LX + "_mario_jump", new ArrayList<PImage>() {{
+      add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_JUMP));
+    }});
+
+    imageDictionary.put(MARIO_FIRE_FLOWER + RX + "_mario_walk", new ArrayList<PImage>() {{
+      add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_WALK_1));
+      add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_WALK_2));
+      add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_WALK_3));
+    }});
+
+    imageDictionary.put(MARIO_FIRE_FLOWER + LX + "_mario_walk", new ArrayList<PImage>() {{
+      add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_WALK_1));
+      add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_WALK_2));
+      add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_WALK_3));
     }});
 
     this.boostValue = 3;
@@ -182,6 +213,18 @@ class Player extends Entity {
     height = texture.height;
     position.y = position.y + oldHeight - height;
     damage = 1;
+  }
+
+  void fireFlowerPower() {
+    powerLevel = 3;
+    player.breakingValue.put("up", 2);
+    animation(imageDictionary.get(powerLevelSet.get(powerLevel) + side + "_mario_neutral"), 0);
+    currentAnimation = 0;
+    float oldHeight = height;
+    width = texture.width;
+    height = texture.height;
+    position.y = position.y + oldHeight - height;
+    damage = 2;
   }
   
 
