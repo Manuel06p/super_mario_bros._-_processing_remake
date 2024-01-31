@@ -45,6 +45,7 @@ class Goomba extends Enemy {
             player.takeDamage(damage);
         }
         
+        
 
     }
 

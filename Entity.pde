@@ -44,35 +44,34 @@ class Entity extends Sprite {
         
         if (exceedsLowerBound()) {
           this.takeDamage(-1);
-        }
-        
-
-
-        checkCollisions(platforms, powerUps);
-
-        if (!downCollision && jumpStatus == 0 ) {
-            applyGravity();
-        } else if ((jump || jumpStatus > 0) && jumpTimeout == 0) {
-            if (jumpStatus<jumpValue && !upCollision) {
-                jumpStatus += 1;
-                jump = false;
-                applyInvertedGravity();
-            } else if (jump && jumpValue == smallJumpValue && jumpStatus > 3) {
-                jumpValue = superJumpValue;
-            } else {
-                jumpValue = smallJumpValue;
-                jumpStatus = 0;
-                jump = false;
-                jumpTimeout = JUMP_TIMEOUT_VALUE;
-            }
-            
         } else {
-            stopY();
-        }
+            
+            checkCollisions(platforms, powerUps);
 
-        if (jumpTimeout > 0 && downCollision) {
-            jump = false;
-            jumpTimeout -= 1;
+            if (!downCollision && jumpStatus == 0 ) {
+                applyGravity();
+            } else if ((jump || jumpStatus > 0) && jumpTimeout == 0) {
+                if (jumpStatus<jumpValue && !upCollision) {
+                    jumpStatus += 1;
+                    jump = false;
+                    applyInvertedGravity();
+                } else if (jump && jumpValue == smallJumpValue && jumpStatus > 3) {
+                    jumpValue = superJumpValue;
+                } else {
+                    jumpValue = smallJumpValue;
+                    jumpStatus = 0;
+                    jump = false;
+                    jumpTimeout = JUMP_TIMEOUT_VALUE;
+                }
+                
+            } else {
+                stopY();
+            }
+
+            if (jumpTimeout > 0 && downCollision) {
+                jump = false;
+                jumpTimeout -= 1;
+            }
         }
 
     }

@@ -75,6 +75,14 @@ final String KICK_EFFECT = "kick_effect.wav";
 final String PIPE_EFFECT = "pipe_effect.wav";
 final String DIE_EFFECT = "die_effect.wav";
 final String POWERUP_APPEARS_EFFECT = "powerup_appears_effect.wav";
+final String FIRE_BALL_EFFECT = "fire_ball_effect.wav";
+
+final String FIRE_BALL_0 = ITEMS + "fire_ball_0.png";
+final String FIRE_BALL_1 = ITEMS + "fire_ball_1.png";
+final String FIRE_BALL_2 = ITEMS + "fire_ball_2.png";
+final String FIRE_BALL_3 = ITEMS + "fire_ball_3.png";
+
+
 
 final String GROUND_GROUP = "assets/ground_group.png";
 final String GROUND_GROUP_3 = "assets/ground_group_3.png";

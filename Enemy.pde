@@ -24,6 +24,14 @@ class Enemy extends Entity {
   @Override
   void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
     super.update(platforms, powerUps);
+    
+    for (FireBall fireBall : player.fireBalls) {
+      if (collideDown(fireBall) || collideUp(fireBall) || collideRight(fireBall) || collideLeft(fireBall)) {
+        takeDamage(fireBall.damage);
+        fireBall.isDead = true;
+        kick_effect.play();
+      }
+    }
   }
 
   @Override

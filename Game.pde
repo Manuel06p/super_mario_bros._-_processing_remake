@@ -18,6 +18,7 @@ Sound pipe_effect;
 Sound die_effect;
 Sound one_up_effect;
 Sound powerup_appears_effect;
+Sound fire_ball_effect;
 
 Timer deadResetTimeout;
 Timer deadScreenTimeout;
@@ -40,6 +41,7 @@ void setup() {
   die_effect = new Sound(this, SOUND + DIE_EFFECT);
   one_up_effect = new Sound(this, SOUND + ONE_UP_EFFECT);
   powerup_appears_effect = new Sound(this, SOUND + POWERUP_APPEARS_EFFECT);
+  fire_ball_effect = new Sound(this, SOUND + FIRE_BALL_EFFECT);
 
   deadResetTimeout = new Timer(200); //Tempo della durata del dead screen, prima del reset
   deadScreenTimeout = new Timer(150); //Tempo di durata dell'animazione, prima dell'inizio del dead screen
@@ -60,6 +62,8 @@ void setup() {
   // Aggiungi gli oggetti Key al dizionario
   keyMap.put("a_key", new Key('a'));
   keyMap.put("d_key", new Key('d'));
+  keyMap.put("x_key", new Key('x'));
+  keyMap.put("X_key", new Key('X'));
   keyMap.put("left_arrow_key", new Key(LEFT));
   keyMap.put("right_arrow_key", new Key(RIGHT));
   keyMap.put("shift_key", new Key(SHIFT));
@@ -97,7 +101,17 @@ void drawLevel() {
   
     // Disegnare il livello
     level.draw();
+    
+    for (int i = player.fireBalls.size() - 1; i >= 0; i--) {
+      FireBall fireBall = player.fireBalls.get(i);
+      fireBall.update(level.platforms, level.powerUps);
+      fireBall.draw();
+      if (fireBall.isDead) {
+        player.fireBalls.remove(i);
+      }
+    } 
     player.draw();
+
   
     // Reimpostare la trasformazione per il prossimo frame
     translate(level.cameraX, 0);

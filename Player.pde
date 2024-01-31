@@ -13,14 +13,20 @@ class Player extends Entity {
   int damageTimeout;
   boolean isDead = false;
   HashMap<Integer, String> powerLevelSet = new HashMap<Integer, String>();
+  
+  ArrayList<FireBall> fireBalls = new ArrayList<FireBall>();
 
   Timer deadJump;
+  Timer fireBallTimeout;
   
+  boolean fireBallAbility = false;
 
   String leftKey;
   String rightKey;
   String boostKey;
   String jumpKey;
+  String fireBallKey_0;
+  String fireBallKey_1;
   
   
   
@@ -46,7 +52,7 @@ class Player extends Entity {
     lives = 3;    
     damageTimeout = DAMAGE_TIMEOUT_VALUE;
     deadJump = new Timer(20);
-
+    fireBallTimeout = new Timer(20);
     
 
     powerLevelSet.put(1, MARIO_BASE);
@@ -156,6 +162,8 @@ class Player extends Entity {
     this.rightKey = "right_arrow_key";
     this.boostKey = "shift_key";
     this.jumpKey = "spacebar_key";
+    this.fireBallKey_0 = "x_key";
+    this.fireBallKey_1 = "X_key";
     
     
   }
@@ -167,7 +175,8 @@ class Player extends Entity {
     position = initialPosition;
     updateLifeHud();
     updateCoinHud();
-
+    
+    fireBalls.clear();
     
     deadJump.reset();
     
@@ -199,6 +208,7 @@ class Player extends Entity {
     width = texture.width;
     height = texture.height;
     position.y = position.y + oldHeight - height;
+    fireBallAbility = false;
     damage = 1;
   }
 
@@ -212,6 +222,7 @@ class Player extends Entity {
     width = texture.width;
     height = texture.height;
     position.y = position.y + oldHeight - height;
+    fireBallAbility = false;
     damage = 1;
   }
 
@@ -224,6 +235,7 @@ class Player extends Entity {
     width = texture.width;
     height = texture.height;
     position.y = position.y + oldHeight - height;
+    fireBallAbility = true;
     damage = 2;
   }
   
@@ -253,14 +265,20 @@ class Player extends Entity {
       die();
     } else {
       if (damageTimeout == DAMAGE_TIMEOUT_VALUE) {
-      if (powerLevel - damage <= 0 ) {
-        die();
-      } else if (damage > 0) {
-        powerLevel -= damage;
-        basePower();
-        pipe_effect.play();
-      }
-      damageTimeout = 0;
+        if (powerLevel - damage == 0 ) {
+          die();
+        } else {
+          powerLevel -= damage;
+          pipe_effect.play();
+          if (powerLevel == 1) {
+            basePower();
+          } else if (powerLevel == 2) {
+            superMushroomPower();
+          }
+          
+          
+        }
+        damageTimeout = 0;
     }
     }
   }
@@ -277,8 +295,11 @@ class Player extends Entity {
     overworld_ost.stop();
     isDead = true;
     lives -= 1;
+    powerLevel = 1;
     updateLifeHud();
-    animation(imageDictionary.get(powerLevelSet.get(1) + "mario_dead"), 0);
+
+    animation(imageDictionary.get(MARIO_BASE + "mario_dead"), 0);
+    currentAnimation = 3;
     damage = 0;
     
     float oldHeight = height;
@@ -306,6 +327,7 @@ class Player extends Entity {
     }
   }
 
+  @Override
   void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
     
 
@@ -349,6 +371,16 @@ class Player extends Entity {
           animation(imageDictionary.get(powerLevelSet.get(powerLevel) + side + "_mario_neutral"), 0);
           currentAnimation = 0;
         }
+      }
+      
+
+      fireBallTimeout.update();
+
+      if (fireBallAbility && (getKeyStatus(fireBallKey_0) || getKeyStatus(fireBallKey_1)) && fireBallTimeout.tick()) {
+        fire_ball_effect.play();
+        fireBallTimeout.reset();
+        fireBalls.add(new FireBall(player.centralPositionX(), player.centralPositionY() - 40, side));
+        
       }
 
       if (!downCollision) {

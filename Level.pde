@@ -48,7 +48,8 @@ class Level {
     void update() {
         // Aggiorna la posizione della telecamera in base alla velocità specifica del livello
         
-
+        
+        
         ArrayList<Integer> killedEnemies = new ArrayList<Integer>();
 
         for (int i = 0; i < enemies.size(); i++) {
