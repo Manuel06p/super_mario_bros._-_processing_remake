@@ -7,15 +7,7 @@ class QuestionBlock extends Platform {
         super(path, initialPosition, hasBounds, breakabilityUp, breakabilityDown, breakabilityLeft, breakabilityRight);
         this.powerUp = powerUp;
 
-        imageDictionary.put("question_block", new ArrayList<PImage>() {{
-            add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_1));
-            add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_2));
-            add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_3));
-        }});
-
-        imageDictionary.put("question_block_empty", new ArrayList<PImage>() {{
-            add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_EMPTY));
-        }});
+        
         
         animation(imageDictionary.get("question_block"), 10);
         currentAnimation = 0;

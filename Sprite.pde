@@ -23,7 +23,7 @@ class Sprite {
   boolean upCollision = false;
   
 
-  HashMap<String, ArrayList<PImage>> imageDictionary = new HashMap<String, ArrayList<PImage>>();
+  
   ArrayList<PImage> currentFrameSet = new ArrayList<PImage>();
 
   int frameCount;

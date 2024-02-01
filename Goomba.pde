@@ -16,10 +16,7 @@ class Goomba extends Enemy {
                 0 //breakingValueRight
         );
 
-        imageDictionary.put("goomba", new ArrayList<PImage>() {{
-            add(loadImage(GOOMBA + RX + GOOMBA_NEUTRAL));
-            add(loadImage(GOOMBA + LX + GOOMBA_NEUTRAL));
-        }});
+        
 
         animation(imageDictionary.get("goomba"), 7);
         currentAnimation = 0;

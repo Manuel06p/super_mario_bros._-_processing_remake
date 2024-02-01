@@ -13,6 +13,10 @@ class Entity extends Sprite {
 
     HashMap<String, Integer> breakingValue = new HashMap<String, Integer>();
 
+    
+
+
+
     boolean jump = false;
 
     Entity(String path, PVector initialPosition, float gravity, float speed, float smallJumpValue, float superJumpValue, int breakingValueUp, int breakingValueDown, int breakingValueLeft, int breakingValueRight) {
@@ -27,6 +31,7 @@ class Entity extends Sprite {
         this.superJumpValue = superJumpValue;
 
         this.jumpValue = this.smallJumpValue;
+
 
         this.breakingValue.put("up", breakingValueUp);
         this.breakingValue.put("down", breakingValueDown);
@@ -220,18 +225,15 @@ class Entity extends Sprite {
 
     boolean moveAuto(boolean isRight) {
         if (isRight) {
-            if (!rightCollision) {
-                speed.x = movementSpeed;
-            } else {
-                speed.x = -movementSpeed;
+            if (rightCollision) {
+                speed.x = -abs(speed.x);
                 isRight = false;
             }
         } else {
-            if (!leftCollision) {
-                speed.x = -movementSpeed;
-            } else {
-                speed.x = movementSpeed;
+            if (leftCollision) {
                 isRight = true;
+            } else {
+                speed.x = -abs(speed.x);
             }
         }
 

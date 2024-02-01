@@ -21,8 +21,10 @@ class Level1 extends Level {
         platforms.add(question_block(1320, 520, FIRE_FLOWER));
         platforms.add(brick(1440, 520));
 
-        enemies.add(new Goomba(1680, 210, false));
-        enemies.add(new Goomba(1920, 210, false));
+        //enemies.add(new Goomba(1680, 210, false));
+        //enemies.add(new Goomba(1920, 210, false));
+        enemies.add(new GreenKoopaTroopa(1920, 120 + 135, false));
+        
 
         powerUps.add(new Coin(2040 + 35, 520));
         powerUps.add(new Coin(2160 + 35, 520));

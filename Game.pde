@@ -25,7 +25,7 @@ Timer deadScreenTimeout;
 
 Text coinLoadLevelText;
 Sprite coinLoadLevelIcon;
-
+HashMap<String, ArrayList<PImage>> imageDictionary;
 Text lifeLoadLevelText;
 Sprite lifeLoadLevelIcon;
 
@@ -46,6 +46,79 @@ void setup() {
   deadResetTimeout = new Timer(200); //Tempo della durata del dead screen, prima del reset
   deadScreenTimeout = new Timer(150); //Tempo di durata dell'animazione, prima dell'inizio del dead screen
 
+  booleanSide.put(true, RX);
+  booleanSide.put(false, LX);
+
+  /**
+   * Dictionary of sprites
+   */
+  imageDictionary = new HashMap<String, ArrayList<PImage>>();
+
+  /**
+   * Coin
+   */
+    imageDictionary.put("coin", new ArrayList<PImage>() {{
+      add(loadImage(POWER_UP + COIN_0));
+      add(loadImage(POWER_UP + COIN_1));
+      add(loadImage(POWER_UP + COIN_2));
+      add(loadImage(POWER_UP + COIN_3));
+    }});
+
+  /**
+   * Fire Ball
+   */
+    imageDictionary.put("fireFlower", new ArrayList<PImage>() {{
+      add(loadImage(POWER_UP + FIRE_FLOWER_0));
+      add(loadImage(POWER_UP + FIRE_FLOWER_1));
+      add(loadImage(POWER_UP + FIRE_FLOWER_2));
+      add(loadImage(POWER_UP + FIRE_FLOWER_3));
+    }});
+
+  /**
+   * Goomba
+   */
+    imageDictionary.put("goomba", new ArrayList<PImage>() {{
+      add(loadImage(GOOMBA + RX + GOOMBA_NEUTRAL));
+      add(loadImage(GOOMBA + LX + GOOMBA_NEUTRAL));
+    }});
+
+  /**
+   * Green Koopa Troopa
+   */
+    imageDictionary.put("green_koopa_troopa_" + RX, new ArrayList<PImage>() {{
+      add(loadImage(GREEN_KOOPA_TROOPA + RX + GREEN_KOOPA_TROOPA_0));
+      add(loadImage(GREEN_KOOPA_TROOPA + RX + GREEN_KOOPA_TROOPA_1));
+    }});
+
+    imageDictionary.put("green_koopa_troopa_" + LX, new ArrayList<PImage>() {{
+      add(loadImage(GREEN_KOOPA_TROOPA + LX + GREEN_KOOPA_TROOPA_0));
+      add(loadImage(GREEN_KOOPA_TROOPA + LX + GREEN_KOOPA_TROOPA_1));
+    }});
+    
+    imageDictionary.put("green_koopa_troopa_shell_0", new ArrayList<PImage>() {{
+      add(loadImage(GREEN_KOOPA_TROOPA + GREEN_KOOPA_TROOPA_SHELL_0));
+
+    }});
+
+    imageDictionary.put("green_koopa_troopa_shell_1", new ArrayList<PImage>() {{
+      add(loadImage(GREEN_KOOPA_TROOPA + GREEN_KOOPA_TROOPA_SHELL_1));
+    }});
+  
+   /**
+   * Question Block
+   */
+    imageDictionary.put("question_block", new ArrayList<PImage>() {{
+      add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_1));
+      add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_2));
+      add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_3));
+    }});
+
+    imageDictionary.put("question_block_empty", new ArrayList<PImage>() {{
+      add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_EMPTY));
+    }});
+  //
+  
+  
   fullScreen();
   windowTitle(GAME_TITLE);
   frameRate(FRAME_RATE);

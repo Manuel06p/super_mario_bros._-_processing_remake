@@ -2,12 +2,7 @@ class FireFlower extends PowerUp {
 
     FireFlower(float x, float y) {
         super(POWER_UP + FIRE_FLOWER_0, new PVector(x, y), GRAVITY, 0, 0, 0);
-        imageDictionary.put("fireFlower", new ArrayList<PImage>() {{
-            add(loadImage(POWER_UP + FIRE_FLOWER_0));
-            add(loadImage(POWER_UP + FIRE_FLOWER_1));
-            add(loadImage(POWER_UP + FIRE_FLOWER_2));
-            add(loadImage(POWER_UP + FIRE_FLOWER_3));
-        }});
+        
 
         animation(imageDictionary.get("fireFlower"), 8);
         currentAnimation = 0;

@@ -3,12 +3,7 @@ class Coin extends PowerUp {
         //super(path: String, posizione iniziale: PVector, salute: int, gravità: float, velocità: float, salto: float)
         super(POWER_UP + COIN_0, new PVector(x, y), 0, 0, 0, 0);
 
-        imageDictionary.put("coin", new ArrayList<PImage>() {{
-            add(loadImage(POWER_UP + COIN_0));
-            add(loadImage(POWER_UP + COIN_1));
-            add(loadImage(POWER_UP + COIN_2));
-            add(loadImage(POWER_UP + COIN_3));
-        }});
+        
 
         animation(imageDictionary.get("coin"), 8);
         currentAnimation = 0;

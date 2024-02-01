@@ -196,7 +196,7 @@ class Player extends Entity {
     player.downCollision = true;
       player.jump = true;
       player.jumpTimeout = 0;
-      player.jumpStatus = player.jumpValue/3.0*2.0;
+      player.jumpStatus = 1;
   }
 
   void basePower() {

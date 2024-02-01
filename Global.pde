@@ -9,6 +9,8 @@ final int FRAME_RATE = 60;
 final String RX = "rx";
 final String LX = "lx";
 
+HashMap<Boolean, String> booleanSide = new HashMap<Boolean, String>();
+
 
 
 final String MARIO = "assets/player/";
@@ -25,6 +27,12 @@ final String MARIO_JUMP = "_mario_jump.png";
 final String MARIO_DEAD = "mario_dead.png";
 
 final String ENEMIES = "assets/enemies/";
+
+final String GREEN_KOOPA_TROOPA = ENEMIES + "green_koopa_troopa/";
+final String GREEN_KOOPA_TROOPA_0 = "_green_koopa_troopa_0.png";
+final String GREEN_KOOPA_TROOPA_1 = "_green_koopa_troopa_1.png";
+final String GREEN_KOOPA_TROOPA_SHELL_0 = "green_koopa_troopa_shell_0.png";
+final String GREEN_KOOPA_TROOPA_SHELL_1 = "green_koopa_troopa_shell_1.png";
 
 final String GOOMBA = ENEMIES + "goomba/";
 final String GOOMBA_NEUTRAL = "_goomba_neutral.png";
