@@ -17,6 +17,11 @@ class Level1 extends Level {
 
 
         platforms.add(ground_17x1(0, 120));
+
+        platforms.add(brick(0, 240));
+        platforms.add(brick(120, 240));
+
+
         platforms.add(brick(1200, 520));
         platforms.add(question_block(1320, 520, FIRE_FLOWER));
         platforms.add(brick(1440, 520));

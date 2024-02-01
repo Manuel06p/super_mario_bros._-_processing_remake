@@ -13,7 +13,8 @@ class Entity extends Sprite {
 
     HashMap<String, Integer> breakingValue = new HashMap<String, Integer>();
 
-    
+    boolean horizontalBreak;
+    boolean verticalBreak;
 
 
 
@@ -37,6 +38,9 @@ class Entity extends Sprite {
         this.breakingValue.put("down", breakingValueDown);
         this.breakingValue.put("left", breakingValueLeft);
         this.breakingValue.put("right", breakingValueRight);
+
+        horizontalBreak = false;
+        verticalBreak = false;
     }
 
     void jump() {
@@ -95,11 +99,17 @@ class Entity extends Sprite {
         leftCollision = false;
         upCollision = false;
 
+        horizontalBreak = false;
+        verticalBreak = false;
+
         ArrayList<Integer> killedPlatforms = new ArrayList<Integer>();
 
         for (int i = 0; i < platforms.size(); i++) {
             Platform platform = platforms.get(i);
             boolean remove = false;
+
+            
+           
 
             boolean rightCollisionOld = rightCollision;
             boolean leftCollisionOld = leftCollision;
@@ -168,6 +178,7 @@ class Entity extends Sprite {
                 breakingValue.get("right") >= platform.breakability.get("left")
             ) {
                 rightCollision = rightCollisionOld;
+                horizontalBreak = true;
                 remove = true;
             }
             if (leftCollisionCurrent &&
@@ -175,6 +186,7 @@ class Entity extends Sprite {
                 breakingValue.get("left") >= platform.breakability.get("right")
             ) {
                 leftCollision = leftCollisionOld;
+                horizontalBreak = true;
                 remove = true;
             }
             if (downCollisionCurrent && 
@@ -182,6 +194,7 @@ class Entity extends Sprite {
                 breakingValue.get("down") >= platform.breakability.get("up")
             ) {
                 downCollision = downCollisionOld;
+                verticalBreak = true;
                 remove = true;
             }
             if (upCollisionCurrent && 
@@ -189,14 +202,20 @@ class Entity extends Sprite {
                 breakingValue.get("up") >= platform.breakability.get("down")
             ) {
                 upCollision = upCollisionOld;
+                verticalBreak = true;
                 remove = true;
             }
+
 
             if (remove) {
                 position.y = positionYOld;
                 position.x = positionXOld;
                 killedPlatforms.add(i);
             }
+        }
+
+        if (horizontalBreak || verticalBreak) {
+            break_block_effect.play();
         }
         
         Collections.sort(killedPlatforms, Collections.reverseOrder());
@@ -209,7 +228,9 @@ class Entity extends Sprite {
 
     }
 
-    
+    void directionChanged(boolean isRightNew) {
+
+    }
 
     void moveLeft() {
         if (!leftCollision) {
@@ -224,20 +245,31 @@ class Entity extends Sprite {
     }
 
     boolean moveAuto(boolean isRight) {
-        if (isRight) {
-            if (rightCollision) {
+        boolean isRightNew = isRight;
+        if (isRightNew) {
+            if (rightCollision || horizontalBreak) {
+                isRightNew = false;
+                directionChanged(isRightNew);
                 speed.x = -abs(speed.x);
-                isRight = false;
+                
+                
+            } else {
+                speed.x = abs(speed.x);
             }
         } else {
-            if (leftCollision) {
-                isRight = true;
+            if (leftCollision || horizontalBreak) {
+                isRightNew = true;
+
+                directionChanged(isRightNew);
+                
+                speed.x = abs(speed.x);
+                
             } else {
                 speed.x = -abs(speed.x);
             }
         }
 
-        return isRight;
+        return isRightNew;
     }
     
     void takeDamage(int damage) {

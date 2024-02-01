@@ -19,6 +19,7 @@ Sound die_effect;
 Sound one_up_effect;
 Sound powerup_appears_effect;
 Sound fire_ball_effect;
+Sound break_block_effect;
 
 Timer deadResetTimeout;
 Timer deadScreenTimeout;
@@ -42,6 +43,7 @@ void setup() {
   one_up_effect = new Sound(this, SOUND + ONE_UP_EFFECT);
   powerup_appears_effect = new Sound(this, SOUND + POWERUP_APPEARS_EFFECT);
   fire_ball_effect = new Sound(this, SOUND + FIRE_BALL_EFFECT);
+  break_block_effect = new Sound(this, SOUND + BREAK_BLOCK_EFFECT);
 
   deadResetTimeout = new Timer(200); //Tempo della durata del dead screen, prima del reset
   deadScreenTimeout = new Timer(150); //Tempo di durata dell'animazione, prima dell'inizio del dead screen
@@ -85,23 +87,23 @@ void setup() {
   /**
    * Green Koopa Troopa
    */
-    imageDictionary.put("green_koopa_troopa_" + RX, new ArrayList<PImage>() {{
-      add(loadImage(GREEN_KOOPA_TROOPA + RX + GREEN_KOOPA_TROOPA_0));
-      add(loadImage(GREEN_KOOPA_TROOPA + RX + GREEN_KOOPA_TROOPA_1));
+    imageDictionary.put(KOOPA + GREEN_KOOPA_TROOPA + RX, new ArrayList<PImage>() {{
+      add(loadImage(KOOPA + RX + GREEN_KOOPA_TROOPA + KOOPA_0));
+      add(loadImage(KOOPA + RX + GREEN_KOOPA_TROOPA + KOOPA_1));
     }});
 
-    imageDictionary.put("green_koopa_troopa_" + LX, new ArrayList<PImage>() {{
-      add(loadImage(GREEN_KOOPA_TROOPA + LX + GREEN_KOOPA_TROOPA_0));
-      add(loadImage(GREEN_KOOPA_TROOPA + LX + GREEN_KOOPA_TROOPA_1));
+    imageDictionary.put(KOOPA + GREEN_KOOPA_TROOPA + LX, new ArrayList<PImage>() {{
+      add(loadImage(KOOPA + LX + GREEN_KOOPA_TROOPA + KOOPA_0));
+      add(loadImage(KOOPA + LX + GREEN_KOOPA_TROOPA + KOOPA_1));
     }});
     
-    imageDictionary.put("green_koopa_troopa_shell_0", new ArrayList<PImage>() {{
-      add(loadImage(GREEN_KOOPA_TROOPA + GREEN_KOOPA_TROOPA_SHELL_0));
+    imageDictionary.put(KOOPA + GREEN_KOOPA_TROOPA + KOOPA_SHELL_0, new ArrayList<PImage>() {{
+      add(loadImage(KOOPA + GREEN_KOOPA_TROOPA + KOOPA_SHELL_0));
 
     }});
 
-    imageDictionary.put("green_koopa_troopa_shell_1", new ArrayList<PImage>() {{
-      add(loadImage(GREEN_KOOPA_TROOPA + GREEN_KOOPA_TROOPA_SHELL_1));
+    imageDictionary.put(KOOPA + GREEN_KOOPA_TROOPA + KOOPA_SHELL_1, new ArrayList<PImage>() {{
+      add(loadImage(KOOPA + GREEN_KOOPA_TROOPA + KOOPA_SHELL_1));
     }});
   
    /**

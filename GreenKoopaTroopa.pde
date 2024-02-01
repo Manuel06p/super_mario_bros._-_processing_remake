@@ -5,13 +5,15 @@ class GreenKoopaTroopa extends Koopa{
         super(  x,
                 y,
                 isRight,
-                (GREEN_KOOPA_TROOPA + LX + GREEN_KOOPA_TROOPA_0)
+                (KOOPA + LX + GREEN_KOOPA_TROOPA + KOOPA_0),
+                (GREEN_KOOPA_TROOPA)
         );
         
         
         livingKoopa();
         
     }
+
 
     @Override
     void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
@@ -26,10 +28,6 @@ class GreenKoopaTroopa extends Koopa{
     @Override
     void staticShell() {
         super.staticShell();
-
-        animation(imageDictionary.get("green_koopa_troopa_shell_0"), 0);
-        currentAnimation = 1;
-
     }
 
     @Override
@@ -40,8 +38,5 @@ class GreenKoopaTroopa extends Koopa{
     @Override
     void livingKoopa() {
         super.livingKoopa();
-
-        animation(imageDictionary.get("green_koopa_troopa_" + booleanSide.get(isRight)), 7);
-        currentAnimation = 0;
     }
 }

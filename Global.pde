@@ -28,11 +28,13 @@ final String MARIO_DEAD = "mario_dead.png";
 
 final String ENEMIES = "assets/enemies/";
 
-final String GREEN_KOOPA_TROOPA = ENEMIES + "green_koopa_troopa/";
-final String GREEN_KOOPA_TROOPA_0 = "_green_koopa_troopa_0.png";
-final String GREEN_KOOPA_TROOPA_1 = "_green_koopa_troopa_1.png";
-final String GREEN_KOOPA_TROOPA_SHELL_0 = "green_koopa_troopa_shell_0.png";
-final String GREEN_KOOPA_TROOPA_SHELL_1 = "green_koopa_troopa_shell_1.png";
+final String KOOPA = ENEMIES + "koopa/";
+final String GREEN_KOOPA_TROOPA = "_green_koopa_troopa";
+
+final String KOOPA_0 = "_0.png";
+final String KOOPA_1 = "_1.png";
+final String KOOPA_SHELL_0 = "_shell_0.png";
+final String KOOPA_SHELL_1 = "_shell_1.png";
 
 final String GOOMBA = ENEMIES + "goomba/";
 final String GOOMBA_NEUTRAL = "_goomba_neutral.png";
@@ -84,6 +86,7 @@ final String PIPE_EFFECT = "pipe_effect.wav";
 final String DIE_EFFECT = "die_effect.wav";
 final String POWERUP_APPEARS_EFFECT = "powerup_appears_effect.wav";
 final String FIRE_BALL_EFFECT = "fire_ball_effect.wav";
+final String BREAK_BLOCK_EFFECT = "break_block_effect.wav";
 
 final String FIRE_BALL_0 = ITEMS + "fire_ball_0.png";
 final String FIRE_BALL_1 = ITEMS + "fire_ball_1.png";

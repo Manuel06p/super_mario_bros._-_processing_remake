@@ -5,10 +5,13 @@ class Koopa extends Enemy {
 
     Timer movingShellTimeout;
     Timer immunityShellTimeout;
+    Timer staticShellTimeout;
 
-    float shellSpeed = 15;
+    String koopaType;
 
-    Koopa(float x, float y, boolean isRight, String path) {
+    float shellSpeed = 12;
+
+    Koopa(float x, float y, boolean isRight, String path, String koopaType) {
         super(  path, //path
                 new PVector(x, y), //initialPosition
                 1, //health
@@ -22,9 +25,11 @@ class Koopa extends Enemy {
                 0, //breakingValueLeft
                 0 //breakingValueRight
         );
-
+        
+        this.koopaType = koopaType;
         movingShellTimeout = new Timer(13);
-        immunityShellTimeout = new Timer(25);
+        immunityShellTimeout = new Timer(20);
+        staticShellTimeout = new Timer(300);
 
         this.isRight = isRight;
         isShell = false;
@@ -39,7 +44,7 @@ class Koopa extends Enemy {
 
         
 
-        if (!isShell) {
+        if (!isShell) { //Living Koopa
             isRight = moveAuto(isRight);
             if (collideUp(player)) {
                 if (player.damage > 1) {
@@ -54,23 +59,32 @@ class Koopa extends Enemy {
             if (collideDown(player) || ((collideRight(player) || collideLeft(player)) && player.position.y + player.height > centralPositionY())) {
                 player.takeDamage(damage);
             }
-        } else if (!movingShell){
+        } else if (!movingShell){ //Static shell
             movingShellTimeout.update();
-            if (collideUp(player) && movingShellTimeout.tick()) {
-                movingShell();
-                isRight = !isRight;
-                movingShellTimeout.reset();
-                player.bounceOverEnemy();
-            } else if (collideRight(player) && movingShellTimeout.tick()) {
-                isRight = false;
-                movingShell();
-                movingShellTimeout.reset();
-            } else if (collideLeft(player) && movingShellTimeout.tick()) {
-                isRight = true;
-                movingShell();
-                movingShellTimeout.reset();
+            staticShellTimeout.update();
+            if (staticShellTimeout.elapsed == staticShellTimeout.delay-50) {
+                animation(imageDictionary.get(KOOPA + koopaType + KOOPA_SHELL_1), 0);
+                currentAnimation = 2;
             }
-        } else {
+            if (staticShellTimeout.tick()) {
+                livingKoopa();
+            } else {
+                if (collideUp(player) && movingShellTimeout.tick()) {
+                    movingShell();
+                    isRight = !isRight;
+                    player.bounceOverEnemy();
+                } else if (collideRight(player) && movingShellTimeout.tick()) {
+                    kick_effect.play();
+                    isRight = false;
+                    movingShell();
+                } else if (collideLeft(player) && movingShellTimeout.tick()) {
+                    kick_effect.play();
+                    isRight = true;
+                    movingShell();
+                }
+            }
+            
+        } else { //Moving shell
             movingShellTimeout.update();
             immunityShellTimeout.update();
             isRight = moveAuto(isRight);
@@ -83,32 +97,48 @@ class Koopa extends Enemy {
                 } else {
                     staticShell();
                 }
-                movingShellTimeout.reset();
+                
                 player.bounceOverEnemy();
             }
         }
 
     }
-
+    
+   
     @Override
     void draw() {
         super.draw();
     }
 
+    @Override
+    void directionChanged(boolean isRightNew) {
+        super.directionChanged(isRightNew);
+        if (currentAnimation == 0) {
+            animation(imageDictionary.get(KOOPA + koopaType + booleanSide.get(isRightNew)), 7);
+        }
+    }
+
     void staticShell() {
         isShell = true;
         movingShell = false;
+        
         speed.x = 0;
         breakingValue.put("left", 0);
         breakingValue.put("right", 0);
+        animation(imageDictionary.get(KOOPA + koopaType + KOOPA_SHELL_0), 0);
+        currentAnimation = 1;
     }
 
     void movingShell() {
+        
         immunityShellTimeout.reset();
+        staticShellTimeout.reset();
         movingShell = true;
         speed.x = shellSpeed;
-        breakingValue.put("left", 1);
-        breakingValue.put("right", 1);
+        breakingValue.put("left", 3);
+        breakingValue.put("right", 3);
+        animation(imageDictionary.get(KOOPA + koopaType + KOOPA_SHELL_0), 0);
+        currentAnimation = 1;
 
     }
 
@@ -116,6 +146,11 @@ class Koopa extends Enemy {
         speed.x = movementSpeed;
         isShell = false;
         movingShell = false;
+        movingShellTimeout.reset();
+        staticShellTimeout.reset();
+
+        animation(imageDictionary.get(KOOPA + koopaType + booleanSide.get(isRight)), 7);
+        currentAnimation = 0;
     }
 
 }
