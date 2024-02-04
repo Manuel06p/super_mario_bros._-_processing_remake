@@ -20,6 +20,8 @@ class Level {
 
     PVector playerInitialPosition;
 
+    boolean isFinished = false;
+
     Level(Sound music) {
         this.music = music;
 

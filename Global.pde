@@ -43,7 +43,9 @@ final String ITEMS = "assets/items/";
 
 final String GROUND_17X1 = ITEMS + "ground_17x1.png";
 
-final String BLOCK = ITEMS + "block.png";
+final String BLOCK = ITEMS + "block/";
+
+final String BLOCK_SPRITE = "_block.png";
 
 final String BRICK = ITEMS + "brick.png";
 
@@ -92,6 +94,12 @@ final String FIRE_BALL_0 = ITEMS + "fire_ball_0.png";
 final String FIRE_BALL_1 = ITEMS + "fire_ball_1.png";
 final String FIRE_BALL_2 = ITEMS + "fire_ball_2.png";
 final String FIRE_BALL_3 = ITEMS + "fire_ball_3.png";
+
+final String FLAG = ITEMS + "flag.png";
+final String FLAG_STAND = ITEMS + "flag_stand.png";
+
+final String UI = "assets/ui/";
+final String LOGO = UI + "logo.png";
 
 
 

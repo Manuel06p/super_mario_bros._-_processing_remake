@@ -17,7 +17,7 @@ class Goomba extends Enemy {
         );
 
         
-
+        
         animation(imageDictionary.get("goomba"), 7);
         currentAnimation = 0;
 

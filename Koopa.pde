@@ -135,8 +135,8 @@ class Koopa extends Enemy {
         staticShellTimeout.reset();
         movingShell = true;
         speed.x = shellSpeed;
-        breakingValue.put("left", 3);
-        breakingValue.put("right", 3);
+        breakingValue.put("left", 2);
+        breakingValue.put("right", 2);
         animation(imageDictionary.get(KOOPA + koopaType + KOOPA_SHELL_0), 0);
         currentAnimation = 1;
 

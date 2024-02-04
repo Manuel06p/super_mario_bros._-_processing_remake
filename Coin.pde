@@ -1,7 +1,7 @@
 class Coin extends PowerUp {    
     Coin(float x, float y) {
         //super(path: String, posizione iniziale: PVector, salute: int, gravità: float, velocità: float, salto: float)
-        super(POWER_UP + COIN_0, new PVector(x, y), 0, 0, 0, 0);
+        super(POWER_UP + COIN_0, new PVector(x, y), 0, 0, 0, 0, true);
 
         
 

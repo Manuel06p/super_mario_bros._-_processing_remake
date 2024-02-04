@@ -41,6 +41,7 @@ class Entity extends Sprite {
 
         horizontalBreak = false;
         verticalBreak = false;
+        this.speed.x = movementSpeed;
     }
 
     void jump() {
@@ -159,13 +160,13 @@ class Entity extends Sprite {
                     questionBlock.isActive = false;
                     questionBlock.emptyBlock();
                     if (questionBlock.powerUp == SUPER_MUSHROOM) {
-                        powerUps.add(new SuperMushroom(questionBlock.position.x, questionBlock.position.y + questionBlock.height, true));
+                        powerUps.add(new SuperMushroom(questionBlock.position.x, questionBlock.position.y + questionBlock.height - 10, questionBlock.isRight));
                         powerup_appears_effect.play();
                     } else if (questionBlock.powerUp == ONE_UP_MUSHROOM) {
-                        powerUps.add(new OneUpMushroom(questionBlock.position.x, questionBlock.position.y + questionBlock.height, true));
+                        powerUps.add(new OneUpMushroom(questionBlock.position.x, questionBlock.position.y + questionBlock.height - 10, questionBlock.isRight));
                         powerup_appears_effect.play();
                     } else if (questionBlock.powerUp == FIRE_FLOWER) {
-                        powerUps.add(new FireFlower(questionBlock.position.x + 15, questionBlock.position.y + questionBlock.height));
+                        powerUps.add(new FireFlower(questionBlock.position.x + 15, questionBlock.position.y + questionBlock.height - 10));
                         powerup_appears_effect.play();
                     }
                 }

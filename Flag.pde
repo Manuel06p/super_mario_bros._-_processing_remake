@@ -1,11 +1,12 @@
-class OneUpMushroom extends PowerUp {    
-  
-    OneUpMushroom(float x, float y, boolean isRight) {
+class Flag extends PowerUp {    
+
+    Sprite flag;
+
+    Flag(float x, float y) {
         //super(path: String, posizione iniziale: PVector, gravità: float, velocità: float, salto: float)
         
-        super(POWER_UP + ONE_UP_MUSHROOM, new PVector(x, y), GRAVITY, 5, 0, 0, isRight);
-
-        this.isRight = isRight;
+        super(FLAG_STAND, new PVector(x, y), 0, 0, 0, 0, true);
+        flag = new Sprite(FLAG, new PVector(position.x - 145, position.y + 10));
     }
 
     @Override
@@ -14,14 +15,13 @@ class OneUpMushroom extends PowerUp {
         isRight = moveAuto(isRight);
 
         if (collideDown(player) || collideRight(player) || collideLeft(player) || collideUp(player)) {
-            player.getLife();
-            isActive = false;
-            one_up_effect.play();
+            level.isFinished = true;
         }
     }
     
     @Override
     void draw() {
         super.draw();
+        flag.draw();
     }
 }

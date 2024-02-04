@@ -1,7 +1,7 @@
 class FireFlower extends PowerUp {    
 
     FireFlower(float x, float y) {
-        super(POWER_UP + FIRE_FLOWER_0, new PVector(x, y), GRAVITY, 0, 0, 0);
+        super(POWER_UP + FIRE_FLOWER_0, new PVector(x, y), GRAVITY, 0, 0, 0, true);
         
 
         animation(imageDictionary.get("fireFlower"), 8);

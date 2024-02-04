@@ -7,7 +7,7 @@ import java.lang.Object.*;
 Level level;
 Player player;
 HashMap<String, Key> keyMap;
-HashMap<String, Level> levels;
+ArrayList<Level> levels;
 
 Sound overworld_ost;
 Sound powerup_effect;
@@ -125,11 +125,12 @@ void setup() {
   windowTitle(GAME_TITLE);
   frameRate(FRAME_RATE);
 
-  levels = new HashMap<String, Level>();
+  levels = new ArrayList<Level>();
 
-  levels.put("level_1", new Level1());
+  levels.add(new Level0());
+  levels.add(new Level1());
 
-  level = levels.get("level_1");
+  level = levels.get(0);
 
   keyMap = new HashMap<String, Key>();
 
@@ -208,6 +209,12 @@ void loadLevelDraw() {
 void draw() {
   // Chiamare la funzione update del livello
   if (!player.isDead) {
+      if (level.isFinished && level.id + 1 < levels.size()) {
+        level = levels.get(level.id + 1);
+        level.reset();
+        player.reset(level.playerInitialPosition);
+        
+      }
       drawLevel();
   } else if (player.lives <= 0) {
     
