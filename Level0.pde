@@ -40,8 +40,7 @@ class Level0 extends Level {
     @Override
     void draw() {
         super.draw();
-        controls.draw();
-
         logo.draw();
+        controls.draw();
     }
 }
