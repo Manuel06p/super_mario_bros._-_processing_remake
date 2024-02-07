@@ -1,5 +1,6 @@
 class Flag extends PowerUp {    
 
+
     Sprite flag;
 
     Flag(float x, float y) {
@@ -9,13 +10,15 @@ class Flag extends PowerUp {
         flag = new Sprite(FLAG, new PVector(position.x - 145, position.y + 10));
     }
 
+
+
     @Override
     void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
-        super.update(platforms, powerUps);     
-        isRight = moveAuto(isRight);
+        //super.update(platforms, powerUps);     
+        //isRight = moveAuto(isRight);
 
-        if (collideDown(player) || collideRight(player) || collideLeft(player) || collideUp(player)) {
-            level.isFinished = true;
+        if ((collideDown(player) || collideRight(player) || collideLeft(player) || collideUp(player)) && !level.isFinished) {
+            level.finished();
         }
     }
     

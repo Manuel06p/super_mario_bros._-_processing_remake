@@ -42,9 +42,16 @@ class Level {
     void reset() {
         music.loop();
         cameraX = 0;
+        isFinished = false;
         platforms = new ArrayList<Platform>();
         enemies = new ArrayList<Enemy>();
         powerUps = new ArrayList<PowerUp>();
+    }
+
+    void finished() {
+        isFinished = true;
+        music.stop();
+        course_clear_effect.play();
     }
 
     void update() {

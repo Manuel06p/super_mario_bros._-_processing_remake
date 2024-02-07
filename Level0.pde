@@ -19,23 +19,27 @@ class Level0 extends Level {
         name = "Main Menu";
         id = 0;
 
-
         logo = new Sprite(LOGO, new PVector(607, 50));
 
         platforms.add(ground_17x1(0, 120));
 
         platforms.add(block(1680, 240, 1, 1));
         powerUps.add(new Flag(1680 + 52, 800 + 240));
-
-        
-
-
     }
 
     @Override
     void drawHud() {
-
     }
+
+    @Override
+    void finished() {
+        isFinished = true;
+        music.stop();
+        lets_a_go_effect.play();
+        newLevelAnimationLevelTimeDuration.elapsed = 350;
+    }
+
+
 
     @Override
     void draw() {

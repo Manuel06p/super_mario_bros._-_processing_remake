@@ -1,7 +1,10 @@
-// File: Game.pde
-import java.util.Iterator;
-import java.util.Collections;
-import java.lang.Object.*;
+/**
+* Imported Libraries
+*/
+  import java.util.Iterator;
+  import java.util.Collections;
+  import java.lang.Object.*;
+//
 
 
 Level level;
@@ -9,20 +12,33 @@ Player player;
 HashMap<String, Key> keyMap;
 ArrayList<Level> levels;
 
-Sound overworld_ost;
-Sound powerup_effect;
-Sound jump_effect;
-Sound coin_effect;
-Sound kick_effect;
-Sound pipe_effect;
-Sound die_effect;
-Sound one_up_effect;
-Sound powerup_appears_effect;
-Sound fire_ball_effect;
-Sound break_block_effect;
+/**
+* Sound declaration
+*/
+  Sound overworld_ost;
+  Sound powerup_effect;
+  Sound jump_effect;
+  Sound coin_effect;
+  Sound kick_effect;
+  Sound pipe_effect;
+  Sound die_effect;
+  Sound one_up_effect;
+  Sound powerup_appears_effect;
+  Sound fire_ball_effect;
+  Sound break_block_effect;
+  Sound game_over_effect;
+  Sound course_clear_effect;
+  Sound lets_a_go_effect;
+//
 
-Timer deadResetTimeout;
-Timer deadScreenTimeout;
+/**
+* Timer declaration
+*/
+  Timer loadLevelScreenTimeDuration;
+  Timer deathAnimationLevelTimeDuration;
+  Timer newLevelAnimationLevelTimeDuration;
+  Timer gameOverScreenTimeDuration;
+//
 
 Text coinLoadLevelText;
 Sprite coinLoadLevelIcon;
@@ -30,122 +46,262 @@ HashMap<String, ArrayList<PImage>> imageDictionary;
 Text lifeLoadLevelText;
 Sprite lifeLoadLevelIcon;
 
+HashMap<Boolean, String> booleanSide;
+
 StringBuilder levelNameString = new StringBuilder();
 
+
 void setup() {
-  overworld_ost = new Sound(this, SOUND + OVERWORLD_OST);
-  powerup_effect = new Sound(this, SOUND + POWERUP_EFFECT);
-  jump_effect = new Sound(this, SOUND + JUMP_EFFECT);
-  coin_effect = new Sound(this, SOUND + COIN_EFFECT);
-  kick_effect = new Sound(this, SOUND + KICK_EFFECT);
-  pipe_effect = new Sound(this, SOUND + PIPE_EFFECT);
-  die_effect = new Sound(this, SOUND + DIE_EFFECT);
-  one_up_effect = new Sound(this, SOUND + ONE_UP_EFFECT);
-  powerup_appears_effect = new Sound(this, SOUND + POWERUP_APPEARS_EFFECT);
-  fire_ball_effect = new Sound(this, SOUND + FIRE_BALL_EFFECT);
-  break_block_effect = new Sound(this, SOUND + BREAK_BLOCK_EFFECT);
 
-  deadResetTimeout = new Timer(200); //Tempo della durata del dead screen, prima del reset
-  deadScreenTimeout = new Timer(150); //Tempo di durata dell'animazione, prima dell'inizio del dead screen
+  /**
+   * Sound
+   */
+    overworld_ost = new Sound(this, SOUND + OVERWORLD_OST);
+    powerup_effect = new Sound(this, SOUND + POWERUP_EFFECT);
+    jump_effect = new Sound(this, SOUND + JUMP_EFFECT);
+    coin_effect = new Sound(this, SOUND + COIN_EFFECT);
+    kick_effect = new Sound(this, SOUND + KICK_EFFECT);
+    pipe_effect = new Sound(this, SOUND + PIPE_EFFECT);
+    die_effect = new Sound(this, SOUND + DIE_EFFECT);
+    one_up_effect = new Sound(this, SOUND + ONE_UP_EFFECT);
+    powerup_appears_effect = new Sound(this, SOUND + POWERUP_APPEARS_EFFECT);
+    fire_ball_effect = new Sound(this, SOUND + FIRE_BALL_EFFECT);
+    break_block_effect = new Sound(this, SOUND + BREAK_BLOCK_EFFECT);
+    game_over_effect = new Sound(this, SOUND + GAME_OVER_EFFECT, 0.5);
+    course_clear_effect = new Sound(this, SOUND + COURSE_CLEAR_EFFECT, 0.5);
+    lets_a_go_effect = new Sound(this, SOUND + LETS_A_GO_EFFECT, 0.5);
+  //
 
-  booleanSide.put(true, RX);
-  booleanSide.put(false, LX);
+  /**
+   * Timer
+   */
+    loadLevelScreenTimeDuration = new Timer(200); //Tempo della durata del dead screen, prima del reset
+    deathAnimationLevelTimeDuration = new Timer(150); //Tempo di durata dell'animazione, prima dell'inizio del dead screen
+    gameOverScreenTimeDuration = new Timer(300); //Tempo di durata del game over screen, prima del reset
+    newLevelAnimationLevelTimeDuration = new Timer(450); 
+  //
+
+  /**
+   * Dictionary side <boolean - string>
+   */
+    booleanSide = new HashMap<Boolean, String>();
+
+    booleanSide.put(true, RX);
+    booleanSide.put(false, LX);
+  //
 
   /**
    * Dictionary of sprites
    */
-  imageDictionary = new HashMap<String, ArrayList<PImage>>();
+    imageDictionary = new HashMap<String, ArrayList<PImage>>();
 
-  /**
-   * Coin
-   */
-    imageDictionary.put("coin", new ArrayList<PImage>() {{
-      add(loadImage(POWER_UP + COIN_0));
-      add(loadImage(POWER_UP + COIN_1));
-      add(loadImage(POWER_UP + COIN_2));
-      add(loadImage(POWER_UP + COIN_3));
-    }});
+    /**
+    * Player
+    */
+      /**
+      * Player Base
+      */
+        imageDictionary.put(MARIO_BASE + "mario_dead", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_BASE + MARIO_DEAD));
+        }});
 
-  /**
-   * Fire Ball
-   */
-    imageDictionary.put("fireFlower", new ArrayList<PImage>() {{
-      add(loadImage(POWER_UP + FIRE_FLOWER_0));
-      add(loadImage(POWER_UP + FIRE_FLOWER_1));
-      add(loadImage(POWER_UP + FIRE_FLOWER_2));
-      add(loadImage(POWER_UP + FIRE_FLOWER_3));
-    }});
+        imageDictionary.put(MARIO_BASE + RX + "_mario_neutral", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_BASE + RX + MARIO_NEUTRAL));
+        }});
 
-  /**
-   * Goomba
-   */
-    imageDictionary.put("goomba", new ArrayList<PImage>() {{
-      add(loadImage(GOOMBA + RX + GOOMBA_NEUTRAL));
-      add(loadImage(GOOMBA + LX + GOOMBA_NEUTRAL));
-    }});
+        imageDictionary.put(MARIO_BASE + LX + "_mario_neutral", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_BASE + LX + MARIO_NEUTRAL));
+        }});
 
-  /**
-   * Green Koopa Troopa
-   */
-    imageDictionary.put(KOOPA + GREEN_KOOPA_TROOPA + RX, new ArrayList<PImage>() {{
-      add(loadImage(KOOPA + RX + GREEN_KOOPA_TROOPA + KOOPA_0));
-      add(loadImage(KOOPA + RX + GREEN_KOOPA_TROOPA + KOOPA_1));
-    }});
+        imageDictionary.put(MARIO_BASE + RX + "_mario_jump", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_BASE + RX + MARIO_JUMP));
+        }});
 
-    imageDictionary.put(KOOPA + GREEN_KOOPA_TROOPA + LX, new ArrayList<PImage>() {{
-      add(loadImage(KOOPA + LX + GREEN_KOOPA_TROOPA + KOOPA_0));
-      add(loadImage(KOOPA + LX + GREEN_KOOPA_TROOPA + KOOPA_1));
-    }});
+        imageDictionary.put(MARIO_BASE + LX + "_mario_jump", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_BASE + LX + MARIO_JUMP));
+        }});
+
+
+        imageDictionary.put(MARIO_BASE + RX + "_mario_walk", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_BASE + RX + MARIO_WALK_1));
+          add(loadImage(MARIO + MARIO_BASE + RX + MARIO_WALK_2));
+          add(loadImage(MARIO + MARIO_BASE + RX + MARIO_WALK_3));
+        }});
+
+        imageDictionary.put(MARIO_BASE + LX + "_mario_walk", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_BASE + LX + MARIO_WALK_1));
+          add(loadImage(MARIO + MARIO_BASE + LX + MARIO_WALK_2));
+          add(loadImage(MARIO + MARIO_BASE + LX + MARIO_WALK_3));
+        }});
+      //
+
+      /**
+      * Player Super Mushroom Power Up
+      */
+        imageDictionary.put(MARIO_SUPER_MUSHROOM + RX + "_mario_neutral", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + RX + MARIO_NEUTRAL));
+        }});
+
+        imageDictionary.put(MARIO_SUPER_MUSHROOM + LX + "_mario_neutral", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + LX + MARIO_NEUTRAL));
+        }});
+
+        imageDictionary.put(MARIO_SUPER_MUSHROOM + RX + "_mario_jump", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + RX + MARIO_JUMP));
+        }});
+
+        imageDictionary.put(MARIO_SUPER_MUSHROOM + LX + "_mario_jump", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + LX + MARIO_JUMP));
+        }});
+
+        imageDictionary.put(MARIO_SUPER_MUSHROOM + RX + "_mario_walk", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + RX + MARIO_WALK_1));
+          add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + RX + MARIO_WALK_2));
+          add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + RX + MARIO_WALK_3));
+        }});
+
+        imageDictionary.put(MARIO_SUPER_MUSHROOM + LX + "_mario_walk", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + LX + MARIO_WALK_1));
+          add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + LX + MARIO_WALK_2));
+          add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + LX + MARIO_WALK_3));
+        }});
+      //
+
+      /**
+      * Player Fire Flower Power Up
+      */
+        imageDictionary.put(MARIO_FIRE_FLOWER + RX + "_mario_neutral", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_NEUTRAL));
+        }});
+
+        imageDictionary.put(MARIO_FIRE_FLOWER + LX + "_mario_neutral", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_NEUTRAL));
+        }});
+
+        imageDictionary.put(MARIO_FIRE_FLOWER + RX + "_mario_jump", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_JUMP));
+        }});
+
+        imageDictionary.put(MARIO_FIRE_FLOWER + LX + "_mario_jump", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_JUMP));
+        }});
+
+        imageDictionary.put(MARIO_FIRE_FLOWER + RX + "_mario_walk", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_WALK_1));
+          add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_WALK_2));
+          add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_WALK_3));
+        }});
+
+        imageDictionary.put(MARIO_FIRE_FLOWER + LX + "_mario_walk", new ArrayList<PImage>() {{
+          add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_WALK_1));
+          add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_WALK_2));
+          add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_WALK_3));
+        }});
+      //
+    //
     
-    imageDictionary.put(KOOPA + GREEN_KOOPA_TROOPA + KOOPA_SHELL_0, new ArrayList<PImage>() {{
-      add(loadImage(KOOPA + GREEN_KOOPA_TROOPA + KOOPA_SHELL_0));
+    /**
+    * Coin
+    */
+      imageDictionary.put("coin", new ArrayList<PImage>() {{
+        add(loadImage(POWER_UP + COIN_0));
+        add(loadImage(POWER_UP + COIN_1));
+        add(loadImage(POWER_UP + COIN_2));
+        add(loadImage(POWER_UP + COIN_3));
+      }});
+    //
 
-    }});
+    /**
+    * Fire Ball
+    */
+      imageDictionary.put("fireFlower", new ArrayList<PImage>() {{
+        add(loadImage(POWER_UP + FIRE_FLOWER_0));
+        add(loadImage(POWER_UP + FIRE_FLOWER_1));
+        add(loadImage(POWER_UP + FIRE_FLOWER_2));
+        add(loadImage(POWER_UP + FIRE_FLOWER_3));
+      }});
+    //
 
-    imageDictionary.put(KOOPA + GREEN_KOOPA_TROOPA + KOOPA_SHELL_1, new ArrayList<PImage>() {{
-      add(loadImage(KOOPA + GREEN_KOOPA_TROOPA + KOOPA_SHELL_1));
-    }});
-  
-   /**
-   * Question Block
-   */
-    imageDictionary.put("question_block", new ArrayList<PImage>() {{
-      add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_1));
-      add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_2));
-      add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_3));
-    }});
+    /**
+    * Goomba
+    */
+      imageDictionary.put("goomba", new ArrayList<PImage>() {{
+        add(loadImage(GOOMBA + RX + GOOMBA_NEUTRAL));
+        add(loadImage(GOOMBA + LX + GOOMBA_NEUTRAL));
+      }});
+    //
 
-    imageDictionary.put("question_block_empty", new ArrayList<PImage>() {{
-      add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_EMPTY));
-    }});
+    /**
+    * Green Koopa Troopa
+    */
+      imageDictionary.put(KOOPA + GREEN_KOOPA_TROOPA + RX, new ArrayList<PImage>() {{
+        add(loadImage(KOOPA + RX + GREEN_KOOPA_TROOPA + KOOPA_0));
+        add(loadImage(KOOPA + RX + GREEN_KOOPA_TROOPA + KOOPA_1));
+      }});
+
+      imageDictionary.put(KOOPA + GREEN_KOOPA_TROOPA + LX, new ArrayList<PImage>() {{
+        add(loadImage(KOOPA + LX + GREEN_KOOPA_TROOPA + KOOPA_0));
+        add(loadImage(KOOPA + LX + GREEN_KOOPA_TROOPA + KOOPA_1));
+      }});
+      
+      imageDictionary.put(KOOPA + GREEN_KOOPA_TROOPA + KOOPA_SHELL_0, new ArrayList<PImage>() {{
+        add(loadImage(KOOPA + GREEN_KOOPA_TROOPA + KOOPA_SHELL_0));
+
+      }});
+
+      imageDictionary.put(KOOPA + GREEN_KOOPA_TROOPA + KOOPA_SHELL_1, new ArrayList<PImage>() {{
+        add(loadImage(KOOPA + GREEN_KOOPA_TROOPA + KOOPA_SHELL_1));
+      }});
+    //
+    
+    /**
+    * Question Block
+    */
+      imageDictionary.put("question_block", new ArrayList<PImage>() {{
+        add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_1));
+        add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_2));
+        add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_3));
+      }});
+
+      imageDictionary.put("question_block_empty", new ArrayList<PImage>() {{
+        add(loadImage(QUESTION_BLOCK + QUESTION_BLOCK_EMPTY));
+      }});
+    //
   //
-  
-  
-  fullScreen();
-  windowTitle(GAME_TITLE);
-  frameRate(FRAME_RATE);
 
-  levels = new ArrayList<Level>();
+  /**
+   * Settings
+   */
+    fullScreen();
+    windowTitle(GAME_TITLE);
+    frameRate(FRAME_RATE);
+  //
 
-  levels.add(new Level0());
-  levels.add(new Level1());
+  /**
+   * Levels
+   */
+    levels = new ArrayList<Level>();
 
-  level = levels.get(0);
+    levels.add(new Level0());
+    levels.add(new Level1());
 
-  keyMap = new HashMap<String, Key>();
+    level = levels.get(0);
+  //
 
-  
-  // Aggiungi gli oggetti Key al dizionario
-  keyMap.put("a_key", new Key('a'));
-  keyMap.put("d_key", new Key('d'));
-  keyMap.put("x_key", new Key('x'));
-  keyMap.put("X_key", new Key('X'));
-  keyMap.put("left_arrow_key", new Key(LEFT));
-  keyMap.put("right_arrow_key", new Key(RIGHT));
-  keyMap.put("shift_key", new Key(SHIFT));
-  keyMap.put("spacebar_key", new Key(32));
+  /**
+   * Key dictionary
+   */
+    keyMap = new HashMap<String, Key>();
 
-  
+    keyMap.put("a_key", new Key('a'));
+    keyMap.put("d_key", new Key('d'));
+    keyMap.put("x_key", new Key('x'));
+    keyMap.put("X_key", new Key('X'));
+    keyMap.put("left_arrow_key", new Key(LEFT));
+    keyMap.put("right_arrow_key", new Key(RIGHT));
+    keyMap.put("shift_key", new Key(SHIFT));
+    keyMap.put("spacebar_key", new Key(32));
+  //
   
 
   player = new Player(MARIO + MARIO_BASE + RX + MARIO_NEUTRAL, level.playerInitialPosition);
@@ -196,7 +352,9 @@ void drawLevel() {
   level.drawHud();
 }
 
-
+void gameOverDraw() {
+  background(0, 0, 0);
+}
 
 void loadLevelDraw() {
   background(0);
@@ -210,24 +368,61 @@ void draw() {
   // Chiamare la funzione update del livello
   if (!player.isDead) {
       if (level.isFinished && level.id + 1 < levels.size()) {
-        level = levels.get(level.id + 1);
-        level.reset();
-        player.reset(level.playerInitialPosition);
         
+        if (loadLevelScreenTimeDuration.tick()) {
+          level = levels.get(level.id + 1);
+          level.reset();
+          player.reset(level.playerInitialPosition);
+          newLevelAnimationLevelTimeDuration.reset();
+          loadLevelScreenTimeDuration.reset();
+          drawLevel();
+        } else {
+          newLevelAnimationLevelTimeDuration.update();
+          if (newLevelAnimationLevelTimeDuration.tick()) { 
+            loadLevelScreenTimeDuration.update();
+            loadLevelDraw();
+          } else {
+            player.stopX();
+            
+            drawLevel();
+
+          }      
+        }        
+      } else {
+        drawLevel();
       }
-      drawLevel();
+      
   } else if (player.lives <= 0) {
-    
+    if (gameOverScreenTimeDuration.tick()) { // Attiva il reset del player alla fine del timer
+      level = levels.get(0);
+      for (Level level : levels) {
+        level.reset();
+      }
+      player.resetGameOver(level.playerInitialPosition);
+      gameOverScreenTimeDuration.reset();
+      deathAnimationLevelTimeDuration.reset();
+    } else {
+      deathAnimationLevelTimeDuration.update();
+      if (deathAnimationLevelTimeDuration.tick()) { // Attiva lo screen delle vite dopo l'animazione alla fine del timer
+        gameOverScreenTimeDuration.update();
+        if (!game_over_effect.isPlaying()) {
+          game_over_effect.play();
+        }
+        gameOverDraw();
+      } else {
+        drawLevel();
+      }      
+    }
   } else {
-    if (deadResetTimeout.tick()) { // Attiva il reset del player alla fine del timer
+    if (loadLevelScreenTimeDuration.tick()) { // Attiva il reset del player alla fine del timer
       level.reset();
       player.reset(level.playerInitialPosition);
-      deadResetTimeout.reset();
-      deadScreenTimeout.reset();
+      loadLevelScreenTimeDuration.reset();
+      deathAnimationLevelTimeDuration.reset();
     } else {
-      deadScreenTimeout.update();
-      if (deadScreenTimeout.tick()) { // Attiva lo screen delle vite dopo l'animazione alla fine del timer
-        deadResetTimeout.update();
+      deathAnimationLevelTimeDuration.update();
+      if (deathAnimationLevelTimeDuration.tick()) { // Attiva lo screen delle vite dopo l'animazione alla fine del timer
+        loadLevelScreenTimeDuration.update();
         loadLevelDraw();
       } else {
         drawLevel();

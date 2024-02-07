@@ -9,7 +9,7 @@ final int FRAME_RATE = 60;
 final String RX = "rx";
 final String LX = "lx";
 
-HashMap<Boolean, String> booleanSide = new HashMap<Boolean, String>();
+
 
 
 
@@ -89,6 +89,9 @@ final String DIE_EFFECT = "die_effect.wav";
 final String POWERUP_APPEARS_EFFECT = "powerup_appears_effect.wav";
 final String FIRE_BALL_EFFECT = "fire_ball_effect.wav";
 final String BREAK_BLOCK_EFFECT = "break_block_effect.wav";
+final String GAME_OVER_EFFECT = "game_over_effect.wav";
+final String COURSE_CLEAR_EFFECT = "course_clear_effect.wav";
+final String LETS_A_GO_EFFECT = "lets_a_go_effect.wav";
 
 final String FIRE_BALL_0 = ITEMS + "fire_ball_0.png";
 final String FIRE_BALL_1 = ITEMS + "fire_ball_1.png";

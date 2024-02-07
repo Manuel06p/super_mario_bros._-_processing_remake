@@ -59,98 +59,7 @@ class Player extends Entity {
     powerLevelSet.put(2, MARIO_SUPER_MUSHROOM);
     powerLevelSet.put(3, MARIO_FIRE_FLOWER);
 
-    imageDictionary.put(MARIO_BASE + "mario_dead", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_BASE + MARIO_DEAD));
-    }});
-
-    imageDictionary.put(MARIO_BASE + RX + "_mario_neutral", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_BASE + RX + MARIO_NEUTRAL));
-    }});
-
-    imageDictionary.put(MARIO_BASE + LX + "_mario_neutral", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_BASE + LX + MARIO_NEUTRAL));
-    }});
-
-    imageDictionary.put(MARIO_BASE + RX + "_mario_jump", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_BASE + RX + MARIO_JUMP));
-    }});
-
-    imageDictionary.put(MARIO_BASE + LX + "_mario_jump", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_BASE + LX + MARIO_JUMP));
-    }});
-
-
-    imageDictionary.put(MARIO_BASE + RX + "_mario_walk", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_BASE + RX + MARIO_WALK_1));
-      add(loadImage(MARIO + MARIO_BASE + RX + MARIO_WALK_2));
-      add(loadImage(MARIO + MARIO_BASE + RX + MARIO_WALK_3));
-    }});
-
-    imageDictionary.put(MARIO_BASE + LX + "_mario_walk", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_BASE + LX + MARIO_WALK_1));
-      add(loadImage(MARIO + MARIO_BASE + LX + MARIO_WALK_2));
-      add(loadImage(MARIO + MARIO_BASE + LX + MARIO_WALK_3));
-    }});
-
-
-
-    imageDictionary.put(MARIO_SUPER_MUSHROOM + RX + "_mario_neutral", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + RX + MARIO_NEUTRAL));
-    }});
-
-    imageDictionary.put(MARIO_SUPER_MUSHROOM + LX + "_mario_neutral", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + LX + MARIO_NEUTRAL));
-    }});
-
-    imageDictionary.put(MARIO_SUPER_MUSHROOM + RX + "_mario_jump", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + RX + MARIO_JUMP));
-    }});
-
-    imageDictionary.put(MARIO_SUPER_MUSHROOM + LX + "_mario_jump", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + LX + MARIO_JUMP));
-    }});
-
-    imageDictionary.put(MARIO_SUPER_MUSHROOM + RX + "_mario_walk", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + RX + MARIO_WALK_1));
-      add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + RX + MARIO_WALK_2));
-      add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + RX + MARIO_WALK_3));
-    }});
-
-    imageDictionary.put(MARIO_SUPER_MUSHROOM + LX + "_mario_walk", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + LX + MARIO_WALK_1));
-      add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + LX + MARIO_WALK_2));
-      add(loadImage(MARIO + MARIO_SUPER_MUSHROOM + LX + MARIO_WALK_3));
-    }});
-
-
-    //Fire flower
-    imageDictionary.put(MARIO_FIRE_FLOWER + RX + "_mario_neutral", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_NEUTRAL));
-    }});
-
-    imageDictionary.put(MARIO_FIRE_FLOWER + LX + "_mario_neutral", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_NEUTRAL));
-    }});
-
-    imageDictionary.put(MARIO_FIRE_FLOWER + RX + "_mario_jump", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_JUMP));
-    }});
-
-    imageDictionary.put(MARIO_FIRE_FLOWER + LX + "_mario_jump", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_JUMP));
-    }});
-
-    imageDictionary.put(MARIO_FIRE_FLOWER + RX + "_mario_walk", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_WALK_1));
-      add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_WALK_2));
-      add(loadImage(MARIO + MARIO_FIRE_FLOWER + RX + MARIO_WALK_3));
-    }});
-
-    imageDictionary.put(MARIO_FIRE_FLOWER + LX + "_mario_walk", new ArrayList<PImage>() {{
-      add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_WALK_1));
-      add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_WALK_2));
-      add(loadImage(MARIO + MARIO_FIRE_FLOWER + LX + MARIO_WALK_3));
-    }});
+    
 
     this.boostValue = 3;
 
@@ -186,6 +95,12 @@ class Player extends Entity {
       isBoosted = false;
       movementSpeed /= boostValue;
     }
+  }
+
+  void resetGameOver(PVector initialPosition) {
+      coins = 0;
+      lives = 3;
+      reset(initialPosition);
   }
 
   void bounceOverEnemy() {

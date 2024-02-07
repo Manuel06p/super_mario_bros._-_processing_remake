@@ -14,6 +14,11 @@ class Sound {
   Sound(PApplet parent, String path) {
     sound = new SoundFile(parent, path);
   }
+
+  Sound(PApplet parent, String path, float volume) {
+    this(parent, path);
+    volume(volume);
+  }
   
   /**
   Esegue il suono.
@@ -49,5 +54,9 @@ class Sound {
   */
   void volume(float value) {
     sound.amp(value);
+  }
+
+  boolean isPlaying() {
+    return sound.isPlaying();
   }
 }
