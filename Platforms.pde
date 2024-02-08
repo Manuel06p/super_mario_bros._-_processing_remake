@@ -1,6 +1,6 @@
-Platform ground(float x, float y) {
+Platform ground(float x, float y, int width, int height) {
   return new Platform(
-    GROUND_GROUP, //texture
+    GROUND + width + "x" + height + GROUND_SPRITE, //texture
     new PVector(x, y),  //position
     true, //hasBounds
     0, //breakabilityUp
@@ -10,21 +10,9 @@ Platform ground(float x, float y) {
   );
 }
 
-Platform ground_17x1(float x, float y) {
+Platform brick(float x, float y, int width, int height) {
   return new Platform(
-    GROUND_17X1, //texture
-    new PVector(x, y),  //position
-    true, //hasBounds
-    0, //breakabilityUp
-    0, //breakabilityDown
-    0, //breakabilityLeft
-    0 //breakabilityRight
-  );
-}
-
-Platform brick(float x, float y) {
-  return new Platform(
-    BRICK, //texture
+    BRICK + width + "x" + height + BRICK_SPRITE, //texture
     new PVector(x, y),  //position
     true, //hasBounds
     2, //breakabilityUp

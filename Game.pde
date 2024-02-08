@@ -38,13 +38,19 @@ ArrayList<Level> levels;
   Timer deathAnimationLevelTimeDuration;
   Timer newLevelAnimationLevelTimeDuration;
   Timer gameOverScreenTimeDuration;
+  Timer pauseKeyTimeDuration;
 //
 
 Text coinLoadLevelText;
+Text lifeLoadLevelText;
+Text titleLoadLevelText;
+
+
 Sprite coinLoadLevelIcon;
 HashMap<String, ArrayList<PImage>> imageDictionary;
-Text lifeLoadLevelText;
+
 Sprite lifeLoadLevelIcon;
+boolean pause;
 
 HashMap<Boolean, String> booleanSide;
 
@@ -52,6 +58,8 @@ StringBuilder levelNameString = new StringBuilder();
 
 
 void setup() {
+
+  
 
   /**
    * Sound
@@ -79,6 +87,7 @@ void setup() {
     deathAnimationLevelTimeDuration = new Timer(150); //Tempo di durata dell'animazione, prima dell'inizio del dead screen
     gameOverScreenTimeDuration = new Timer(300); //Tempo di durata del game over screen, prima del reset
     newLevelAnimationLevelTimeDuration = new Timer(450); 
+    pauseKeyTimeDuration = new Timer(20);
   //
 
   /**
@@ -272,10 +281,16 @@ void setup() {
   /**
    * Settings
    */
-    fullScreen();
+    
     windowTitle(GAME_TITLE);
     frameRate(FRAME_RATE);
+    fullScreen();
+    surface.setAlwaysOnTop(true);
+    noCursor();
+    
   //
+
+  player = new Player(MARIO + MARIO_BASE + RX + MARIO_NEUTRAL, new PVector(0, 0));
 
   /**
    * Levels
@@ -284,8 +299,6 @@ void setup() {
 
     levels.add(new Level0());
     levels.add(new Level1());
-
-    level = levels.get(0);
   //
 
   /**
@@ -297,24 +310,30 @@ void setup() {
     keyMap.put("d_key", new Key('d'));
     keyMap.put("x_key", new Key('x'));
     keyMap.put("X_key", new Key('X'));
+    keyMap.put("p_key", new Key('p'));
+    keyMap.put("P_key", new Key('P'));
+    keyMap.put("e_key", new Key('e'));
+    keyMap.put("E_key", new Key('E'));
     keyMap.put("left_arrow_key", new Key(LEFT));
     keyMap.put("right_arrow_key", new Key(RIGHT));
     keyMap.put("shift_key", new Key(SHIFT));
     keyMap.put("spacebar_key", new Key(32));
   //
   
+  level = levels.get(0);
+  player.reset();
+  
+  lifeLoadLevelIcon = new Sprite(POWER_UP + ONE_UP_MUSHROOM_BIG, new PVector(700, 400));
+  lifeLoadLevelText = new Text(STANDARD_FONT, lifeLoadLevelIcon.position.x + 195 + 10, lifeLoadLevelIcon.position.y + 135, player.lifeHudString, 255, 100);
 
-  player = new Player(MARIO + MARIO_BASE + RX + MARIO_NEUTRAL, level.playerInitialPosition);
-
-  coinLoadLevelIcon = new Sprite(POWER_UP + COIN_0_BIG, new PVector(740, 600));
-  coinLoadLevelText = new Text(STANDARD_FONT, coinLoadLevelIcon.position.x + 120, coinLoadLevelIcon.position.y + 135, level.coinHudString, 255, 100);
-
-  lifeLoadLevelIcon = new Sprite(POWER_UP + ONE_UP_MUSHROOM_BIG, new PVector(700, 200));
-  lifeLoadLevelText = new Text(STANDARD_FONT, lifeLoadLevelIcon.position.x + 195, lifeLoadLevelIcon.position.y + 135, level.lifeHudString, 255, 100);
+  coinLoadLevelIcon = new Sprite(POWER_UP + COIN_0_BIG, new PVector(740, 700));
+  coinLoadLevelText = new Text(STANDARD_FONT, coinLoadLevelIcon.position.x + 155 + 10, coinLoadLevelIcon.position.y + 135, player.coinHudString, 255, 100);
 
   levelNameString.append(level.name);
 
-  lifeLoadLevelText = new Text(STANDARD_FONT, 195, 135, levelNameString, 255, 100);
+  pause = false;
+
+  titleLoadLevelText = new Text(STANDARD_FONT, GAME_WIDTH / 2, 250, levelNameString, 255, 130, CENTER);
 
 }
 
@@ -362,43 +381,81 @@ void loadLevelDraw() {
   coinLoadLevelText.draw();
   lifeLoadLevelIcon.draw();
   lifeLoadLevelText.draw();
+  titleLoadLevelText.draw();
+}
+
+void pauseKeyTrue() {
+  if (getKeyStatus("p_key") || getKeyStatus("P_key")) {
+    pause = true;
+    pauseKeyTimeDuration.reset();
+  }
+}
+
+void pauseKeyFalse() {
+  if (getKeyStatus("p_key") || getKeyStatus("P_key")) {
+    pause = false;
+    pauseKeyTimeDuration.reset();
+  }
 }
 
 void draw() {
   // Chiamare la funzione update del livello
   if (!player.isDead) {
-      if (level.isFinished && level.id + 1 < levels.size()) {
+    if (level.isFinished && level.id + 1 < levels.size()) {
+      if (loadLevelScreenTimeDuration.tick()) {
+        player.immunity = false;
+        level = levels.get(level.id + 1);
         
-        if (loadLevelScreenTimeDuration.tick()) {
-          level = levels.get(level.id + 1);
-          level.reset();
-          player.reset(level.playerInitialPosition);
-          newLevelAnimationLevelTimeDuration.reset();
-          loadLevelScreenTimeDuration.reset();
-          drawLevel();
-        } else {
-          newLevelAnimationLevelTimeDuration.update();
-          if (newLevelAnimationLevelTimeDuration.tick()) { 
-            loadLevelScreenTimeDuration.update();
-            loadLevelDraw();
-          } else {
-            player.stopX();
-            
-            drawLevel();
-
-          }      
-        }        
+        level.reset();
+        player.reset();
+        newLevelAnimationLevelTimeDuration.reset();
+        loadLevelScreenTimeDuration.reset();
+        drawLevel();
       } else {
+        newLevelAnimationLevelTimeDuration.update();
+        if (newLevelAnimationLevelTimeDuration.tick()) { 
+          loadLevelScreenTimeDuration.update();
+          loadLevelDraw();
+        } else {
+          player.stopX();
+          player.immunity = true;
+          drawLevel();
+        }      
+      }        
+    } else {
+      if (pause) {
+        if (pauseKeyTimeDuration.tick()) {
+          pauseKeyFalse();
+          if (getKeyStatus("e_key") || getKeyStatus("E_key")) {
+            exit();
+          }
+        } else {
+          pauseKeyTimeDuration.update();
+        }
+
+        gameOverDraw();
+
+      } else {
+        if (pauseKeyTimeDuration.tick()) {
+          pauseKeyTrue();
+        } else {
+          pauseKeyTimeDuration.update();
+        }
+        
         drawLevel();
       }
       
+    }
+      
   } else if (player.lives <= 0) {
     if (gameOverScreenTimeDuration.tick()) { // Attiva il reset del player alla fine del timer
+      player.immunity = false;
       level = levels.get(0);
       for (Level level : levels) {
         level.reset();
       }
-      player.resetGameOver(level.playerInitialPosition);
+      levelNameString.replace(0, levelNameString.length(), level.name);
+      player.resetGameOver();
       gameOverScreenTimeDuration.reset();
       deathAnimationLevelTimeDuration.reset();
     } else {
@@ -410,13 +467,15 @@ void draw() {
         }
         gameOverDraw();
       } else {
+        player.immunity = true;
         drawLevel();
       }      
     }
   } else {
     if (loadLevelScreenTimeDuration.tick()) { // Attiva il reset del player alla fine del timer
+      player.immunity = false;
       level.reset();
-      player.reset(level.playerInitialPosition);
+      player.reset();
       loadLevelScreenTimeDuration.reset();
       deathAnimationLevelTimeDuration.reset();
     } else {
@@ -425,16 +484,18 @@ void draw() {
         loadLevelScreenTimeDuration.update();
         loadLevelDraw();
       } else {
+        player.immunity = true;
         drawLevel();
       }      
     }
   }
-
-  
-  
 }
 
-
+void updateNextLevelName() {
+  if (level.id + 1 <  levels.size()) {
+    levelNameString.replace(0, levelNameString.length(), levels.get(level.id + 1).name);
+  }
+}
 
 void keyPressed() {
   for (Key keyToUpdate : keyMap.values()) {

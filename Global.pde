@@ -1,17 +1,14 @@
 /**
 Costanti globali.
 */
-final String GAME_TITLE = "GAME";
+final String GAME_TITLE = "Super Mario Bros. - Remaster Processing";
+final String REPOSITORY_NAME = "Super_Mario_Bros._-_Remaster_Processing";
 final int GAME_WIDTH = 1920;
 final int GAME_HEIGHT = 1080;
 final int FRAME_RATE = 60;
 
 final String RX = "rx";
 final String LX = "lx";
-
-
-
-
 
 final String MARIO = "assets/player/";
 
@@ -44,10 +41,13 @@ final String ITEMS = "assets/items/";
 final String GROUND_17X1 = ITEMS + "ground_17x1.png";
 
 final String BLOCK = ITEMS + "block/";
-
 final String BLOCK_SPRITE = "_block.png";
 
-final String BRICK = ITEMS + "brick.png";
+final String GROUND = ITEMS + "ground/";
+final String GROUND_SPRITE = "_ground.png";
+
+final String BRICK = ITEMS + "brick/";
+final String BRICK_SPRITE = "_brick.png";
 
 final String QUESTION_BLOCK = ITEMS + "question_block/";
 
@@ -93,10 +93,11 @@ final String GAME_OVER_EFFECT = "game_over_effect.wav";
 final String COURSE_CLEAR_EFFECT = "course_clear_effect.wav";
 final String LETS_A_GO_EFFECT = "lets_a_go_effect.wav";
 
-final String FIRE_BALL_0 = ITEMS + "fire_ball_0.png";
-final String FIRE_BALL_1 = ITEMS + "fire_ball_1.png";
-final String FIRE_BALL_2 = ITEMS + "fire_ball_2.png";
-final String FIRE_BALL_3 = ITEMS + "fire_ball_3.png";
+final String FIRE_BALL = ITEMS + "fire_ball/";
+final String FIRE_BALL_0 = FIRE_BALL + "fire_ball_0.png";
+final String FIRE_BALL_1 = FIRE_BALL + "fire_ball_1.png";
+final String FIRE_BALL_2 = FIRE_BALL + "fire_ball_2.png";
+final String FIRE_BALL_3 = FIRE_BALL + "fire_ball_3.png";
 
 final String FLAG = ITEMS + "flag.png";
 final String FLAG_STAND = ITEMS + "flag_stand.png";
@@ -104,10 +105,6 @@ final String FLAG_STAND = ITEMS + "flag_stand.png";
 final String UI = "assets/ui/";
 final String LOGO = UI + "logo.png";
 
-
-
-final String GROUND_GROUP = "assets/ground_group.png";
-final String GROUND_GROUP_3 = "assets/ground_group_3.png";
 
 final String FONTS = "assets/fonts/";
 final String STANDARD_FONT = FONTS + "standard_font.ttf";

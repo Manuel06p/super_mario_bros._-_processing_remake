@@ -1,6 +1,23 @@
 class Level0 extends Level {
 
-    Text controls = new Text(STANDARD_FONT, 62, 400, new StringBuilder("Comandi:\n\n- Frecce per muoversi\n- Barra spaziatrice per saltare\n- Shift per correre\n- X per usare il potere fuoco\n\n\nColpisci la bandiera per iniziare!"), color(40, 40, 40), 40);
+    Text controls = new Text(
+        STANDARD_FONT, 
+        62, 
+        400, 
+        new StringBuilder(
+            "Comandi:\n" +
+            "\n" +
+            "- Frecce per muoversi\n" +
+            "- Barra spaziatrice per saltare\n" +
+            "- Shift per correre\n" +
+            "- X per usare il potere fuoco\n" +
+            "- P per mettere in pausa\n" +
+            "\n" +
+            "Colpisci la bandiera per iniziare!"), 
+        color(40, 40, 40), 
+        40
+    );
+
     Sprite logo;
 
     Level0() {
@@ -21,7 +38,7 @@ class Level0 extends Level {
 
         logo = new Sprite(LOGO, new PVector(607, 50));
 
-        platforms.add(ground_17x1(0, 120));
+        platforms.add(ground(0, 120, 17, 1));
 
         platforms.add(block(1680, 240, 1, 1));
         powerUps.add(new Flag(1680 + 52, 800 + 240));
@@ -37,6 +54,7 @@ class Level0 extends Level {
         music.stop();
         lets_a_go_effect.play();
         newLevelAnimationLevelTimeDuration.elapsed = 350;
+        updateNextLevelName();
     }
 
 

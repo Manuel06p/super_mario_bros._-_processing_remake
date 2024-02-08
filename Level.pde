@@ -10,11 +10,11 @@ class Level {
     float cameraSpeed;
     Sound music;
 
-    StringBuilder coinHudString = new StringBuilder();
+    
     Text coinHudText;
     Sprite coinHudIcon;
     
-    StringBuilder lifeHudString = new StringBuilder();
+    
     Text lifeHudText;
     Sprite lifeHudIcon;
 
@@ -26,13 +26,13 @@ class Level {
         this.music = music;
 
         //HUD
-        coinHudString.append("x00");
+        
         coinHudIcon = new Sprite(POWER_UP + COIN_0, new PVector(400, 70));
-        coinHudText = new Text(STANDARD_FONT, coinHudIcon.position.x + 62, coinHudIcon.position.y + 62, coinHudString, 255, 40);
+        coinHudText = new Text(STANDARD_FONT, coinHudIcon.position.x + 62, coinHudIcon.position.y + 62, player.coinHudString, 255, 40);
 
-        lifeHudString.append("x03");
+        
         lifeHudIcon = new Sprite(POWER_UP + ONE_UP_MUSHROOM, new PVector(70, 70));
-        lifeHudText = new Text(STANDARD_FONT, lifeHudIcon.position.x + 98, lifeHudIcon.position.y + 62, lifeHudString, 255, 40);
+        lifeHudText = new Text(STANDARD_FONT, lifeHudIcon.position.x + 98, lifeHudIcon.position.y + 62, player.lifeHudString, 255, 40);
 
 
         reset();
@@ -52,7 +52,10 @@ class Level {
         isFinished = true;
         music.stop();
         course_clear_effect.play();
+        updateNextLevelName();
+        
     }
+
 
     void update() {
         // Aggiorna la posizione della telecamera in base alla velocità specifica del livello

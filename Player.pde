@@ -7,6 +7,7 @@ class Player extends Entity {
   int coins;
   
   boolean isBoosted;
+  boolean immunity;
   int powerLevel = 1;
   int damage;
   final int DAMAGE_TIMEOUT_VALUE = 120;
@@ -15,6 +16,11 @@ class Player extends Entity {
   HashMap<Integer, String> powerLevelSet = new HashMap<Integer, String>();
   
   ArrayList<FireBall> fireBalls = new ArrayList<FireBall>();
+
+  StringBuilder coinHudString = new StringBuilder();
+  StringBuilder lifeHudString = new StringBuilder();
+
+  
 
   Timer deadJump;
   Timer fireBallTimeout;
@@ -27,13 +33,6 @@ class Player extends Entity {
   String jumpKey;
   String fireBallKey_0;
   String fireBallKey_1;
-  
-  
-  
-  
-
-  
-
 
   Player(String path, PVector initialPosition) {
     //super(path: String, posizione iniziale: PVector, salute: int, gravità: float, velocità: float, salto: float)
@@ -48,6 +47,9 @@ class Player extends Entity {
           0, //breakingValueLeft
           0 //breakingValueRight
     );
+
+    coinHudString.append("x00");
+    lifeHudString.append("x03");
 
     lives = 3;    
     damageTimeout = DAMAGE_TIMEOUT_VALUE;
@@ -64,6 +66,7 @@ class Player extends Entity {
     this.boostValue = 3;
 
     this.isBoosted = false;
+    this.immunity = false;
     
     this.damage = 1;
     
@@ -73,15 +76,13 @@ class Player extends Entity {
     this.jumpKey = "spacebar_key";
     this.fireBallKey_0 = "x_key";
     this.fireBallKey_1 = "X_key";
-    
-    
   }
 
   // Altri metodi specifici del giocatore, se necessario
-  void reset(PVector initialPosition) {
+  void reset() {
     side = RX;
     basePower();
-    position = initialPosition;
+    position = level.playerInitialPosition;
     updateLifeHud();
     updateCoinHud();
     
@@ -97,10 +98,10 @@ class Player extends Entity {
     }
   }
 
-  void resetGameOver(PVector initialPosition) {
+  void resetGameOver() {
       coins = 0;
       lives = 3;
-      reset(initialPosition);
+      reset();
   }
 
   void bounceOverEnemy() {
@@ -176,25 +177,25 @@ class Player extends Entity {
   @Override
   void takeDamage(int damage) {
     super.takeDamage(damage);
-    if (damage == -1) {
-      die();
-    } else {
-      if (damageTimeout == DAMAGE_TIMEOUT_VALUE) {
-        if (powerLevel - damage == 0 ) {
-          die();
-        } else {
-          powerLevel -= damage;
-          pipe_effect.play();
-          if (powerLevel == 1) {
-            basePower();
-          } else if (powerLevel == 2) {
-            superMushroomPower();
+    if (!immunity) {
+      if (damage == -1) {
+        die();
+      } else {
+        if (damageTimeout == DAMAGE_TIMEOUT_VALUE) {
+          if (powerLevel - damage == 0 ) {
+            die();
+          } else {
+            powerLevel -= damage;
+            pipe_effect.play();
+            if (powerLevel == 1) {
+              basePower();
+            } else if (powerLevel == 2) {
+              superMushroomPower();
+            }
           }
-          
-          
+          damageTimeout = 0;
         }
-        damageTimeout = 0;
-    }
+      }
     }
   }
 
@@ -228,17 +229,17 @@ class Player extends Entity {
 
   void updateLifeHud() {
     if (lives < 10) {
-      level.lifeHudString.replace(level.lifeHudString.length()-1, level.lifeHudString.length(), lives + "");
+      lifeHudString.replace(lifeHudString.length()-1, lifeHudString.length(), lives + "");
     } else {
-      level.lifeHudString.replace(level.lifeHudString.length()-2, level.lifeHudString.length(), lives + "");
+      lifeHudString.replace(lifeHudString.length()-2, lifeHudString.length(), lives + "");
     }
   }
 
   void updateCoinHud() {
     if (coins < 10) {
-      level.coinHudString.replace(level.coinHudString.length()-1, level.coinHudString.length(), coins + "");
+      coinHudString.replace(coinHudString.length()-1, coinHudString.length(), coins + "");
     } else {
-      level.coinHudString.replace(level.coinHudString.length()-2, level.coinHudString.length(), coins + "");
+      coinHudString.replace(coinHudString.length()-2, coinHudString.length(), coins + "");
     }
   }
 
