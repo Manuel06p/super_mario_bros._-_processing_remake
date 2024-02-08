@@ -45,6 +45,8 @@ Text coinLoadLevelText;
 Text lifeLoadLevelText;
 Text titleLoadLevelText;
 Text gameOverText;
+Text pauseText;
+
 
 
 Sprite coinLoadLevelIcon;
@@ -88,7 +90,7 @@ void setup() {
     deathAnimationLevelTimeDuration = new Timer(150); //Tempo di durata dell'animazione, prima dell'inizio del dead screen
     gameOverScreenTimeDuration = new Timer(300); //Tempo di durata del game over screen, prima del reset
     newLevelAnimationLevelTimeDuration = new Timer(450); 
-    pauseKeyTimeDuration = new Timer(20);
+    pauseKeyTimeDuration = new Timer(10);
   //
 
   /**
@@ -334,25 +336,46 @@ void setup() {
     coinLoadLevelIcon = new Sprite(POWER_UP + COIN_0_BIG, new PVector(740, 700));
     coinLoadLevelText = new Text(STANDARD_FONT, coinLoadLevelIcon.position.x + 155 + 10, coinLoadLevelIcon.position.y + 135, player.coinHudString, 255, 100);
   //
-    
 
+  /**
+   * Game over HUD
+   */
+    gameOverText = new Text(
+      STANDARD_FONT, 
+      GAME_WIDTH / 2, 
+      GAME_HEIGHT / 2 - 50, 
+      new StringBuilder(
+          "GAME\n" +
+          "OVER"),
+      color(255, 255, 255), 
+      200,
+      CENTER
+    );
+  //
+
+  /**
+   * Pause HUD
+   */
+    pauseText = new Text(
+      STANDARD_FONT, 
+      GAME_WIDTH / 2, 
+      GAME_HEIGHT / 2 - 180, 
+      new StringBuilder(
+          "Press P to resume\n" +
+          "\n" +
+          "or\n" +
+          "\n" +
+          "Press E to exit"),
+      color(255, 255, 255), 
+      100,
+      CENTER
+    );
+  //
 
   pause = false;
-
-
-  gameOverText = new Text(
-        STANDARD_FONT, 
-        GAME_WIDTH / 2, 
-        GAME_HEIGHT / 2, 
-        new StringBuilder(
-            "GAME\n" +
-            "OVER"),
-        color(255, 255, 255), 
-        200,
-        CENTER
-    );
-
 }
+
+
 
 // Aggiorna la logica del gioco
 void updateLevel() {
@@ -416,6 +439,11 @@ void pauseKeyFalse() {
   }
 }
 
+void pauseDraw() {
+  background(0);
+  pauseText.draw();
+}
+
 void draw() {
   // Chiamare la funzione update del livello
   if (!player.isDead) {
@@ -436,6 +464,7 @@ void draw() {
           loadLevelDraw();
         } else {
           player.stopX();
+          player.jump = false;
           player.immunity = true;
           drawLevel();
         }      
@@ -451,7 +480,13 @@ void draw() {
           pauseKeyTimeDuration.update();
         }
 
-        gameOverDraw();
+        pauseDraw();
+        if (!pause) {
+          level.music.play();
+        } else {
+          level.music.pause();
+        }
+        
 
       } else {
         if (pauseKeyTimeDuration.tick()) {

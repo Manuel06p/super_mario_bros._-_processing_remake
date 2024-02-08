@@ -74,6 +74,7 @@ class Level1 extends Level {
         platforms.add(brick(6240 + 360, 480 + 20, 1, 1));
         powerUps.add(new FireFlower(6240 + 240 + 15, 485));
 
+        platforms.add(ground(4800 + 2400, 120, 17, 1));
         
     }
 }
