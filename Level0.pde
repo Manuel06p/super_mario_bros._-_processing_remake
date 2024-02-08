@@ -33,7 +33,7 @@ class Level0 extends Level {
         cameraSpeed = 5;
         playerInitialPosition = new PVector(500, GAME_HEIGHT - 243);
         tag = "level_0";
-        name = "Main Menu";
+        name = "Start Level";
         id = 0;
 
         logo = new Sprite(LOGO, new PVector(607, 50));

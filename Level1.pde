@@ -12,7 +12,7 @@ class Level1 extends Level {
         cameraSpeed = 5;
         playerInitialPosition = new PVector(480, GAME_HEIGHT-1200);
         tag = "level_1";
-        name = "Livello 1";
+        name = "Level 1";
         id = 1;
 
 

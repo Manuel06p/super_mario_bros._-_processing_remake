@@ -44,6 +44,7 @@ ArrayList<Level> levels;
 Text coinLoadLevelText;
 Text lifeLoadLevelText;
 Text titleLoadLevelText;
+Text gameOverText;
 
 
 Sprite coinLoadLevelIcon;
@@ -281,13 +282,11 @@ void setup() {
   /**
    * Settings
    */
-    
     windowTitle(GAME_TITLE);
     frameRate(FRAME_RATE);
     fullScreen();
     surface.setAlwaysOnTop(true);
     noCursor();
-    
   //
 
   player = new Player(MARIO + MARIO_BASE + RX + MARIO_NEUTRAL, new PVector(0, 0));
@@ -323,17 +322,35 @@ void setup() {
   level = levels.get(0);
   player.reset();
   
-  lifeLoadLevelIcon = new Sprite(POWER_UP + ONE_UP_MUSHROOM_BIG, new PVector(700, 400));
-  lifeLoadLevelText = new Text(STANDARD_FONT, lifeLoadLevelIcon.position.x + 195 + 10, lifeLoadLevelIcon.position.y + 135, player.lifeHudString, 255, 100);
+  /**
+   * Load level HUD
+   */
+    levelNameString.append(level.name);
+    titleLoadLevelText = new Text(STANDARD_FONT, GAME_WIDTH / 2, 250, levelNameString, 255, 130, CENTER);
 
-  coinLoadLevelIcon = new Sprite(POWER_UP + COIN_0_BIG, new PVector(740, 700));
-  coinLoadLevelText = new Text(STANDARD_FONT, coinLoadLevelIcon.position.x + 155 + 10, coinLoadLevelIcon.position.y + 135, player.coinHudString, 255, 100);
+    lifeLoadLevelIcon = new Sprite(POWER_UP + ONE_UP_MUSHROOM_BIG, new PVector(700, 400));
+    lifeLoadLevelText = new Text(STANDARD_FONT, lifeLoadLevelIcon.position.x + 195 + 10, lifeLoadLevelIcon.position.y + 135, player.lifeHudString, 255, 100);
 
-  levelNameString.append(level.name);
+    coinLoadLevelIcon = new Sprite(POWER_UP + COIN_0_BIG, new PVector(740, 700));
+    coinLoadLevelText = new Text(STANDARD_FONT, coinLoadLevelIcon.position.x + 155 + 10, coinLoadLevelIcon.position.y + 135, player.coinHudString, 255, 100);
+  //
+    
+
 
   pause = false;
 
-  titleLoadLevelText = new Text(STANDARD_FONT, GAME_WIDTH / 2, 250, levelNameString, 255, 130, CENTER);
+
+  gameOverText = new Text(
+        STANDARD_FONT, 
+        GAME_WIDTH / 2, 
+        GAME_HEIGHT / 2, 
+        new StringBuilder(
+            "GAME\n" +
+            "OVER"),
+        color(255, 255, 255), 
+        200,
+        CENTER
+    );
 
 }
 
@@ -373,6 +390,7 @@ void drawLevel() {
 
 void gameOverDraw() {
   background(0, 0, 0);
+  gameOverText.draw();
 }
 
 void loadLevelDraw() {
