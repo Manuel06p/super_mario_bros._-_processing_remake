@@ -300,6 +300,7 @@ void setup() {
 
     levels.add(new Level0());
     levels.add(new Level1());
+    levels.add(new Level2());
   //
 
   /**
@@ -384,7 +385,6 @@ void updateLevel() {
 }
 
 void drawLevel() {
-  background(159, 203, 255);
   pushMatrix();
     updateLevel();
     // Spostare il display in base alla posizione della telecamera

@@ -25,6 +25,14 @@ class Enemy extends Entity {
   void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
     super.update(platforms, powerUps);
     
+    for (Enemy enemy : level.enemies) {
+      if (collideLeft(enemy)) {
+        leftCollision = true;
+      } else if(collideRight(enemy)){
+        rightCollision = true;
+      }
+    }
+
     for (FireBall fireBall : player.fireBalls) {
       if (collideDown(fireBall) || collideUp(fireBall) || collideRight(fireBall) || collideLeft(fireBall)) {
         takeDamage(fireBall.damage);

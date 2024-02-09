@@ -87,9 +87,21 @@ class Koopa extends Enemy {
         } else { //Moving shell
             movingShellTimeout.update();
             immunityShellTimeout.update();
-            isRight = moveAuto(isRight);
+            
+            
+            for (Enemy enemy : level.enemies) {
+              if ((collideDown(enemy) || ((collideRight(enemy) || collideLeft(enemy)) && enemy.position.y + enemy.height > centralPositionY())) && immunityShellTimeout.tick()) {
+                enemy.takeDamage(damage);
+                leftCollision = false;
+                rightCollision = false;
+              }
+            }
+            
             if ((collideDown(player) || ((collideRight(player) || collideLeft(player)) && player.position.y + player.height > centralPositionY())) && immunityShellTimeout.tick()) {
                 player.takeDamage(damage);
+                leftCollision = false;
+                rightCollision = false;
+                
             }
             if (collideUp(player) && movingShellTimeout.tick()) {
                 if (player.damage > 1) {
@@ -100,6 +112,7 @@ class Koopa extends Enemy {
                 
                 player.bounceOverEnemy();
             }
+            isRight = moveAuto(isRight);
         }
 
     }

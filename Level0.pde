@@ -5,15 +5,15 @@ class Level0 extends Level {
         62, 
         400, 
         new StringBuilder(
-            "Comandi:\n" +
+            "Controls:\n" +
             "\n" +
-            "- Frecce per muoversi\n" +
-            "- Barra spaziatrice per saltare\n" +
-            "- Shift per correre\n" +
-            "- X per usare il potere fuoco\n" +
-            "- P per mettere in pausa\n" +
+            "- Press the arrows to move\n" +
+            "- Press the spacebar to jump\n" +
+            "- Press Shift to run\n" +
+            "- Press x to use fire balls\n" +
+            "- Press p to pause\n" +
             "\n" +
-            "Colpisci la bandiera per iniziare!"), 
+            "Hit the flag to start!"), 
         color(40, 40, 40), 
         40
     );
@@ -28,7 +28,7 @@ class Level0 extends Level {
     @Override
     void reset() {
         super.reset();;
-
+        backgroundColor = BACKGROUND_1;
         length = 1920;
         cameraSpeed = 5;
         playerInitialPosition = new PVector(500, GAME_HEIGHT - 243);

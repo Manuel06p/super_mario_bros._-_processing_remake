@@ -7,6 +7,8 @@ final int GAME_WIDTH = 1920;
 final int GAME_HEIGHT = 1080;
 final int FRAME_RATE = 60;
 
+final color BACKGROUND_1 = color(159, 203, 255);
+
 final String RX = "rx";
 final String LX = "lx";
 

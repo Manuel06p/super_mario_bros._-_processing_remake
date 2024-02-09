@@ -85,6 +85,25 @@ class Sprite {
     }
     return downCollisionTemp;
   }
+
+  boolean collideDownTolerant(Sprite sprite) {
+    boolean downCollisionTemp = false;
+    if (sprite.position.y - (position.y + height) <= collisionFraction &&
+        //Quando la differenza tra la Y della parte alta dello sprite e la Y della parte bassa di this è minore di collisionFraction
+
+        sprite.position.y - (position.y + height) > -collisionFraction &&
+        //Quando la differenza tra la Y della parte alta dello sprite e la Y della parte bassa di this è maggiore di -collisionFraction
+
+        sprite.position.x - (position.x + width) < 0 &&
+        //Quando la differenza tra la X della parte sinsitra dello sprite e la X della parte destra di this è minore di 0
+
+        (sprite.position.x + sprite.width) - position.x > 0)
+        //Quando la differenza tra la X della parte destra dello sprite e la X della parte sinsitra di this è  maggiore di 0
+    {
+      downCollisionTemp = true;
+    }
+    return downCollisionTemp;
+  }
    
   boolean collideRight(Sprite sprite) {
     boolean rightCollisionTemp = false;
@@ -101,6 +120,25 @@ class Sprite {
         //Quando la differenza tra la Y della parte bassa dello sprite e la Y della parte alta di this è minore di 0
     {
       rightCollisionX = sprite.position.x - width;
+      rightCollisionTemp = true;
+    }
+    return rightCollisionTemp;
+  }
+
+   boolean collideRightTolerant(Sprite sprite) {
+    boolean rightCollisionTemp = false;
+    if (sprite.position.x - (position.x + width) < collisionFraction &&
+        //Quando la differenza tra la X della parte sinistra dello sprite e la X della parte destra di this è minore di collisionFraction
+        
+        sprite.position.x - (position.x + width) > -collisionFraction &&
+        //Quando la differenza tra la X della parte sinistra dello sprite e la X della parte destra di this è maggiore di -collisionFraction
+
+        sprite.position.y - (position.y + height) < 0 &&
+        //Quando la differenza tra la Y della parte alta dello sprite e la Y della parte bassa di this è minore di 0
+
+        (sprite.position.y + sprite.height) - (position.y) > 0)
+        //Quando la differenza tra la Y della parte bassa dello sprite e la Y della parte alta di this è minore di 0
+    {
       rightCollisionTemp = true;
     }
     return rightCollisionTemp;
@@ -125,6 +163,25 @@ class Sprite {
         //Quando la differenza tra la Y della parte bassa dello sprite e la Y della parte alta di this è minore di 0
     {
       leftCollisionX = sprite.position.x + sprite.width;
+      leftCollisionTemp = true;
+    }
+    return leftCollisionTemp;
+  }
+
+  boolean collideLeftTolerant(Sprite sprite) {
+    boolean leftCollisionTemp = false;
+    if ((sprite.position.x + sprite.width) - position.x > -collisionFraction &&
+        //Quando la differenza tra la X della parte destra dello sprite e la X della parte sinistra di this è maggiore di -collisionFraction
+        
+        (sprite.position.x + sprite.width) - position.x < collisionFraction &&
+        //Quando la differenza tra la X della parte destra dello sprite e la X della parte sinistra di this è minore di collisionFraction
+
+        sprite.position.y - (position.y + height) < 0 &&
+        //Quando la differenza tra la Y della parte alta dello sprite e la Y della parte bassa di this è minore di 0
+
+        (sprite.position.y + sprite.height) - (position.y) > 0)
+        //Quando la differenza tra la Y della parte bassa dello sprite e la Y della parte alta di this è minore di 0
+    {
       leftCollisionTemp = true;
     }
     return leftCollisionTemp;

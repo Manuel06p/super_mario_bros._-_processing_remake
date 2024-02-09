@@ -9,6 +9,7 @@ class Level {
     float cameraX;
     float cameraSpeed;
     Sound music;
+    color backgroundColor;
 
     
     Text coinHudText;
@@ -108,6 +109,9 @@ class Level {
     }
 
     void draw() {
+      
+        background(backgroundColor);  
+      
         for (Platform platform : platforms) {
             platform.draw();
         }

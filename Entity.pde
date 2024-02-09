@@ -154,24 +154,7 @@ class Entity extends Sprite {
             leftCollision = leftCollisionCurrent || leftCollision;
             upCollision = upCollisionCurrent || upCollision;
 
-            if (upCollisionCurrent && platform instanceof QuestionBlock) {
-                QuestionBlock questionBlock = (QuestionBlock) platform;
-                if (this instanceof Player && questionBlock.isActive) {
-                    questionBlock.isActive = false;
-                    questionBlock.emptyBlock();
-                    if (questionBlock.powerUp == SUPER_MUSHROOM) {
-                        powerUps.add(new SuperMushroom(questionBlock.position.x, questionBlock.position.y + questionBlock.height - 10, questionBlock.isRight));
-                        powerup_appears_effect.play();
-                    } else if (questionBlock.powerUp == ONE_UP_MUSHROOM) {
-                        powerUps.add(new OneUpMushroom(questionBlock.position.x, questionBlock.position.y + questionBlock.height - 10, questionBlock.isRight));
-                        powerup_appears_effect.play();
-                    } else if (questionBlock.powerUp == FIRE_FLOWER) {
-                        powerUps.add(new FireFlower(questionBlock.position.x + 15, questionBlock.position.y + questionBlock.height - 10));
-                        powerup_appears_effect.play();
-                    }
-                }
-                
-            }
+            
             
             
             if (rightCollisionCurrent && 
