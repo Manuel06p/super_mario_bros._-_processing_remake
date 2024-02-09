@@ -17,6 +17,10 @@ class Enemy extends Entity {
     super.takeDamage(damage);
     health -= damage;
     if (health <= 0 || damage == -1) {
+        if (damage != - 1) {
+          kick_effect.play();
+        }
+        
         isActive = false;
     }
   }
@@ -37,7 +41,7 @@ class Enemy extends Entity {
       if (collideDown(fireBall) || collideUp(fireBall) || collideRight(fireBall) || collideLeft(fireBall)) {
         takeDamage(fireBall.damage);
         fireBall.isDead = true;
-        kick_effect.play();
+        
       }
     }
   }

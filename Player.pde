@@ -81,27 +81,29 @@ class Player extends Entity {
   // Altri metodi specifici del giocatore, se necessario
   void reset() {
     side = RX;
-    basePower();
     position = level.playerInitialPosition;
-    updateLifeHud();
-    updateCoinHud();
-    
     fireBalls.clear();
-    
     deadJump.reset();
-    
     isDead = false;
     damageTimeout = DAMAGE_TIMEOUT_VALUE;
     if (isBoosted) {
       isBoosted = false;
       movementSpeed /= boostValue;
     }
+
+    updateLifeHud();
+    updateCoinHud();
+  }
+
+  void resetDead() {
+    reset();
+    basePower();
   }
 
   void resetGameOver() {
       coins = 0;
       lives = 3;
-      reset();
+      resetDead();
   }
 
   void bounceOverEnemy() {
@@ -152,7 +154,7 @@ class Player extends Entity {
     height = texture.height;
     position.y = position.y + oldHeight - height;
     fireBallAbility = true;
-    damage = 2;
+    damage = 1;
   }
   
 
@@ -202,6 +204,7 @@ class Player extends Entity {
   void getLife() {
     if (lives < 99) {
       lives += 1;
+      one_up_effect.play();
       updateLifeHud();
     }
   }

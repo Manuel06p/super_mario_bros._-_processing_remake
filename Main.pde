@@ -323,7 +323,7 @@ void setup() {
   //
   
   level = levels.get(0);
-  player.reset();
+  player.resetGameOver();
   
   /**
    * Load level HUD
@@ -528,7 +528,7 @@ void draw() {
     if (loadLevelScreenTimeDuration.tick()) { // Attiva il reset del player alla fine del timer
       player.immunity = false;
       level.reset();
-      player.reset();
+      player.resetDead();
       loadLevelScreenTimeDuration.reset();
       deathAnimationLevelTimeDuration.reset();
     } else {

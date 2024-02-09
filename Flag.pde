@@ -14,11 +14,14 @@ class Flag extends PowerUp {
 
     @Override
     void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
-        //super.update(platforms, powerUps);     
-        //isRight = moveAuto(isRight);
-
-        if ((collideDown(player) || collideRight(player) || collideLeft(player) || collideUp(player)) && !level.isFinished) {
-            level.finished();
+        if (!level.isFinished) {
+            if (collideUp(player)) {
+                player.getLife();
+                level.finished();
+                
+            } else  if (collideDown(player) || collideRight(player) || collideLeft(player)) {
+                level.finished();
+            }
         }
     }
     

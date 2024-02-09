@@ -40,8 +40,9 @@ class Level0 extends Level {
 
         platforms.add(ground(0, 120, 17, 1));
 
+        powerUps.add(new Flag(1680 + 52, 680 + 240));
         platforms.add(block(1680, 240, 1, 1));
-        powerUps.add(new Flag(1680 + 52, 800 + 240));
+        
     }
 
     @Override

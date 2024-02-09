@@ -126,15 +126,6 @@ class Entity extends Sprite {
             boolean upCollisionCurrent = false;
 
 
-            /*
-            if (!(rightCollisionCurrent = collideRight(platform))) {
-                if (!(leftCollisionCurrent = collideLeft(platform))) {
-                    if (!(downCollisionCurrent = collideDown(platform))) {
-                        upCollisionCurrent = collideUp(platform);
-                    }
-                }
-            }
-            */
             
             if (rightCollisionCurrent = collideRight(platform)) {
                 position.x = rightCollisionX;

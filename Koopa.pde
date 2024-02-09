@@ -28,7 +28,7 @@ class Koopa extends Enemy {
         
         this.koopaType = koopaType;
         movingShellTimeout = new Timer(13);
-        immunityShellTimeout = new Timer(20);
+        immunityShellTimeout = new Timer(10);
         staticShellTimeout = new Timer(300);
 
         this.isRight = isRight;
@@ -90,7 +90,7 @@ class Koopa extends Enemy {
             
             
             for (Enemy enemy : level.enemies) {
-              if ((collideDown(enemy) || ((collideRight(enemy) || collideLeft(enemy)) && enemy.position.y + enemy.height > centralPositionY())) && immunityShellTimeout.tick()) {
+              if (collideDown(enemy) || ((collideRight(enemy) || collideLeft(enemy)) && enemy.position.y + enemy.height > centralPositionY())) {
                 enemy.takeDamage(damage);
                 leftCollision = false;
                 rightCollision = false;

@@ -16,7 +16,6 @@ class OneUpMushroom extends PowerUp {
         if (collideDown(player) || collideRight(player) || collideLeft(player) || collideUp(player)) {
             player.getLife();
             isActive = false;
-            one_up_effect.play();
         }
     }
     
