@@ -18,7 +18,6 @@ class Flag extends PowerUp {
             if (collideUp(player)) {
                 player.getLife();
                 level.finished();
-                
             } else  if (collideDown(player) || collideRight(player) || collideLeft(player)) {
                 level.finished();
             }

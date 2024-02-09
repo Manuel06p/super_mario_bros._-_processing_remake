@@ -72,8 +72,14 @@ class Level1 extends Level {
 
         platforms.add(ground(7200, 120, 17, 1));
         
+        platforms.add(block(7200 + 240, 240, 5, 1));
+        platforms.add(block(7200 + 360, 360, 4, 1));
+        platforms.add(block(7200 + 480, 480, 3, 1));
+        platforms.add(block(7200 + 600, 600, 2, 1));
+        platforms.add(block(7200 + 720, 720, 1, 1));
+
         platforms.add(block(7200 + 1200, 240, 1, 1));
-        powerUps.add(new Flag(7200 + 1200 + 52, 800 + 240));
+        powerUps.add(new Flag(7200 + 1200 + 52, 680 + 240));
         
     }
 }
