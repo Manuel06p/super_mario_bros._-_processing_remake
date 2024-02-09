@@ -29,7 +29,7 @@ class QuestionBlock extends Platform {
             level.powerUps.add(new OneUpMushroom(this.position.x, GAME_HEIGHT - this.position.y + 90, this.isRight));
             powerup_appears_effect.play();
         } else if (this.powerUp == FIRE_FLOWER) {
-            level.powerUps.add(new FireFlower(this.position.x + 15, this.position.y - this.height - 10));
+            level.powerUps.add(new FireFlower(this.position.x + 15, GAME_HEIGHT - this.position.y + 90));
             powerup_appears_effect.play();
         }
     }

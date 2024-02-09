@@ -49,7 +49,6 @@ class Level1 extends Level {
 
         platforms.add(ground(4800, 120, 17, 1));
 
-        //platforms.add(brick(4800 + 120, 600 + 20));
         platforms.add(block(4800 + 120, 480 + 20, 1, 1));
         platforms.add(brick(4800 + 240, 600 + 20, 1, 1));
         platforms.add(brick(4800 + 240, 360 + 20, 1, 1));
@@ -64,11 +63,13 @@ class Level1 extends Level {
         powerUps.add(new Coin(5280 + 600 + 35, 365));
         powerUps.add(new Coin(5280 + 840 + 35, 365));
         
+        
         platforms.add(brick(6240 + 120, 480 + 20, 1, 1));
         platforms.add(brick(6240 + 240, 600 + 20, 1, 1));
         platforms.add(brick(6240 + 240, 360 + 20, 1, 1));
         platforms.add(brick(6240 + 360, 480 + 20, 1, 1));
-        powerUps.add(new FireFlower(6240 + 240 + 15, 485));
+        powerUps.add(new Coin(6240 + 240 + 35, 485));
+        //
 
         platforms.add(ground(7200, 120, 17, 1));
         

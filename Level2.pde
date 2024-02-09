@@ -24,7 +24,7 @@ class Level2 extends Level {
         platforms.add(block(2040 + 960, 480, 1, 1));
         
         platforms.add(ground(2040 + 1320, 600, 17, 1));
-        platforms.add(question_block(2040 + 1320, 720, ONE_UP_MUSHROOM, true));
+        platforms.add(question_block(2040 + 1320, 720, FIRE_FLOWER, true));
         //enemies.add(new GreenKoopaTroopa(2040 + 1320 + 240, 960, true));
         enemies.add(new Goomba(2040 + 1320 + 240, 960, true));
         enemies.add(new GreenKoopaTroopa(2040 + 1320 + 600, 960, true));
