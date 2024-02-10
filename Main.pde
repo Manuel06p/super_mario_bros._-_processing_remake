@@ -514,10 +514,10 @@ void draw() {
     } else {
       deathAnimationLevelTimeDuration.update();
       if (deathAnimationLevelTimeDuration.tick()) { // Attiva lo screen delle vite dopo l'animazione alla fine del timer
-        gameOverScreenTimeDuration.update();
-        if (!game_over_effect.isPlaying()) {
+        if (gameOverScreenTimeDuration.elapsed == 0) {
           game_over_effect.play();
         }
+        gameOverScreenTimeDuration.update();
         gameOverDraw();
       } else {
         player.immunity = true;
