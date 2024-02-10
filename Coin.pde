@@ -4,7 +4,7 @@
 class Coin extends PowerUp {    
 
     /**
-     * Creates a new Coin object.
+     * Create a new Coin object.
      * - x: horizontal coordinate.
      * - y: vertical coordinate.
      */
@@ -23,6 +23,7 @@ class Coin extends PowerUp {
         animation(imageDictionary.get("coin"), 8);
         currentAnimation = 0;
     }
+    //
 
     /**
      * Update the Coin status.
@@ -39,6 +40,7 @@ class Coin extends PowerUp {
             coin_effect.play();
         }
     }
+    //
     
     
     /**
@@ -48,5 +50,7 @@ class Coin extends PowerUp {
     void draw() {
         super.draw();
     }
+    //
+    
 }
 //

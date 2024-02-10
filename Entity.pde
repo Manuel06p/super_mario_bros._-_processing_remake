@@ -1,7 +1,8 @@
+/**
+ * Class used to manage the sprite Entity. It extends the Sprite class.
+ */
 class Entity extends Sprite {
     
-    
-
     final int JUMP_TIMEOUT_VALUE = 5;
     int jumpTimeout;
     float gravity;
@@ -11,43 +12,52 @@ class Entity extends Sprite {
     float jumpStatus;
     float movementSpeed;
 
-    HashMap<String, Integer> breakingValue = new HashMap<String, Integer>();
+    HashMap<String, Integer> breakingValue;
 
     boolean horizontalBreak;
     boolean verticalBreak;
 
-
-
     boolean jump = false;
 
+    /**
+     * Create a new Entity object.
+     * - path: texture path.
+     * - initialPosition: PVector containing coordinates of the starting position.
+     * - gravity: gravity value.
+     * - speed: speed value.
+     * - smallJumpValue: small jump value.
+     * - superJumpValue: super jump value.
+     * - breakingValueUp: breaking value up.
+     * - breakingValueDown: breaking value down.
+     * - breakingValueLeft: breaking value left.
+     * - breakingValueRight: breaking value right.
+     */
     Entity(String path, PVector initialPosition, float gravity, float speed, float smallJumpValue, float superJumpValue, int breakingValueUp, int breakingValueDown, int breakingValueLeft, int breakingValueRight) {
+        
         super(path, initialPosition);
         this.gravity = gravity;
         this.movementSpeed = speed;
         this.speed.y = 0;
         jumpTimeout = 0;
-        
-
         this.smallJumpValue = smallJumpValue;
         this.superJumpValue = superJumpValue;
-
         this.jumpValue = this.smallJumpValue;
-
-
+        breakingValue = new HashMap<String, Integer>();
         this.breakingValue.put("up", breakingValueUp);
         this.breakingValue.put("down", breakingValueDown);
         this.breakingValue.put("left", breakingValueLeft);
         this.breakingValue.put("right", breakingValueRight);
-
         horizontalBreak = false;
         verticalBreak = false;
         this.speed.x = movementSpeed;
     }
+    //
 
-    void jump() {
-        
-    }
-
+    /**
+     * Update the Entity status.
+     * - platforms: ArrayList of platforms.
+     * - powerUps: ArrayList of power ups.
+     */
     void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
         
         super.update();
@@ -83,17 +93,30 @@ class Entity extends Sprite {
                 jumpTimeout -= 1;
             }
         }
-
     }
+    //
 
+    /**
+     * Apply gravity by changing the vertical speed.
+     */
     void applyGravity() {
         speed.y = gravity;
     }
-
+    //
+    
+    /**
+    * Apply negative gravity by changing the vertical speed.
+    */
     void applyInvertedGravity() {
         speed.y = -gravity;
     }
+    //
 
+    /**
+    * Check the collision with platforms or power ups.
+    * - platforms: ArrayList of platforms.
+    * - powerUps: ArrayList of power ups.
+    */
     void checkCollisions(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
         downCollision = false;
         rightCollision = false;
@@ -109,9 +132,6 @@ class Entity extends Sprite {
             Platform platform = platforms.get(i);
             boolean remove = false;
 
-            
-           
-
             boolean rightCollisionOld = rightCollision;
             boolean leftCollisionOld = leftCollision;
             boolean downCollisionOld = downCollision;
@@ -125,8 +145,6 @@ class Entity extends Sprite {
             boolean downCollisionCurrent = false;
             boolean upCollisionCurrent = false;
 
-
-            
             if (rightCollisionCurrent = collideRight(platform)) {
                 position.x = rightCollisionX;
             }
@@ -143,10 +161,7 @@ class Entity extends Sprite {
             downCollision = downCollisionCurrent || downCollision;
             rightCollision = rightCollisionCurrent || rightCollision;
             leftCollision = leftCollisionCurrent || leftCollision;
-            upCollision = upCollisionCurrent || upCollision;
-
-            
-            
+            upCollision = upCollisionCurrent || upCollision; 
             
             if (rightCollisionCurrent && 
                 platform.breakability.get("left") != 0 && 
@@ -200,25 +215,33 @@ class Entity extends Sprite {
 
             platforms.remove(killedPlatformIndex);
         }
-
     }
+    //
 
-    void directionChanged(boolean isRightNew) {
-
-    }
-
+    /**
+     * Move to left by changing the horizontal speed.
+     */
     void moveLeft() {
         if (!leftCollision) {
-            speed.x = -movementSpeed; // Regola la velocità di movimento
+            speed.x = -movementSpeed;
         }
     }
+    //
 
+    /**
+     * Move to right by changing the horizontal speed.
+     */
     void moveRight() {
         if (!rightCollision) {
-            speed.x = movementSpeed; // Regola la velocità di movimento
+            speed.x = movementSpeed;
         }
     }
-
+    //
+    
+    /**
+     * Manage the automatic movement.
+     * - isRight: is moving to the right.
+     */
     boolean moveAuto(boolean isRight) {
         boolean isRightNew = isRight;
         if (isRightNew) {
@@ -246,13 +269,15 @@ class Entity extends Sprite {
 
         return isRightNew;
     }
+    //
     
-    void takeDamage(int damage) {
-      
-    }
-
+    /**
+     * Draw the image.
+     */
     @Override
     void draw() {
         super.draw();
     }
+    //
+
 }
