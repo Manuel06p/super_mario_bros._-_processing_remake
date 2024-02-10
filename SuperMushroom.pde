@@ -11,7 +11,7 @@ class SuperMushroom extends PowerUp {
         super.update(platforms, powerUps);     
         isRight = moveAuto(isRight);
 
-        if (collideDown(player) || collideRight(player) || collideLeft(player) || collideUp(player)) {
+        if ((collideDown(player) || collideRight(player) || collideLeft(player) || collideUp(player)) && !player.isDead) {
             player.superMushroomPower();
             isActive = false;
             powerup_effect.play();

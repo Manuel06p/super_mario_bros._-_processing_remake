@@ -13,7 +13,7 @@ class OneUpMushroom extends PowerUp {
         super.update(platforms, powerUps);     
         isRight = moveAuto(isRight);
 
-        if (collideDown(player) || collideRight(player) || collideLeft(player) || collideUp(player)) {
+        if ((collideDown(player) || collideRight(player) || collideLeft(player) || collideUp(player)) && !player.isDead) {
             player.getLife();
             isActive = false;
         }

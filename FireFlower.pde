@@ -12,7 +12,7 @@ class FireFlower extends PowerUp {
     void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
         super.update(platforms, powerUps);     
 
-        if (collideDown(player) || collideRight(player) || collideLeft(player) || collideUp(player)) {
+        if ((collideDown(player) || collideRight(player) || collideLeft(player) || collideUp(player)) && !player.isDead) {
             player.fireFlowerPower();
             isActive = false;
             powerup_effect.play();

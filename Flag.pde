@@ -14,11 +14,11 @@ class Flag extends PowerUp {
 
     @Override
     void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
-        if (!level.isFinished) {
+        if (!level.isFinished && !player.isDead) {
             if (collideUp(player)) {
                 player.getLife();
                 level.finished();
-            } else  if (collideDown(player) || collideRight(player) || collideLeft(player)) {
+            } else  if (collideDown(player) || collideRight(player) || collideLeft(player) ) {
                 level.finished();
             }
         }
