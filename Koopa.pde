@@ -1,4 +1,8 @@
+/**
+ * Class used to manage the enemy Koopa. It extends the Enemy class.
+ */
 class Koopa extends Enemy {
+
     boolean isRight;
     boolean isShell;
     boolean movingShell;
@@ -11,19 +15,28 @@ class Koopa extends Enemy {
 
     float shellSpeed = 12;
 
-    Koopa(float x, float y, boolean isRight, String path, String koopaType) {
-        super(  path, //path
-                new PVector(x, y), //initialPosition
-                1, //health
-                1, //damage
-                GRAVITY, //gravity
-                3.0, //speed
-                0, //smallJumpValue
-                0, //superJumpValue
-                1, //breakingValueUp
-                0, //breakingValueDown
-                0, //breakingValueLeft
-                0 //breakingValueRight
+    /**
+     * Create a new Koopa object.
+     * - path: texture path
+     * - x: horizontal coordinate.
+     * - y: vertical coordinate.
+     * - isRight: starts moving to the right.
+     * - koopaType: Koopa type.
+     */
+    Koopa(String path, float x, float y, boolean isRight, String koopaType) {
+        super(  
+            path, // Texture string path
+            new PVector(x, y), // Initial position
+            1, // Health
+            1, // Damage
+            GRAVITY, // Gravity
+            3.0, // Movement speed
+            0, // Small jump value
+            0, // Super jump value
+            1, // Breaking up value
+            0, // Breaking down value
+            0, // Breaking left value
+            0 // Breaking right value
         );
         
         this.koopaType = koopaType;
@@ -37,14 +50,17 @@ class Koopa extends Enemy {
         speed.x = 4;
     }
 
-
+    /**
+     * Update the Koopa status.
+     * - platforms: ArrayList of platforms.
+     * - powerUps: ArrayList of power ups.
+     */
     @Override
     void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
         super.update(platforms, powerUps);
 
-        
-
-        if (!isShell) { //Living Koopa
+        if (!isShell) // Living Koopa
+        { 
             isRight = moveAuto(isRight);
             if (collideUp(player)) {
                 if (player.damage > 1) {
@@ -59,7 +75,9 @@ class Koopa extends Enemy {
             if (collideDown(player) || ((collideRight(player) || collideLeft(player)) && player.position.y + player.height > centralPositionY())) {
                 player.takeDamage(damage);
             }
-        } else if (!movingShell){ //Static shell
+        } 
+        else if (!movingShell) // Static shell
+        { 
             movingShellTimeout.update();
             staticShellTimeout.update();
             if (staticShellTimeout.elapsed == staticShellTimeout.delay-50) {
@@ -82,9 +100,10 @@ class Koopa extends Enemy {
                     isRight = true;
                     movingShell();
                 }
-            }
-            
-        } else { //Moving shell
+            }  
+        } 
+        else // Moving shell
+        { 
             movingShellTimeout.update();
             immunityShellTimeout.update();
             
@@ -114,15 +133,22 @@ class Koopa extends Enemy {
             }
             isRight = moveAuto(isRight);
         }
-
     }
-    
+    //
    
+    /**
+     * Draw the Koopa.
+     */
     @Override
     void draw() {
         super.draw();
     }
+    //
 
+    /**
+     * Manage the change of direction of the Koopa.
+     * - isRightNew: the new movement direction is to the right.
+     */
     @Override
     void directionChanged(boolean isRightNew) {
         super.directionChanged(isRightNew);
@@ -130,7 +156,11 @@ class Koopa extends Enemy {
             animation(imageDictionary.get(KOOPA + koopaType + booleanSide.get(isRightNew)), 7);
         }
     }
+    //
 
+    /**
+     * Manage koopa when it's in the shell status.
+     */
     void staticShell() {
         isShell = true;
         movingShell = false;
@@ -141,9 +171,12 @@ class Koopa extends Enemy {
         animation(imageDictionary.get(KOOPA + koopaType + KOOPA_SHELL_0), 0);
         currentAnimation = 1;
     }
+    //
 
+    /**
+     * Manage koopa when it's in the moving shell status.
+     */
     void movingShell() {
-        
         immunityShellTimeout.reset();
         staticShellTimeout.reset();
         movingShell = true;
@@ -152,9 +185,12 @@ class Koopa extends Enemy {
         breakingValue.put("right", 2);
         animation(imageDictionary.get(KOOPA + koopaType + KOOPA_SHELL_0), 0);
         currentAnimation = 1;
-
     }
+    //
 
+    /**
+     * Manage koopa when it's in the living status.
+     */
     void livingKoopa() {
         speed.x = movementSpeed;
         isShell = false;
@@ -165,5 +201,7 @@ class Koopa extends Enemy {
         animation(imageDictionary.get(KOOPA + koopaType + booleanSide.get(isRight)), 7);
         currentAnimation = 0;
     }
+    //
 
 }
+//
