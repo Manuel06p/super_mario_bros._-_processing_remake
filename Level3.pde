@@ -1,9 +1,20 @@
+/**
+ * Class used to manage the level Level3. It extends the Level class.
+ */
 class Level3 extends Level {
+
+    /**
+     * Create a new Level3 object.
+     */
     Level3() {
         super(overworld_ost);
         reset();
     }
+    //
 
+    /**
+     * Reset Level3 parameters.
+     */
     @Override
     void reset() {
         super.reset();;
@@ -28,9 +39,6 @@ class Level3 extends Level {
         enemies.add(new Goomba(960 + 120*12, 120 + 90, false));
         enemies.add(new Goomba(960 + 120*14, 120 + 90, false));
 
- 
-
-
         
         powerUps.add(new Coin(720 + 35, 120 + 720)); powerUps.add(new Coin(720 + 35 + 120, 120 + 720)); powerUps.add(new Coin(720 + 35 + 240, 120 + 720));
         powerUps.add(new Coin(720 + 35, 120 + 600));
@@ -44,15 +52,15 @@ class Level3 extends Level {
         powerUps.add(new Coin(1200 + 35, 120 + 480));                                               powerUps.add(new Coin(1200 + 35 + 240, 120 + 480));                                                 powerUps.add(new Coin(1200 + 35 + 480, 120 + 480));
         powerUps.add(new Coin(1200 + 35, 120 + 360));                                               powerUps.add(new Coin(1200 + 35 + 240, 120 + 360));                                                 powerUps.add(new Coin(1200 + 35 + 480, 120 + 360));
         powerUps.add(new Coin(1200 + 35, 120 + 240));                                                                                              powerUps.add(new Coin(1200 + 35 + 360, 120 + 240));  powerUps.add(new Coin(1200 + 35 + 480, 120 + 240));
-        
+     
         
         powerUps.add(new Coin(1920 + 35, 120 + 720)); powerUps.add(new Coin(1920 + 35 + 120, 120 + 720));
         powerUps.add(new Coin(1920 + 35, 120 + 600));                                                        powerUps.add(new Coin(1920 + 35 + 240, 120 + 600));
         powerUps.add(new Coin(1920 + 35, 120 + 480));                                                        powerUps.add(new Coin(1920 + 35 + 240, 120 + 480));
         powerUps.add(new Coin(1920 + 35, 120 + 360));                                                        powerUps.add(new Coin(1920 + 35 + 240, 120 + 360));
         powerUps.add(new Coin(1920 + 35, 120 + 240)); powerUps.add(new Coin(1920 + 35 + 120, 120 + 240));
-        
-        
-        
     }
+    //
+
 }
+//

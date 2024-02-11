@@ -1,9 +1,20 @@
+/**
+ * Class used to manage the level Level1. It extends the Level class.
+ */
 class Level1 extends Level {
+
+    /**
+     * Create a new Level1 object.
+     */
     Level1() {
         super(overworld_ost);
         reset();
     }
+    //
 
+    /**
+     * Reset Level1 parameters.
+     */
     @Override
     void reset() {
         super.reset();;
@@ -15,7 +26,6 @@ class Level1 extends Level {
         name = "Level 1";
         id = 1;
 
-
         platforms.add(ground(0, 120, 17, 1));
 
         platforms.add(brick(1200, 520, 1 ,1));
@@ -24,7 +34,6 @@ class Level1 extends Level {
 
         enemies.add(new Goomba(1680, 210, false));
         enemies.add(new Goomba(1920, 210, false));     
-           
         
         powerUps.add(new Coin(2040 + 35, 520));
         powerUps.add(new Coin(2160 + 35, 520));
@@ -64,13 +73,11 @@ class Level1 extends Level {
         powerUps.add(new Coin(5280 + 600 + 35, 365));
         powerUps.add(new Coin(5280 + 840 + 35, 365));
         
-        
         platforms.add(brick(6240 + 120, 480 + 20, 1, 1));
         platforms.add(brick(6240 + 240, 600 + 20, 1, 1));
         platforms.add(brick(6240 + 240, 360 + 20, 1, 1));
         platforms.add(brick(6240 + 360, 480 + 20, 1, 1));
         powerUps.add(new Coin(6240 + 240 + 35, 485));
-        //
 
         platforms.add(ground(7200, 120, 17, 1));
         
@@ -82,6 +89,8 @@ class Level1 extends Level {
 
         platforms.add(block(7200 + 1200, 240, 1, 1));
         powerUps.add(new Flag(7200 + 1200 + 52, 680 + 240));
-        
     }
+    //
+
 }
+//

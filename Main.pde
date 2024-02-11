@@ -1,6 +1,14 @@
 /**
-* Imported Libraries
-*/
+ * 
+ * Main class.
+ *
+ */
+
+
+
+/**
+ * Imported Libraries
+ */
   import java.util.Iterator;
   import java.util.Collections;
   import java.lang.Object.*;
@@ -13,8 +21,8 @@ HashMap<String, Key> keyMap;
 ArrayList<Level> levels;
 
 /**
-* Sound declaration
-*/
+ * Sound declaration
+ */
   Sound overworld_ost;
   Sound powerup_effect;
   Sound jump_effect;
@@ -32,8 +40,8 @@ ArrayList<Level> levels;
 //
 
 /**
-* Timer declaration
-*/
+ * Timer declaration
+ */
   Timer loadLevelScreenTimeDuration;
   Timer deathAnimationLevelTimeDuration;
   Timer newLevelAnimationLevelTimeDuration;
@@ -41,13 +49,15 @@ ArrayList<Level> levels;
   Timer pauseKeyTimeDuration;
 //
 
-Text coinLoadLevelText;
-Text lifeLoadLevelText;
-Text titleLoadLevelText;
-Text gameOverText;
-Text pauseText;
-
-
+/**
+ * Text
+ */
+  Text coinLoadLevelText;
+  Text lifeLoadLevelText;
+  Text titleLoadLevelText;
+  Text gameOverText;
+  Text pauseText;
+//
 
 Sprite coinLoadLevelIcon;
 HashMap<String, ArrayList<PImage>> imageDictionary;
@@ -59,11 +69,10 @@ HashMap<Boolean, String> booleanSide;
 
 StringBuilder levelNameString = new StringBuilder();
 
-
+/**
+ * Setup and start the windows and the global objects.
+ */
 void setup() {
-
-  
-
   /**
    * Sound
    */
@@ -387,22 +396,26 @@ void setup() {
 
   pause = false;
 }
+//
 
-
-
-// Aggiorna la logica del gioco
+/**
+ * Update the level status.
+ */
 void updateLevel() {
   level.update();
   player.update(level.platforms, level.powerUps);
 }
+//
 
+/**
+ * Draw the level.
+ */
 void drawLevel() {
   pushMatrix();
     updateLevel();
-    // Spostare il display in base alla posizione della telecamera
+
     translate(-level.cameraX, 0);
   
-    // Disegnare il livello
     level.draw();
     
     for (int i = player.fireBalls.size() - 1; i >= 0; i--) {
@@ -415,19 +428,24 @@ void drawLevel() {
     } 
     player.draw();
 
-  
-    // Reimpostare la trasformazione per il prossimo frame
     translate(level.cameraX, 0);
   popMatrix();
 
   level.drawHud();
 }
+//
 
+/**
+ * Draw the game over screen.
+ */
 void gameOverDraw() {
   background(0, 0, 0);
   gameOverText.draw();
 }
 
+/**
+ * Draw the load level screen.
+ */
 void loadLevelDraw() {
   background(0);
   coinLoadLevelIcon.draw();
@@ -437,13 +455,20 @@ void loadLevelDraw() {
   titleLoadLevelText.draw();
 }
 
+/**
+ * Manage the pause Key when it is pressed, by setting pause true and resetting the timer.
+ */
 void pauseKeyTrue() {
   if (getKeyStatus("p_key") || getKeyStatus("P_key")) {
     pause = true;
     pauseKeyTimeDuration.reset();
   }
 }
+//
 
+/**
+ * Manage the pause Key when it is pressed, by setting pause false and resetting the timer.
+ */
 void pauseKeyFalse() {
   if (getKeyStatus("p_key") || getKeyStatus("P_key")) {
     pause = false;
@@ -451,14 +476,19 @@ void pauseKeyFalse() {
   }
 }
 
+/**
+ * Draw the pause screen.
+ */
 void pauseDraw() {
   background(0);
   pauseText.draw();
 }
 
+/**
+ * Draw the main window.
+ */
 void draw() {
-  // Chiamare la funzione update del livello
-  if (!player.isDead) {
+  if (!player.isDead) { // When the player is not dead
     if (level.isFinished && level.id + 1 < levels.size()) {
       if (loadLevelScreenTimeDuration.tick()) {
         player.immunity = false;
@@ -499,7 +529,6 @@ void draw() {
           level.music.pause();
         }
         
-
       } else {
         if (pauseKeyTimeDuration.tick()) {
           pauseKeyTrue();
@@ -511,9 +540,10 @@ void draw() {
       }
       
     }
-      
-  } else if (player.lives <= 0) {
-    if (gameOverScreenTimeDuration.tick()) { // Attiva il reset del player alla fine del timer
+  } 
+  else if (player.lives <= 0)  // When the player runs out of lives
+  {
+    if (gameOverScreenTimeDuration.tick()) {
       player.immunity = false;
       level = levels.get(0);
       for (Level level : levels) {
@@ -525,7 +555,7 @@ void draw() {
       deathAnimationLevelTimeDuration.reset();
     } else {
       deathAnimationLevelTimeDuration.update();
-      if (deathAnimationLevelTimeDuration.tick()) { // Attiva lo screen delle vite dopo l'animazione alla fine del timer
+      if (deathAnimationLevelTimeDuration.tick()) {
         if (gameOverScreenTimeDuration.elapsed == 0) {
           game_over_effect.play();
         }
@@ -536,8 +566,10 @@ void draw() {
         drawLevel();
       }      
     }
-  } else {
-    if (loadLevelScreenTimeDuration.tick()) { // Attiva il reset del player alla fine del timer
+  } 
+  else //When the player dies
+  { 
+    if (loadLevelScreenTimeDuration.tick()) {
       player.immunity = false;
       level.reset();
       player.resetDead();
@@ -545,7 +577,7 @@ void draw() {
       deathAnimationLevelTimeDuration.reset();
     } else {
       deathAnimationLevelTimeDuration.update();
-      if (deathAnimationLevelTimeDuration.tick()) { // Attiva lo screen delle vite dopo l'animazione alla fine del timer
+      if (deathAnimationLevelTimeDuration.tick()) {
         loadLevelScreenTimeDuration.update();
         loadLevelDraw();
       } else {
@@ -555,13 +587,21 @@ void draw() {
     }
   }
 }
+//
 
+/**
+ * Update the levelNameString with the name of the next level.
+ */
 void updateNextLevelName() {
   if (level.id + 1 <  levels.size()) {
     levelNameString.replace(0, levelNameString.length(), levels.get(level.id + 1).name);
   }
 }
+//
 
+/**
+ * Manage the key pressing.
+ */
 void keyPressed() {
   for (Key keyToUpdate : keyMap.values()) {
     if (key == CODED) {
@@ -576,7 +616,11 @@ void keyPressed() {
     }
   }
 }
+//
 
+/**
+ * Manage the key releasing.
+ */
 void keyReleased() {
   for (Key keyToUpdate : keyMap.values()) {
     if (key == CODED) {
@@ -591,7 +635,13 @@ void keyReleased() {
     }
   }
 }
+//
 
+/**
+ * Check the key status.
+ * - return the key status, true if pressed, else otherwise.
+ */
 boolean getKeyStatus(String keyName) {
   return keyMap.get(keyName).pressed;
 }
+//

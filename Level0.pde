@@ -1,3 +1,6 @@
+/**
+ * Class used to manage the level Level0. It extends the Level class.
+ */
 class Level0 extends Level {
 
     Text controls = new Text(
@@ -20,11 +23,18 @@ class Level0 extends Level {
 
     Sprite logo;
 
+    /**
+     * Create a new Level0 object.
+     */
     Level0() {
         super(overworld_ost);
         reset();
     }
+    //
 
+    /**
+     * Reset Level0 parameters.
+     */
     @Override
     void reset() {
         super.reset();;
@@ -44,11 +54,19 @@ class Level0 extends Level {
         platforms.add(block(1680, 240, 1, 1));
         
     }
+    //
 
+    /**
+     * Draw the Level0 HUD.
+     */
     @Override
     void drawHud() {
     }
+    //
 
+    /**
+     * Manage the Level0 end.
+     */
     @Override
     void finished() {
         isFinished = true;
@@ -57,13 +75,18 @@ class Level0 extends Level {
         newLevelAnimationLevelTimeDuration.elapsed = 350;
         updateNextLevelName();
     }
+    //
 
-
-
+    /**
+     * Draw the Level0.
+     */
     @Override
     void draw() {
         super.draw();
         logo.draw();
         controls.draw();
     }
+    //
+
 }
+//

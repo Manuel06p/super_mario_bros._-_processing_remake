@@ -1,9 +1,20 @@
+/**
+ * Class used to manage the level Level2. It extends the Level class.
+ */
 class Level2 extends Level {
+
+    /**
+     * Create a new Level2 object.
+     */
     Level2() {
         super(overworld_ost);
         reset();
     }
+    //
 
+    /**
+     * Reset Level2 parameters.
+     */
     @Override
     void reset() {
         super.reset();;
@@ -15,7 +26,6 @@ class Level2 extends Level {
         tag = "level_2";
         name = "Level 2";
         id = 2;
-
 
         platforms.add(ground(0, 120, 17, 1));
         
@@ -50,7 +60,8 @@ class Level2 extends Level {
 
         platforms.add(block(5280 + 1320, 240, 1, 1));
         powerUps.add(new Flag(5280 + 1320 + 52, 680 + 240));
-        
-        
     }
+    //
+
 }
+//

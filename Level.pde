@@ -1,4 +1,8 @@
+/**
+ * Class used to manage the Level.
+ */
 class Level {
+
     ArrayList<Platform> platforms;
     ArrayList<Enemy> enemies;
     ArrayList<PowerUp> powerUps;
@@ -10,11 +14,9 @@ class Level {
     float cameraSpeed;
     Sound music;
     color backgroundColor;
-
     
     Text coinHudText;
     Sprite coinHudIcon;
-    
     
     Text lifeHudText;
     Sprite lifeHudIcon;
@@ -23,23 +25,27 @@ class Level {
 
     boolean isFinished = false;
 
+    /**
+     * Create a new Level object.
+     * - music: level background music.
+     */
     Level(Sound music) {
         this.music = music;
 
-        //HUD
-        
         coinHudIcon = new Sprite(POWER_UP + COIN_0, new PVector(400, 70));
         coinHudText = new Text(STANDARD_FONT, coinHudIcon.position.x + 62, coinHudIcon.position.y + 62, player.coinHudString, 255, 40);
 
-        
         lifeHudIcon = new Sprite(POWER_UP + ONE_UP_MUSHROOM, new PVector(70, 70));
         lifeHudText = new Text(STANDARD_FONT, lifeHudIcon.position.x + 98, lifeHudIcon.position.y + 62, player.lifeHudString, 255, 40);
-
 
         reset();
         this.cameraX = 0;
     }
+    //
 
+    /**
+     * Reset Level parameters.
+     */
     void reset() {
         music.loop();
         cameraX = 0;
@@ -48,21 +54,23 @@ class Level {
         enemies = new ArrayList<Enemy>();
         powerUps = new ArrayList<PowerUp>();
     }
+    //
 
+    /**
+     * Manage the Level end.
+     */
     void finished() {
         isFinished = true;
         music.stop();
         course_clear_effect.play();
         updateNextLevelName();
-        
     }
+    //
 
-
+    /**
+     * Update the Level status.
+     */
     void update() {
-        // Aggiorna la posizione della telecamera in base alla velocità specifica del livello
-        
-        
-        
         ArrayList<Integer> killedEnemies = new ArrayList<Integer>();
 
         for (int i = 0; i < enemies.size(); i++) {
@@ -100,14 +108,17 @@ class Level {
         }
         
 
-        if ((cameraX + GAME_WIDTH) - (player.position.x + player.width) < 800 && cameraX + GAME_WIDTH < length) { //Verso destra
+        if ((cameraX + GAME_WIDTH) - (player.position.x + player.width) < 800 && cameraX + GAME_WIDTH < length) {
             cameraX += cameraSpeed;
-        } else if (player.position.x - cameraX < 800 && cameraX > 0) { //Verso sinistra
+        } else if (player.position.x - cameraX < 800 && cameraX > 0) {
             cameraX -= cameraSpeed;
         }
-        
     }
+    //
 
+    /**
+     * Draw the Level.
+     */
     void draw() {
       
         background(backgroundColor);  
@@ -124,11 +135,18 @@ class Level {
             powerUp.draw();
         }
     }
+    //
 
+    /**
+     * Draw the Level HUD.
+     */
     void drawHud() {
         coinHudIcon.draw();
         coinHudText.draw();
         lifeHudIcon.draw();
         lifeHudText.draw();
     }
+    //
+
 }
+//
