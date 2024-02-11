@@ -1,49 +1,91 @@
+/**
+ * Methods used to create easily platforms.
+ */
+
+
+
+/**
+ * Create a ground platform.
+ * - x: horizontal coordinate.
+ * - y: vertical coordinate, starts from the base.
+ * - w: number of horizontal blocks.
+ * - h: number of vertical blocks.
+ */
 Platform ground(float x, float y, int width, int height) {
   return new Platform(
-    GROUND + width + "x" + height + GROUND_SPRITE, //texture
-    new PVector(x, y),  //position
-    true, //hasBounds
-    0, //breakabilityUp
-    0, //breakabilityDown
-    0, //breakabilityLeft
-    0 //breakabilityRight
+    GROUND + width + "x" + height + GROUND_SPRITE,
+    new PVector(x, y),
+    true,
+    0,
+    0,
+    0,
+    0
   );
 }
+//
 
+/**
+ * Create a brick platform.
+ * - x: horizontal coordinate.
+ * - y: vertical coordinate, starts from the base.
+ * - w: number of horizontal blocks.
+ * - h: number of vertical blocks.
+ */
 Platform brick(float x, float y, int width, int height) {
   return new Platform(
-    BRICK + width + "x" + height + BRICK_SPRITE, //texture
-    new PVector(x, y),  //position
-    true, //hasBounds
-    2, //breakabilityUp
-    2, //breakabilityDown
-    2, //breakabilityLeft
-    2 //breakabilityRight
+    BRICK + width + "x" + height + BRICK_SPRITE,
+    new PVector(x, y),
+    true,
+    2,
+    2,
+    2,
+    2
   );
 }
+//
 
+/**
+ * Create a brick platform.
+ * - x: horizontal coordinate.
+ * - y: vertical coordinate, starts from the basee.
+ * - w: number of horizontal blocks.
+ * - h: number of vertical blocks.
+ */
 Platform block(float x, float y, int width, int height) {
   return new Platform(
-    BLOCK + width + "x" + height + BLOCK_SPRITE, //texture
-    new PVector(x, y),  //position
-    true, //hasBounds
-    3, //breakabilityUp
-    3, //breakabilityDown
-    3, //breakabilityLeft
-    3 //breakabilityRight
+    BLOCK + width + "x" + height + BLOCK_SPRITE,
+    new PVector(x, y),
+    true,
+    3,
+    3,
+    3,
+    3
   );
 }
+//
 
+/**
+ * Create a brick platform.
+ * - x: horizontal coordinate.
+ * - y: vertical coordinate, starts from the base.
+ * - powerUp: type of power up.
+ * - isRight: starts moving to the right.
+ */
 QuestionBlock question_block(float x, float y, String powerUp, boolean isRight) {
   return new QuestionBlock(
-    QUESTION_BLOCK + QUESTION_BLOCK_1, //texture
-    new PVector(x, y),  //position
-    true, //hasBounds
-    3, //breakabilityUp
-    3, //breakabilityDown
-    3, //breakabilityLeft
-    3, //breakabilityRight
-    powerUp, // powerUp
+    QUESTION_BLOCK + QUESTION_BLOCK_1,
+    new PVector(x, y),
+    true,
+    3,
+    3,
+    3,
+    3,
+    powerUp,
     isRight
   );
 }
+//
+
+
+
+//

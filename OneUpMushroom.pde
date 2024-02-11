@@ -1,13 +1,34 @@
+/**
+ * Class used to manage the power up OneUpMushroom. It extends the PowerUp class.
+ */
 class OneUpMushroom extends PowerUp {    
-  
+    
+    /**
+     * Create a new OneUpMushroom object.
+     * - x: horizontal coordinate.
+     * - y: vertical coordinate.
+     * - isRight: starts moving to the right.
+     */
     OneUpMushroom(float x, float y, boolean isRight) {
-        //super(path: String, posizione iniziale: PVector, gravità: float, velocità: float, salto: float)
-        
-        super(POWER_UP + ONE_UP_MUSHROOM, new PVector(x, y), GRAVITY, 5, 0, 0, isRight);
+        super(
+            POWER_UP + ONE_UP_MUSHROOM,  // Texture string path
+            new PVector(x, y), // Inital position
+            GRAVITY, // Gravity
+            5, // Movement speed
+            0, // Small jump value
+            0, // Super jump value
+            isRight // Starts moving to the right
+        );
 
         this.isRight = isRight;
     }
+    //
 
+    /**
+     * Update the OneUpMushroom status.
+     * - platforms: ArrayList of platforms.
+     * - powerUps: ArrayList of power ups.
+     */
     @Override
     void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
         super.update(platforms, powerUps);     
@@ -18,9 +39,16 @@ class OneUpMushroom extends PowerUp {
             isActive = false;
         }
     }
+    //
     
+    /**
+     * Draw the OneUpMushroom.
+     */
     @Override
     void draw() {
         super.draw();
     }
+    //
+
 }
+//

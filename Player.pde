@@ -1,5 +1,6 @@
-// File: Player.pde
-
+/**
+ * Class used to manage the entity Player. It extends the Entity class.
+ */
 class Player extends Entity {
   
   int boostValue;
@@ -20,8 +21,6 @@ class Player extends Entity {
   StringBuilder coinHudString = new StringBuilder();
   StringBuilder lifeHudString = new StringBuilder();
 
-  
-
   Timer deadJump;
   Timer fireBallTimeout;
   
@@ -34,18 +33,22 @@ class Player extends Entity {
   String fireBallKey_0;
   String fireBallKey_1;
 
+  /**
+   * Create a new Player object.
+   * - path: texture path
+   * - PVector: coordinates.
+   */
   Player(String path, PVector initialPosition) {
-    //super(path: String, posizione iniziale: PVector, salute: int, gravità: float, velocità: float, salto: float)
-    super(path, //Texture
-          initialPosition, //Intial Position
-          GRAVITY, //Gravity
-          5.0, //Speed
-          10.0, //smallJump
-          20.0, //superJump
-          1, //breakingValueUp
-          0, //breakingValueDown
-          0, //breakingValueLeft
-          0 //breakingValueRight
+    super(path, // Texture string path
+          initialPosition, // Initial position
+          GRAVITY, // Gravity
+          5.0, // Movement speed
+          10.0, // Small jump value
+          20.0, // Super jump value
+          1, // Breaking up value
+          0, // Breaking down value
+          0, // Breaking left value
+          0 // Breaking right value
     );
 
     coinHudString.append("x00");
@@ -55,13 +58,10 @@ class Player extends Entity {
     damageTimeout = DAMAGE_TIMEOUT_VALUE;
     deadJump = new Timer(20);
     fireBallTimeout = new Timer(20);
-    
 
     powerLevelSet.put(1, MARIO_BASE);
     powerLevelSet.put(2, MARIO_SUPER_MUSHROOM);
     powerLevelSet.put(3, MARIO_FIRE_FLOWER);
-
-    
 
     this.boostValue = 3;
 
@@ -77,8 +77,11 @@ class Player extends Entity {
     this.fireBallKey_0 = "x_key";
     this.fireBallKey_1 = "X_key";
   }
+  //
 
-  // Altri metodi specifici del giocatore, se necessario
+  /**
+   * Reset the base player parameters.
+   */
   void reset() {
     side = RX;
     position = level.playerInitialPosition;
@@ -94,29 +97,45 @@ class Player extends Entity {
     updateLifeHud();
     updateCoinHud();
   }
+  //
 
+  /**
+   * Reset the player paramters when is dead.
+   */
   void resetDead() {
     reset();
     basePower();
   }
+  //
 
+  /**
+   * Reset the player when it runs out of lives.
+   */
   void resetGameOver() {
-      coins = 0;
-      lives = 3;
-      resetDead();
+    coins = 0;
+    lives = 3;
+    resetDead();
   }
+  //
 
+  /**
+   * It manages the bounce over an enemy.
+   */
   void bounceOverEnemy() {
     if (damage > 0) {
       kick_effect.play();
     }
 
     player.downCollision = true;
-      player.jump = true;
-      player.jumpTimeout = 0;
-      player.jumpStatus = 1;
+    player.jump = true;
+    player.jumpTimeout = 0;
+    player.jumpStatus = 1;
   }
+  //
 
+  /**
+   * Set the player power to base.
+   */
   void basePower() {
     powerLevel = 1;
     player.breakingValue.put("up", 1);
@@ -129,7 +148,11 @@ class Player extends Entity {
     fireBallAbility = false;
     damage = 1;
   }
+  //
 
+  /**
+   * Set the player power to super mushroom.
+   */
   void superMushroomPower() {
     powerLevel = 2;
     player.breakingValue.put("up", 2);
@@ -143,7 +166,11 @@ class Player extends Entity {
     fireBallAbility = false;
     damage = 1;
   }
+  //
 
+  /**
+   * Set the player power to fire flower.
+   */
   void fireFlowerPower() {
     powerLevel = 3;
     player.breakingValue.put("up", 2);
@@ -156,8 +183,11 @@ class Player extends Entity {
     fireBallAbility = true;
     damage = 1;
   }
-  
+  //
 
+  /**
+   * Manage the gain of a coin.
+   */
   void coin() {
     coins += 1;
 
@@ -167,15 +197,21 @@ class Player extends Entity {
     }
 
     updateCoinHud();
-    
   }
+  //
 
-  // Override della funzione draw() per personalizzarla
+  /**
+   * Draw the Player.
+   */
   void draw() {
-    // Aggiungi eventuali logiche di disegno specifiche per il giocatore
-    super.draw();  // Chiama il metodo draw() della classe base (Entity)
+    super.draw();
   }
+  //
   
+  /**
+    * Manage the player when it get damaged.
+    * - damage: damage received value.
+  */
   @Override
   void takeDamage(int damage) {
     super.takeDamage(damage);
@@ -200,7 +236,11 @@ class Player extends Entity {
       }
     }
   }
+  //
 
+  /**
+   * Manage the gain of a life.
+   */
   void getLife() {
     if (lives < 99) {
       lives += 1;
@@ -208,7 +248,11 @@ class Player extends Entity {
       updateLifeHud();
     }
   }
+  //
 
+  /**
+   * Manage the player when it dies.
+   */
   void die() {
     die_effect.play();
     overworld_ost.stop();
@@ -227,9 +271,12 @@ class Player extends Entity {
     position.y = position.y + oldHeight - height;
 
     stopX();
-    
   }
+  //
 
+  /**
+   * Update the life HUD status.
+   */
   void updateLifeHud() {
     if (lives < 10) {
       lifeHudString.replace(lifeHudString.length()-1, lifeHudString.length(), lives + "");
@@ -237,7 +284,11 @@ class Player extends Entity {
       lifeHudString.replace(lifeHudString.length()-2, lifeHudString.length(), lives + "");
     }
   }
+  //
 
+  /**
+   * Update the coin HUD.
+   */
   void updateCoinHud() {
     if (coins < 10) {
       coinHudString.replace(coinHudString.length()-1, coinHudString.length(), coins + "");
@@ -245,11 +296,15 @@ class Player extends Entity {
       coinHudString.replace(coinHudString.length()-2, coinHudString.length(), coins + "");
     }
   }
+  //
 
+  /**
+   * Update the Player status.
+   * - platforms: ArrayList of platforms.
+   * - powerUps: ArrayList of power ups.
+   */
   @Override
   void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
-    
-
     if (isDead) {
       deadJump.update();
       if (deadJump.tick()) {
@@ -330,4 +385,7 @@ class Player extends Entity {
       } 
     }
   }
+  //
+
 }
+//

@@ -16,7 +16,7 @@ class FireBall extends Entity {
   FireBall(float x, float y, String side) {
     super(
       FIRE_BALL_0, // Texture string path
-      new PVector(x, y), // Position
+      new PVector(x, y), // Initial position
       12, // Gravity
       13.0, // Movement speed
       6, // Small jump value

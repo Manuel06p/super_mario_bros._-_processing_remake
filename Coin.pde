@@ -11,7 +11,7 @@ class Coin extends PowerUp {
     Coin(float x, float y) {
         super(  
             POWER_UP + COIN_0, // Texture string path
-            new PVector(x, y), // Position
+            new PVector(x, y), // Inital position
             0, // Gravity
             0, // Movement speed
             0, // Small jump value
