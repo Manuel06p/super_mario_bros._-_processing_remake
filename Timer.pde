@@ -1,44 +1,49 @@
 /**
-Classe per la gestione di un timer.
-*/
+ * Class used to manage the Timer.
+ */
 class Timer {
   int delay;
   int elapsed;
   
   /**
-  Crea un nuovo oggetto Timer.
-  - delay: numero di frame di attesa.
-  */
+   * Create a new Timer object.
+   * - delay: timer duration.
+   */
   Timer(int delay) {
     this.delay = delay;
     elapsed = 0;
   }
+  //
 
   /**
-  Reimposta il timer.
-  */
+   * Reset the Timer.
+   */
   void reset() {
     elapsed = 0;
   }
+  //
 
   /**
-  Aggiorna il timer.
-  */
+   * Update the Timer status when is not finished.
+   */
   void update() {
     if (elapsed <= delay) {
       elapsed++;
     }
   }
+  //
 
   /**
-  Verifica il tick del timer.
-  - ritorna true se il timer ha eseguito un tick, altrimenti false.
-  */
+   * Check the Timer status.
+   * - returns true if the Timer is finished, false otherwise.
+   */
   boolean tick() {
     if (elapsed >= delay) {
-      //elapsed = 0;
       return true;
     }
     return false;
   }
+  //
+
 }
+//
