@@ -244,6 +244,17 @@ void setup() {
     //
 
     /**
+    * Fire Ball
+    */
+      imageDictionary.put("fireBall", new ArrayList<PImage>() {{
+        add(loadImage(FIRE_BALL_0));
+        add(loadImage(FIRE_BALL_1));
+        add(loadImage(FIRE_BALL_2));
+        add(loadImage(FIRE_BALL_3));
+      }});
+    //
+
+    /**
     * Green Koopa Troopa
     */
       imageDictionary.put(KOOPA + GREEN_KOOPA_TROOPA + RX, new ArrayList<PImage>() {{

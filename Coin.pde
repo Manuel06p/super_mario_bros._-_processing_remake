@@ -9,7 +9,6 @@ class Coin extends PowerUp {
      * - y: vertical coordinate.
      */
     Coin(float x, float y) {
-        //super(path: String, posizione iniziale: PVector, salute: int, gravità: float, velocità: float, salto: float)
         super(  
             POWER_UP + COIN_0, // Texture string path
             new PVector(x, y), // Position
@@ -41,7 +40,6 @@ class Coin extends PowerUp {
         }
     }
     //
-    
     
     /**
      * Draw the Coin.

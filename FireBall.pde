@@ -1,29 +1,31 @@
+/**
+ * Class used to manage the entity FireBall. It extends the Entity class.
+ */
 class FireBall extends Entity {
   
   int damage = 1;
   int bounce = 0;
   boolean isDead = false;
   
-  
+  /**
+  * Create a new FireBall object.
+  * - x: horizontal coordinate.
+  * - y: vertical coordinate.
+  * - side: side of the sprite.
+  */
   FireBall(float x, float y, String side) {
-    super(FIRE_BALL_0,
-          new PVector(x, y),
-          12, //gravity
-          13.0, //speed
-          6, //smallJumpValue
-          0, //superJumpValue
-          0, //breakingValueUp
-          0, //breakingValueDown
-          0, //breakingValueLeft
-          0 //breakingValueRight)
+    super(
+      FIRE_BALL_0, // Texture string path
+      new PVector(x, y), // Position
+      12, // Gravity
+      13.0, // Movement speed
+      6, // Small jump value
+      0, // Super jump value
+      0, // Breaking up value
+      0, // Breaking down value
+      0, // Breaking left value
+      0 // Breaking right value
     );
-
-    imageDictionary.put("fireBall", new ArrayList<PImage>() {{
-        add(loadImage(FIRE_BALL_0));
-        add(loadImage(FIRE_BALL_1));
-        add(loadImage(FIRE_BALL_2));
-        add(loadImage(FIRE_BALL_3));
-    }});
 
     animation(imageDictionary.get("fireBall"), 4);
     currentAnimation = 0;
@@ -35,10 +37,14 @@ class FireBall extends Entity {
     } else {;
       speed.x = -movementSpeed; 
     }
-    
-
   }
+  //
   
+  /**
+  * Update the FireBall status.
+  * - platforms: ArrayList of platforms.
+  * - powerUps: ArrayList of power ups.
+  */
   @Override
   void update(ArrayList<Platform> platforms, ArrayList<PowerUp> powerUps) {
     super.update(platforms, powerUps);
@@ -48,13 +54,18 @@ class FireBall extends Entity {
       jump = true;
       jumpTimeout = 0;
       bounce += 1;
-    }
-    
+    } 
   }
+  //
   
+  /**
+  * Draw the FireBall.
+  */
   @Override
   void draw() {
    super.draw(); 
   }
+  //
   
 }
+//

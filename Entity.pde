@@ -97,6 +97,24 @@ class Entity extends Sprite {
     //
 
     /**
+     * Manage the Entity when it get damaged.
+     * - damage: damage received value.
+     */
+    void takeDamage(int damage) {
+
+    }
+    //
+
+    /**
+     * Manage the change of direction of the Entity.
+     * - isRightNew: the new movement direction is to the right.
+     */
+    void directionChanged(boolean isRightNew) {
+
+    }
+    //
+
+    /**
      * Apply gravity by changing the vertical speed.
      */
     void applyGravity() {
@@ -281,3 +299,4 @@ class Entity extends Sprite {
     //
 
 }
+//
