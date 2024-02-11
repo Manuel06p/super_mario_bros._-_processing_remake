@@ -5,8 +5,8 @@
 
 
 /**
-* Settings
-*/
+ * Settings
+ */
     final String GAME_TITLE = "Super Mario Bros. - Remaster Processing";
     final String REPOSITORY_NAME = "Super_Mario_Bros._-_Remaster_Processing";
     final int GAME_WIDTH = 1920;
@@ -15,21 +15,21 @@
 //
 
 /**
-* Backgrounds
-*/
+ * Backgrounds
+ */
     final color BACKGROUND_1 = color(159, 203, 255);
 //
 
 /**
-* Side
-*/
+ * Side
+ */
     final String RX = "rx";
     final String LX = "lx";
 //
 
 /**
-* Mario
-*/
+ * Mario
+ */
     final String MARIO = "assets/mario/";
 
     final String MARIO_BASE = "base/";
@@ -45,8 +45,8 @@
 //
 
 /**
-* Enemies
-*/
+ * Enemies
+ */
     final String ENEMIES = "assets/enemies/";
     
     /**
@@ -70,8 +70,8 @@
 //
 
 /**
-* Items
-*/
+ * Items
+ */
     final String ITEMS = "assets/items/";
 
     final String GROUND_17X1 = ITEMS + "ground_17x1.png";
@@ -95,8 +95,8 @@
 //
 
 /**
-* Power up
-*/
+ * Power up
+ */
     final String POWER_UP = "assets/power_up/";
 
     final String SUPER_MUSHROOM = "super_mushroom.png";
@@ -121,8 +121,8 @@
 //
 
 /**
-* Sound
-*/
+ * Sound
+ */
     final String SOUND = "assets/sound/";
 
     final String OVERWORLD_OST = "overworld_ost.wav";
@@ -142,8 +142,8 @@
 //
 
 /**
-* FireBall
-*/
+ * FireBall
+ */
     final String FIRE_BALL = ITEMS + "fire_ball/";
     final String FIRE_BALL_0 = FIRE_BALL + "fire_ball_0.png";
     final String FIRE_BALL_1 = FIRE_BALL + "fire_ball_1.png";
@@ -152,21 +152,21 @@
 //
 
 /**
-* UI
-*/
+ * UI
+ */
     final String UI = "assets/ui/";
     final String LOGO = UI + "logo.png";
 //
 
 /**
-* Fonts
-*/
+ * Fonts
+ */
     final String FONTS = "assets/fonts/";
     final String STANDARD_FONT = FONTS + "standard_font.ttf";
 //
 
 /**
-* Game constants
-*/
+ * Game constants
+ */
     final float GRAVITY = 20.0;
 //
