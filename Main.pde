@@ -12,6 +12,7 @@
   import java.util.Iterator;
   import java.util.Collections;
   import java.lang.Object.*;
+  import processing.sound.*;
 //
 
 
