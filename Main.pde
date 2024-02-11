@@ -604,7 +604,10 @@ void updateNextLevelName() {
  * Manage the key pressing.
  */
 void keyPressed() {
-  for (Key keyToUpdate : keyMap.values()) {
+  if (key == ESC) {
+    key = 0;  // Fools! don't let them escape!
+  } else {
+    for (Key keyToUpdate : keyMap.values()) {
     if (key == CODED) {
       if (keyCode == keyToUpdate.keyCode) {
         keyToUpdate.keyPressed();
@@ -615,6 +618,7 @@ void keyPressed() {
         keyToUpdate.keyPressed();
       }
     }
+  }
   }
 }
 //
