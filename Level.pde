@@ -47,12 +47,20 @@ class Level {
      * Reset Level parameters.
      */
     void reset() {
-        music.loop();
         cameraX = 0;
         isFinished = false;
         platforms = new ArrayList<Platform>();
         enemies = new ArrayList<Enemy>();
         powerUps = new ArrayList<PowerUp>();
+    }
+    //
+
+    /**
+     * Start level.
+     */
+    void startLevel() {
+        reset();
+        music.loop();
     }
     //
 

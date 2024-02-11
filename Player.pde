@@ -255,7 +255,7 @@ class Player extends Entity {
    */
   void die() {
     die_effect.play();
-    overworld_ost.stop();
+    level.music.stop();
     isDead = true;
     lives -= 1;
     powerLevel = 1;
@@ -291,9 +291,9 @@ class Player extends Entity {
    */
   void updateCoinHud() {
     if (coins < 10) {
-      coinHudString.replace(coinHudString.length()-1, coinHudString.length(), coins + "");
+      coinHudString.replace(coinHudString.length()-2, coinHudString.length(), "0" + coins);
     } else {
-      coinHudString.replace(coinHudString.length()-2, coinHudString.length(), coins + "");
+      coinHudString.replace(coinHudString.length()-2, coinHudString.length(), "" + coins);
     }
   }
   //

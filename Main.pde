@@ -25,6 +25,7 @@ ArrayList<Level> levels;
  * Sound declaration
  */
   Sound overworld_ost;
+  Sound overworld_remix_ost;
   Sound powerup_effect;
   Sound jump_effect;
   Sound coin_effect;
@@ -78,6 +79,7 @@ void setup() {
    * Sound
    */
     overworld_ost = new Sound(this, SOUND + OVERWORLD_OST);
+    overworld_remix_ost = new Sound(this, SOUND + OVERWORLD_REMIX_OST, 0.5);
     powerup_effect = new Sound(this, SOUND + POWERUP_EFFECT);
     jump_effect = new Sound(this, SOUND + JUMP_EFFECT);
     coin_effect = new Sound(this, SOUND + COIN_EFFECT);
@@ -90,7 +92,7 @@ void setup() {
     break_block_effect = new Sound(this, SOUND + BREAK_BLOCK_EFFECT);
     game_over_effect = new Sound(this, SOUND + GAME_OVER_EFFECT, 0.5);
     course_clear_effect = new Sound(this, SOUND + COURSE_CLEAR_EFFECT, 0.5);
-    lets_a_go_effect = new Sound(this, SOUND + LETS_A_GO_EFFECT, 0.5);
+    lets_a_go_effect = new Sound(this, SOUND + LETS_A_GO_EFFECT, 0.3);
   //
 
   /**
@@ -345,6 +347,7 @@ void setup() {
   //
   
   level = levels.get(0);
+  level.startLevel();
   player.resetGameOver();
   
   /**
@@ -490,13 +493,23 @@ void pauseDraw() {
  */
 void draw() {
   if (!player.isDead) { // When the player is not dead
-    if (level.isFinished && level.id + 1 < levels.size()) {
+    if (level.isFinished) {
       if (loadLevelScreenTimeDuration.tick()) {
+        if (level.id + 1 < levels.size()) {
+          level = levels.get(level.id + 1);
+          player.reset();
+        } else {
+          level = levels.get(0);
+          for (Level level : levels) {
+            level.reset();
+          }
+          player.resetGameOver();
+        }
+
         player.immunity = false;
-        level = levels.get(level.id + 1);
         
-        level.reset();
-        player.reset();
+        level.startLevel();
+        
         newLevelAnimationLevelTimeDuration.reset();
         loadLevelScreenTimeDuration.reset();
         drawLevel();
@@ -511,7 +524,7 @@ void draw() {
           player.immunity = true;
           drawLevel();
         }      
-      }        
+      }   
     } else {
       if (pause) {
         if (pauseKeyTimeDuration.tick()) {
@@ -550,6 +563,7 @@ void draw() {
       for (Level level : levels) {
         level.reset();
       }
+      level.startLevel();
       levelNameString.replace(0, levelNameString.length(), level.name);
       player.resetGameOver();
       gameOverScreenTimeDuration.reset();
@@ -572,7 +586,7 @@ void draw() {
   { 
     if (loadLevelScreenTimeDuration.tick()) {
       player.immunity = false;
-      level.reset();
+      level.startLevel();
       player.resetDead();
       loadLevelScreenTimeDuration.reset();
       deathAnimationLevelTimeDuration.reset();
@@ -596,6 +610,8 @@ void draw() {
 void updateNextLevelName() {
   if (level.id + 1 <  levels.size()) {
     levelNameString.replace(0, levelNameString.length(), levels.get(level.id + 1).name);
+  } else {
+    levelNameString.replace(0, levelNameString.length(), levels.get(0).name);
   }
 }
 //

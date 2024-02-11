@@ -7,7 +7,7 @@ class Level3 extends Level {
      * Create a new Level3 object.
      */
     Level3() {
-        super(overworld_ost);
+        super(overworld_remix_ost);
         reset();
     }
     //
@@ -19,7 +19,7 @@ class Level3 extends Level {
     void reset() {
         super.reset();;
 
-        length = 7200;
+        length = 4080;
         cameraSpeed = 5;
         playerInitialPosition = new PVector(480, GAME_HEIGHT-1200);
         backgroundColor = BACKGROUND_1;
@@ -59,6 +59,10 @@ class Level3 extends Level {
         powerUps.add(new Coin(1920 + 35, 120 + 480));                                                        powerUps.add(new Coin(1920 + 35 + 240, 120 + 480));
         powerUps.add(new Coin(1920 + 35, 120 + 360));                                                        powerUps.add(new Coin(1920 + 35 + 240, 120 + 360));
         powerUps.add(new Coin(1920 + 35, 120 + 240)); powerUps.add(new Coin(1920 + 35 + 120, 120 + 240));
+    
+        platforms.add(block(2640, 240, 1, 1));
+        powerUps.add(new Flag(2640 + 52, 680 + 240));
+    
     }
     //
 

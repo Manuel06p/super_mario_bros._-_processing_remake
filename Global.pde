@@ -126,6 +126,7 @@
     final String SOUND = "assets/sound/";
 
     final String OVERWORLD_OST = "overworld_ost.wav";
+    final String OVERWORLD_REMIX_OST = "overworld_remix_ost.wav";
     final String POWERUP_EFFECT = "powerup_effect.wav";
     final String JUMP_EFFECT = "jump_effect.wav";
     final String COIN_EFFECT = "coin_effect.wav";

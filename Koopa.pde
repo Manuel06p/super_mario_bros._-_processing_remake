@@ -41,7 +41,7 @@ class Koopa extends Enemy {
         
         this.koopaType = koopaType;
         movingShellTimeout = new Timer(13);
-        immunityShellTimeout = new Timer(10);
+        immunityShellTimeout = new Timer(15);
         staticShellTimeout = new Timer(300);
 
         this.isRight = isRight;
