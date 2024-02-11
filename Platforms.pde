@@ -15,7 +15,6 @@ Platform ground(float x, float y, int width, int height) {
   return new Platform(
     GROUND + width + "x" + height + GROUND_SPRITE,
     new PVector(x, y),
-    true,
     0,
     0,
     0,
@@ -35,7 +34,6 @@ Platform brick(float x, float y, int width, int height) {
   return new Platform(
     BRICK + width + "x" + height + BRICK_SPRITE,
     new PVector(x, y),
-    true,
     2,
     2,
     2,
@@ -55,7 +53,6 @@ Platform block(float x, float y, int width, int height) {
   return new Platform(
     BLOCK + width + "x" + height + BLOCK_SPRITE,
     new PVector(x, y),
-    true,
     3,
     3,
     3,
@@ -75,7 +72,6 @@ QuestionBlock question_block(float x, float y, String powerUp, boolean isRight) 
   return new QuestionBlock(
     QUESTION_BLOCK + QUESTION_BLOCK_1,
     new PVector(x, y),
-    true,
     3,
     3,
     3,

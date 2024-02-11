@@ -36,7 +36,7 @@ class Player extends Entity {
   /**
    * Create a new Player object.
    * - path: texture path
-   * - PVector: coordinates.
+   * - PVector: initial position.
    */
   Player(String path, PVector initialPosition) {
     super(path, // Texture string path
@@ -209,9 +209,9 @@ class Player extends Entity {
   //
   
   /**
-    * Manage the player when it get damaged.
-    * - damage: damage received value.
-  */
+   * Manage the Player when it get damaged.
+   * - damage: damage received value.
+   */
   @Override
   void takeDamage(int damage) {
     super.takeDamage(damage);

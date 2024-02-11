@@ -1,24 +1,53 @@
+/**
+ * Class used to manage the platform QuestionBlock. It extends the Platform class.
+ */
 class QuestionBlock extends Platform {
     
     boolean isActive = true;
     String powerUp = "";
     boolean isRight;
 
-    QuestionBlock(String path, PVector initialPosition, boolean hasBounds, int breakabilityUp, int breakabilityDown, int breakabilityLeft, int breakabilityRight, String powerUp, boolean isRight) {
-        super(path, initialPosition, hasBounds, breakabilityUp, breakabilityDown, breakabilityLeft, breakabilityRight);
+    /**
+     * Create a new Platform object.
+     * - path: texture path.
+     * - initialPosition: PVector containing coordinates of the starting position.
+     * - breakabilityUp: breakability value up.
+     * - breakabilityDown: breakability value down.
+     * - breakabilityLeft: breakability value left.
+     * - breakabilityRight: breakability value right.
+     * - powerUp: power up type.
+     * - isRight: starts moving to the right.
+     */
+    QuestionBlock(String path, PVector initialPosition, int breakabilityUp, int breakabilityDown, int breakabilityLeft, int breakabilityRight, String powerUp, boolean isRight) {
+        super(
+            path, // Texture string path
+            initialPosition, // Initial position
+            breakabilityUp, // Breaking up value
+            breakabilityDown, // Breaking down value
+            breakabilityLeft, // Breaking left value
+            breakabilityRight // Breaking right value
+        );
+
         this.powerUp = powerUp;
         this.isRight = isRight;
-          
-        
+
         animation(imageDictionary.get("question_block"), 10);
         currentAnimation = 0;
     }
-
+    //
+    
+    /**
+     * Change the animation when the block is empty.
+     */
     void emptyBlock() {
         animation(imageDictionary.get("question_block_empty"), 0);
         currentAnimation = 1;
     }
+    //
 
+    /**
+     * Manage the question block hit.
+     */
     void hitQuestionBlock() {
         this.isActive = false;
         this.emptyBlock();
@@ -33,8 +62,13 @@ class QuestionBlock extends Platform {
             powerup_appears_effect.play();
         }
     }
+    //
 
-
+    /**
+     * Update the QuestionBlock status.
+     * - platforms: ArrayList of platforms.
+     * - powerUps: ArrayList of power ups.
+     */
     @Override
     void update() {
         super.update();
@@ -52,13 +86,18 @@ class QuestionBlock extends Platform {
                 }
             }
             }
-            
-        
         }
     }
+    //
 
+    /**
+     * Draw the QuestionBlock.
+     */
     @Override
     void draw() {
         super.draw();
     }
+    //
+
 }
+//
