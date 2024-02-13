@@ -12,7 +12,7 @@ class Text {
   
   /**
    * Create a new Text object.
-   * - path: texture path.
+   * - path: font path.
    * - x: horizontal coordinate.
    * - y: vertical coordinate.
    * - text: text passed as StringBuilder, so it acts like if the text was passed for reference.
@@ -30,7 +30,7 @@ class Text {
 
   /**
    * Create a new Text object.
-   * - path: texture path.
+   * - path: font path.
    * - x: horizontal coordinate.
    * - y: vertical coordinate.
    * - text: text passed as StringBuilder, so it acts like if the text was passed for reference.
