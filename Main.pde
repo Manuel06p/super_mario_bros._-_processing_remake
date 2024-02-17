@@ -69,6 +69,8 @@ boolean pause;
 
 HashMap<Boolean, String> booleanSide;
 
+PImage titleBarIcon;
+
 StringBuilder levelNameString = new StringBuilder();
 
 /**
@@ -312,6 +314,9 @@ void setup() {
     fullScreen();
     surface.setAlwaysOnTop(true);
     noCursor();
+
+    titleBarIcon = loadImage(ICON);
+    surface.setIcon(titleBarIcon);
   //
 
   player = new Player(MARIO + MARIO_BASE + RX + MARIO_NEUTRAL, new PVector(0, 0));

@@ -157,6 +157,7 @@
  */
     final String UI = "assets/ui/";
     final String LOGO = UI + "logo.png";
+    final String ICON = UI + "icon.png";
 //
 
 /**
