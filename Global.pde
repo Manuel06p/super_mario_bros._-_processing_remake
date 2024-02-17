@@ -116,8 +116,8 @@
     final String FIRE_FLOWER_2 = "fire_flower_2.png";
     final String FIRE_FLOWER_3 = "fire_flower_3.png";
 
-    final String FLAG = ITEMS + "flag.png";
-    final String FLAG_STAND = ITEMS + "flag_stand.png";
+    final String FLAG = POWER_UP + "flag.png";
+    final String FLAG_STAND = POWER_UP + "flag_stand.png";
 //
 
 /**

@@ -41,9 +41,9 @@ class Level0 extends Level {
         backgroundColor = BACKGROUND_1;
         length = 1920;
         cameraSpeed = 5;
-        playerInitialPosition = new PVector(500, GAME_HEIGHT - 243);
+        playerInitialPosition = new PVector(500, GAME_HEIGHT - 350);
         tag = "level_0";
-        name = "Start Level";
+        name = "Game finished!";
         id = 0;
 
         logo = new Sprite(LOGO, new PVector(607, 50));

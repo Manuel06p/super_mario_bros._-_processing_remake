@@ -621,7 +621,7 @@ void updateNextLevelName() {
  */
 void keyPressed() {
   if (key == ESC) {
-    key = 0;  // Fools! don't let them escape!
+    key = 0;
   } else {
     for (Key keyToUpdate : keyMap.values()) {
     if (key == CODED) {

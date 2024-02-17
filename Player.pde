@@ -279,9 +279,9 @@ class Player extends Entity {
    */
   void updateLifeHud() {
     if (lives < 10) {
-      lifeHudString.replace(lifeHudString.length()-1, lifeHudString.length(), lives + "");
+      lifeHudString.replace(lifeHudString.length()-2, lifeHudString.length(), "0" + lives);
     } else {
-      lifeHudString.replace(lifeHudString.length()-2, lifeHudString.length(), lives + "");
+      lifeHudString.replace(lifeHudString.length()-2, lifeHudString.length(), "" + lives);
     }
   }
   //
