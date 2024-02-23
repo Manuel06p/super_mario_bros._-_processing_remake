@@ -7,8 +7,8 @@
 /**
  * Settings
  */
-    final String GAME_TITLE = "Super Mario Bros. - Remaster Processing";
-    final String REPOSITORY_NAME = "super_mario_bros._-_remaster_processing";
+    final String GAME_TITLE = "Super Mario Bros. - Processing Remake";
+    final String REPOSITORY_NAME = "super_mario_bros._-_processing_remake";
     final int GAME_WIDTH = 1920;
     final int GAME_HEIGHT = 1080;
     final int FRAME_RATE = 60;
