@@ -1,5 +1,5 @@
 /**
- * Class used to manage the global constants.
+ * File used to manage the global constants.
  */
 
 
